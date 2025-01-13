@@ -1,20 +1,24 @@
 cask "macwhisper" do
-  version "5.4,460"
-  sha256 "b45dc4bd5e35b15f327baac015edffdc8825d9588b1fb001cbdc740180cd5cb8"
+  version "11.3.2,1137"
+  sha256 "5d73d9a07d9e114bac8a749167bc4e556a77ab0da8cffa5eb069a9bef34609c2"
 
-  url "https://macwhisper-site.vercel.app/releases/MacWhisper-#{version.csv.second}.zip",
-      verified: "macwhisper-site.vercel.app/releases/"
+  url "https://stickytimers.app/macwhisper/MacWhisper-#{version.csv.second}.zip",
+      verified: "stickytimers.app/macwhisper/"
   name "MacWhisper"
   desc "Speech recognition tool"
   homepage "https://goodsnooze.gumroad.com/l/macwhisper"
 
+  # Older items in the Sparkle feed may have a newer pubDate, so it's necessary
+  # to work with all of the items in the feed (not just the newest one).
   livecheck do
     url "https://macwhisper-site.vercel.app/appcast.xml"
-    strategy :sparkle
+    strategy :sparkle do |items|
+      items.map(&:nice_version)
+    end
   end
 
   auto_updates true
-  depends_on macos: ">= :ventura"
+  depends_on macos: ">= :sonoma"
 
   app "MacWhisper.app"
 
@@ -26,6 +30,7 @@ cask "macwhisper" do
     "~/Library/HTTPStorages/com.goodsnooze.MacWhisper",
     "~/Library/HTTPStorages/com.goodsnooze.MacWhisper.binarycookies",
     "~/Library/Preferences/com.goodsnooze.MacWhisper.plist",
+    "~/Library/Saved Application State/com.goodsnooze.MacWhisper.savedState",
     "~/Library/WebKit/com.goodsnooze.MacWhisper",
   ]
 end

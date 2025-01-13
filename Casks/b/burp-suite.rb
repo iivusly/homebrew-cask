@@ -1,11 +1,12 @@
 cask "burp-suite" do
   arch arm: "MacOsArm64", intel: "MacOsx"
 
-  version "2023.10.2.4"
-  sha256 arm:   "95f14bb8a70e01d20c624cb14f0f6f11c03d69d93d1ef2631f6df1cd8f400586",
-         intel: "df3c38fe52090943a50291d12fb79583550ffc370b0b5c8d26a29649e06b24eb"
+  version "2024.11.2"
+  sha256 arm:   "6775519f15448d60db3020e784f0058ac489025a0216a4cc5ccff4f1645bf35e",
+         intel: "ca659f994d9f4f9e19a00f76b2e752cd96f777a3e8b23e5d39bde5106d9e7e05"
 
-  url "https://portswigger.net/burp/releases/download?product=community&version=#{version}&type=#{arch}"
+  url "https://portswigger-cdn.net/burp/releases/download?product=community&version=#{version}&type=#{arch}",
+      verified: "portswigger-cdn.net/burp/releases/"
   name "Burp Suite Community Edition"
   desc "Web security testing toolkit"
   homepage "https://portswigger.net/burp/"
@@ -13,17 +14,17 @@ cask "burp-suite" do
   livecheck do
     url "https://portswigger.net/burp/releases/data"
     strategy :json do |json|
-      all_versions = json["ResultSet"]["Results"]
+      all_versions = json.dig("ResultSet", "Results")
       next if all_versions.blank?
 
-      all_versions.map do |item|
+      all_versions.filter_map do |item|
         item["version"] if
-              item["releaseChannels"].include?("Stable") &&
-              item["categories"].include?("Community") &&
-              item["builds"].any? do |build|
+              item["releaseChannels"]&.include?("Stable") &&
+              item["categories"]&.include?("Community") &&
+              item["builds"]&.any? do |build|
                 build["ProductPlatform"] == arch.to_s
               end
-      end.compact
+      end
     end
   end
 

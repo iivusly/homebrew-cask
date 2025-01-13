@@ -1,6 +1,6 @@
 cask "keyman" do
-  version "16.0.142"
-  sha256 "a4b9cb4ccd10d6b22f8e133f1812ba258d47346547e1767a5a12da3673c40c4c"
+  version "17.0.332"
+  sha256 "1b7c0ce0a7cf15db9f2b15fe80ea56b86f7d2ae778d5ae577740d1ea9d040e5e"
 
   url "https://downloads.keyman.com/mac/stable/#{version}/keyman-#{version}.dmg"
   name "Keyman"
@@ -8,7 +8,7 @@ cask "keyman" do
   homepage "https://keyman.com/"
 
   livecheck do
-    url "https://downloads.keyman.com/mac/stable"
+    url "https://downloads.keyman.com/mac/stable/"
     regex(%r{href=["']?v?(\d+(?:\.\d+)+)/?["' >]}i)
   end
 

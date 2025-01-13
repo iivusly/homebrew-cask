@@ -1,6 +1,6 @@
 cask "cloudash" do
-  version "1.21.0"
-  sha256 "b18a9ca643030586ece2ae12d485de3c8e43c6d1f572ce6b977a9b1b6aec7f86"
+  version "1.22.1"
+  sha256 "73451741b9ddf1d26eecd2ae21d92602e2c2eae414eab6329243fa75cd18428c"
 
   url "https://github.com/cloudashdev/cloudash/releases/download/#{version}/Cloudash-#{version}.dmg",
       verified: "github.com/cloudashdev/cloudash/"
@@ -18,4 +18,8 @@ cask "cloudash" do
     "~/Library/Preferences/dev.cloudash.cloudash.plist",
     "~/Library/Saved Application State/dev.cloudash.cloudash.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,9 +1,9 @@
 cask "wechatwebdevtools" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.06.2308310"
-  sha256 arm:   "36cb060450bd6a5fa3af4c219cfada7310c132c5c48338b45c5f6253117a3969",
-         intel: "402e35a37391daf5290098c161e509fcaf84c64939d47eff0386a8bf03892633"
+  version "1.06.2412040"
+  sha256 arm:   "742f2b0263dcabc0f7ff25d0c1e196e106c2763f7668de4e4a78dd69ee9521cf",
+         intel: "9bd9636044727078ce3953794596fb2488c63d1c1e645c4e157c54ad33a0c3ec"
 
   url "https://dldir1.qq.com/WechatWebDev/release/be1ec64cf6184b0fa64091919793f068/wechat_devtools_#{version}_darwin_#{arch}.dmg"
   name "Wechat DevTools"
@@ -23,8 +23,8 @@ cask "wechatwebdevtools" do
   zap trash: [
     "~/Library/Application Support/微信开发者工具",
     "~/Library/Caches/微信开发者工具",
-    "~/Library/Preferences/com.tencent.wechat.devtools.plist",
     "~/Library/Preferences/com.tencent.webplusdevtools.plist",
+    "~/Library/Preferences/com.tencent.wechat.devtools.plist",
     "~/Library/Saved Application State/com.tencent.wechat.devtools.savedState",
   ]
 end

@@ -20,6 +20,8 @@ cask "eddie" do
   desc "OpenVPN UI"
   homepage "https://eddie.website/"
 
+  # The homepage provides version information but it will frequently timeout.
+  # We check GitHub releases as a best guess of when a new version is released.
   livecheck do
     url "https://github.com/AirVPN/Eddie"
     strategy :github_latest
@@ -33,4 +35,8 @@ cask "eddie" do
     "~/.config/eddie",
     "~/Library/Preferences/org.airvpn.eddie.ui.plist",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

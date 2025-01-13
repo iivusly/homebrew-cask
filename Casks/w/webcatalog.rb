@@ -1,6 +1,6 @@
 cask "webcatalog" do
-  version "54.2.0"
-  sha256 "d2b9908ac0cce861878128f9a8afdb51b0fca8efa45e4b2175f4aae7e0cff2f5"
+  version "62.1.0"
+  sha256 "3dd0bf9ce21a77a98f412cb2ad5406d393672c16fe9943b08b8ac5b8c2c74c24"
 
   url "https://cdn-2.webcatalog.io/webcatalog/WebCatalog-#{version}-universal.dmg"
   name "WebCatalog"
@@ -13,6 +13,7 @@ cask "webcatalog" do
   end
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "WebCatalog.app"
 

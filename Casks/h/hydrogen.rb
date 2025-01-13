@@ -1,6 +1,6 @@
 cask "hydrogen" do
-  version "1.2.2"
-  sha256 "c20c2edf80d4f22bfc068e9d9176bf1e8f0a27d66d86340bc1010cd9cc29995d"
+  version "1.2.4"
+  sha256 "5030c76305fda1ff7024dfcdcc3333732de0f98c8341a2610a292c988e365db4"
 
   url "https://github.com/hydrogen-music/hydrogen/releases/download/#{version}/Hydrogen-#{version}.dmg",
       verified: "github.com/hydrogen-music/hydrogen/"
@@ -18,4 +18,8 @@ cask "hydrogen" do
   app "Hydrogen.app"
 
   zap trash: "~/Library/Application Support/Hydrogen"
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,9 +1,9 @@
 cask "inkdrop" do
   arch arm: "arm64", intel: "x64"
 
-  version "5.6.0"
-  sha256 arm:   "bbc789ed4c2effa425d8feeef04f3016d47ac505df35f54815c76b91b40a9f09",
-         intel: "9611778fa7318efbfe3528eb8f060b4beced89039e6096ef67e6bf0f2a296a5c"
+  version "5.9.2"
+  sha256 arm:   "3e40855ccc58ea30ef10d625fe7e9a82b3edc498c2e699b7b0862e52de62fd7a",
+         intel: "7fc05a6e5a5c042a2fd8d5c5f1725b5096f1e26fd197b82e6529307e07538f12"
 
   url "https://d3ip0rje8grhnl.cloudfront.net/v#{version}/Inkdrop-#{version}-#{arch}-Mac.zip",
       verified: "d3ip0rje8grhnl.cloudfront.net/"
@@ -18,13 +18,15 @@ cask "inkdrop" do
     end
   end
 
+  depends_on macos: ">= :catalina"
+
   app "Inkdrop.app"
 
   zap trash: [
     "~/Library/Application Support/inkdrop",
-    "~/Library/Saved Application State/info.pkpk.inkdrop.savedState",
     "~/Library/Caches/info.pkpk.inkdrop",
-    "~/Library/Preferences/info.pkpk.inkdrop.plist",
     "~/Library/Preferences/info.pkpk.inkdrop.helper.plist",
+    "~/Library/Preferences/info.pkpk.inkdrop.plist",
+    "~/Library/Saved Application State/info.pkpk.inkdrop.savedState",
   ]
 end

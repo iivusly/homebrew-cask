@@ -1,9 +1,8 @@
 cask "sol" do
-  version "2.0.47"
-  sha256 "d86ee9543dd3ffa2669aa0859bbfc1e1e9c5c5b8c1ee2bf4fcacd7a339ba2bad"
+  version "2.1.163"
+  sha256 "5c3940412f02ff6d10877b1ce795a54af5f6299595b235d19b389dc8bf2f0c5f"
 
-  url "https://raw.githubusercontent.com/ospfranco/sol/main/releases/#{version}.zip",
-      verified: "raw.githubusercontent.com/ospfranco/sol/"
+  url "https://github.com/ospfranco/sol/releases/download/#{version}/#{version}.zip"
   name "Sol"
   desc "Launcher & command palette"
   homepage "https://github.com/ospfranco/sol"
@@ -17,8 +16,8 @@ cask "sol" do
 
   app "Sol.app"
 
-  uninstall quit:      "com.ospfranco.sol",
-            launchctl: "com.ospfranco.sol-LaunchAtLoginHelper"
+  uninstall launchctl: "com.ospfranco.sol-LaunchAtLoginHelper",
+            quit:      "com.ospfranco.sol"
 
   zap trash: [
     "~/Library/Application Scripts/com.ospfranco.sol-LaunchAtLoginHelper",

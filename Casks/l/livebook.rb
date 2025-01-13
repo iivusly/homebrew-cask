@@ -1,8 +1,8 @@
 cask "livebook" do
-  version "0.11.3"
-  sha256 "5181b685cedb2a43a8992156fb3e6b2a0da7addb926c8d5e29ab93ed08f53a72"
+  version "0.14.5"
+  sha256 "e82926e11638775812d4c2ae5ee55396f20c485fb8e5c29a6d60ab43b8850a25"
 
-  url "https://github.com/livebook-dev/livebook/releases/download/v#{version}/LivebookInstall-v#{version}-macos-universal.dmg",
+  url "https://github.com/livebook-dev/livebook/releases/download/v#{version}/LivebookInstall-macos-universal.dmg",
       verified: "github.com/livebook-dev/livebook/"
   name "Livebook"
   desc "Code notebooks for Elixir developers"

@@ -1,9 +1,9 @@
 cask "dropbox-capture" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "109.8.0"
-  sha256 arm:   "f7d238ae8e22139c33894569af1948a6ddfc2eb9ce512bf08ade25cd2377ae3c",
-         intel: "f3c6efd75280a27be8f64360501d7c2814006a8330c3f8180d713b6cd6b1e734"
+  version "115.1.0"
+  sha256 arm:   "e834c331268461f39fa777ebf54ccd131359ffd12308159bc94ec8987969c178",
+         intel: "51a2188810bb299bba8de16687c7b2bca22e00279c9f74b7e92e7252bc0984eb"
 
   url "https://edge.dropboxstatic.com/dbx-releng/products/dropbox-capture/#{version}/mac.#{arch}/Dropbox_Capture.dmg",
       verified: "edge.dropboxstatic.com/dbx-releng/products/dropbox-capture/"
@@ -17,15 +17,15 @@ cask "dropbox-capture" do
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :catalina"
 
   app "Dropbox Capture.app"
 
   zap trash: [
     "~/Library/Application Support/Dropbox-Capture",
-    "~/Library/Caches/Dropbox-Capture",
     "~/Library/Caches/com.electron.dropbox-capture",
     "~/Library/Caches/com.electron.dropbox-capture.ShipIt",
+    "~/Library/Caches/Dropbox-Capture",
     "~/Library/Logs/Dropbox-Capture",
     "~/Library/Preferences/com.electron.dropbox-capture.plist",
   ]

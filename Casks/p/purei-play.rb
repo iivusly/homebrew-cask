@@ -1,19 +1,18 @@
 cask "purei-play" do
-  version "2023-10-27,985ff954"
-  sha256 "88fbdf75866abcee7cfed57ee12b4c9fa591445564b40be3b3ae1322b5a8668e"
+  version "0.68"
+  sha256 "94570225a6d1519f5062ad45f9c3eb39fc4ec4108fbf38579ac47a4ea8e7e6b6"
 
-  url "https://s3.us-east-2.amazonaws.com/playbuilds/#{version.csv.second}/Play.dmg",
-      verified: "s3.us-east-2.amazonaws.com/playbuilds/"
+  url "https://purei.org/downloads/play/stable/#{version}/Play.dmg"
   name "Play!"
   desc "PlayStation 2 emulator"
   homepage "https://purei.org/"
 
   livecheck do
-    url "https://services.purei.org/api/builds"
-    strategy :json do |json|
-      "#{json["commitDate"][/^(\d+(?:-\d+)+)T/i, 1]},#{json["commitHash"]}"
-    end
+    url "https://purei.org/downloads/play/stable/"
+    regex(/href=.*?v?(\d+(?:\.\d+)+)/i)
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Play.app"
 

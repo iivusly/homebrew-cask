@@ -1,9 +1,9 @@
 cask "visual-studio-code" do
   arch arm: "darwin-arm64", intel: "darwin"
 
-  version "1.83.1"
-  sha256 arm:   "9d065f9ca04dd077a42ff1e38acdbe54cf9f275d71a2bd24ba42a5d33f953b47",
-         intel: "4deda8a2be1b812f3aee3c8ad3081d70ed3d457344d683798096a235be32c19e"
+  version "1.96.2"
+  sha256 arm:   "45240b464e9e41dded36192fb7c272ce456ab99c7ecb46805fc17934c67ea523",
+         intel: "e80a38e6c8176f108eacff83bdce4df4a907d5d062074a2891132819901d12a2"
 
   url "https://update.code.visualstudio.com/#{version}/#{arch}/stable"
   name "Microsoft Visual Studio Code"
@@ -13,20 +13,27 @@ cask "visual-studio-code" do
 
   livecheck do
     url "https://update.code.visualstudio.com/api/update/#{arch}/stable/latest"
-    regex(/"productVersion"\s*:\s*"(\d+(:?\.\d+)+)"/i)
+    strategy :json do |json|
+      json["productVersion"]
+    end
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Visual Studio Code.app"
   binary "#{appdir}/Visual Studio Code.app/Contents/Resources/app/bin/code"
+
+  uninstall launchctl: "com.microsoft.VSCode.ShipIt",
+            quit:      "com.microsoft.VSCode"
 
   zap trash: [
     "~/.vscode",
     "~/Library/Application Support/Code",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.microsoft.vscode.sfl*",
-    "~/Library/Caches/com.microsoft.VSCode.ShipIt",
     "~/Library/Caches/com.microsoft.VSCode",
+    "~/Library/Caches/com.microsoft.VSCode.ShipIt",
+    "~/Library/HTTPStorages/com.microsoft.VSCode",
     "~/Library/Preferences/ByHost/com.microsoft.VSCode.ShipIt.*.plist",
     "~/Library/Preferences/com.microsoft.VSCode.helper.plist",
     "~/Library/Preferences/com.microsoft.VSCode.plist",
