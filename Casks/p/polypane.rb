@@ -1,9 +1,9 @@
 cask "polypane" do
   arch arm: "-arm64"
 
-  version "15.0.1"
-  sha256 arm:   "b1b3c4a6bf10b3ea45e2108b2a8bd93c4e25ace15b88f9ec02a8b2bf18fecf75",
-         intel: "0febbd5289323c7edab6116ca18b55dbfd9b95b981918171b789fc7da78bf7fb"
+  version "23.0.0"
+  sha256 arm:   "30bc4fd0bfdd40ed201ce7cf91241d5a27f4e15ab8e08bab030232bdf0a4b821",
+         intel: "7bbc6e574d552a3084f539c4b6edd05c40cfb17f802e8b99509e6658c850dcf4"
 
   url "https://github.com/firstversionist/polypane/releases/download/v#{version}/Polypane-#{version}#{arch}.dmg",
       verified: "github.com/firstversionist/polypane/"
@@ -11,12 +11,14 @@ cask "polypane" do
   desc "Browser for ambitious developers"
   homepage "https://polypane.app/"
 
+  depends_on macos: ">= :big_sur"
+
   app "Polypane.app"
 
   zap trash: [
     "~/Library/Application Support/Polypane",
-    "~/Library/Caches/com.firstversionist.polypane.ShipIt",
     "~/Library/Caches/com.firstversionist.polypane",
+    "~/Library/Caches/com.firstversionist.polypane.ShipIt",
     "~/Library/Logs/Polypane",
     "~/Library/Preferences/com.firstversionist.polypane.plist",
     "~/Library/Saved Application State/com.firstversionist.polypane.savedState",

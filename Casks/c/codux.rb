@@ -1,9 +1,9 @@
 cask "codux" do
   arch arm: "arm64", intel: "x64"
 
-  version "15.13.0"
-  sha256 arm:   "62becb8c027367dd59382dc00abedebd781f61a3be1c89829e948cde726fdf79",
-         intel: "68afa3ba2e7b6519fcdabc4170a0123b5c891916bb675a7dfb04ec87d8c0185c"
+  version "15.41.0"
+  sha256 arm:   "921b414a41ea1adea4b46ef1d82989d798d3fef7ecae88d986d82ee17674b7cb",
+         intel: "ddc48e34962de549b0e1811327247f1adefb425416b8e7293245269b72d57958"
 
   url "https://github.com/wixplosives/codux-versions/releases/download/#{version}/Codux-#{version}.#{arch}.dmg",
       verified: "github.com/wixplosives/codux-versions/"
@@ -14,10 +14,9 @@ cask "codux" do
   livecheck do
     url "https://www.codux.com/download"
     regex(/href=.*?Codux[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}\.dmg/i)
-    strategy :page_match
   end
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Codux.app"
 

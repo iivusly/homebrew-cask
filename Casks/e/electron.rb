@@ -1,9 +1,9 @@
 cask "electron" do
   arch arm: "arm64", intel: "x64"
 
-  version "27.0.2"
-  sha256 arm:   "b589d51e4e54698efa0403c47ac6f544115eb354858d9117b1728fb0c8202af7",
-         intel: "f6c7bdadf7b5329b1c22fa1c9da43bd21f808600a9e6287a3b31d16763fd40af"
+  version "34.0.0"
+  sha256 arm:   "1e5eb39e508fdd54eeec312d92b30857246fc32924b9609d35ecd8ab91ac1320",
+         intel: "a2aba1dde6b96e0f991d83ff36e1473dd2c89b0c517fcd03947fc00a3d896414"
 
   url "https://github.com/electron/electron/releases/download/v#{version}/electron-v#{version}-darwin-#{arch}.zip",
       verified: "github.com/electron/electron/"
@@ -16,13 +16,17 @@ cask "electron" do
     strategy :github_latest
   end
 
+  depends_on macos: ">= :big_sur"
+
   app "Electron.app"
   binary "#{appdir}/Electron.app/Contents/MacOS/Electron", target: "electron"
 
   zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.github.electron.sfl*",
     "~/Library/Application Support/Electron",
     "~/Library/Caches/Electron",
     "~/Library/Preferences/com.github.electron.helper.plist",
     "~/Library/Preferences/com.github.electron.plist",
+    "~/Library/Saved Application State/com.github.Electron.savedState",
   ]
 end

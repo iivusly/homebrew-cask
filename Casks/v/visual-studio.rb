@@ -2,12 +2,12 @@ cask "visual-studio" do
   arch arm: "arm64", intel: "x64"
 
   on_arm do
-    version "17.6.6.408,83c68d80-cca7-40f0-8411-7ca3263f8ae9,4a418b7f50fbee5ef0567d19f8348f5e"
-    sha256 "a57e3a4eeec189c1c715f1e090421902450434d6f91280a33748cd74751a2ad9"
+    version "17.6.14.413,154dca6a-af92-456d-8874-9c7c27f0bd21,60bf4fe63620e88714aef690ec794226"
+    sha256 "a720327c108a969a18cac7fff84dccbf20917697e8ed3b7fd9c98db980ad05ed"
   end
   on_intel do
-    version "17.6.6.408,83c68d80-cca7-40f0-8411-7ca3263f8ae9,ebbc76f6530843da11bc4e13164caf9b"
-    sha256 "dc89f21704974ff73f73abaf47ffdc53813e84aceba65cc8a8b71fb613b36b7d"
+    version "17.6.14.413,154dca6a-af92-456d-8874-9c7c27f0bd21,a8ec8eabbf59bf8f909b7c5034702558"
+    sha256 "560b7c8832199582a4db7ab97f3294603f1b6ffc618f562bb2ebb2e6b81332f7"
   end
 
   url "https://download.visualstudio.microsoft.com/download/pr/#{version.csv.second}/#{version.csv.third}/visualstudioformac-#{version.csv.first}-#{arch}.dmg"
@@ -15,19 +15,11 @@ cask "visual-studio" do
   desc "Integrated development environment"
   homepage "https://visualstudio.microsoft.com/vs/mac/"
 
-  livecheck do
-    url "https://aka.ms/vsmac/manifest/#{version.major}-stable"
-    regex(%r{/download/pr/([^/]+)/([^/]+)/visualstudioformac[._-]v?(\d+(?:\.\d+)+)-#{arch}.dmg}i)
-    strategy :json do |json|
-      json["items"].flat_map do |item|
-        item["url"]&.scan(regex)&.map { |match| "#{match[2]},#{match[0]},#{match[1]}" }
-      end
-    end
-  end
+  deprecate! date: "2024-08-31", because: :discontinued
 
   auto_updates true
   depends_on macos: ">= :catalina"
-  depends_on cask: "homebrew/cask-versions/mono-mdk-for-visual-studio"
+  depends_on cask: "mono-mdk-for-visual-studio"
 
   app "Visual Studio.app"
 

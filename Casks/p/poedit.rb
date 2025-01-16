@@ -1,6 +1,6 @@
 cask "poedit" do
-  version "3.4.1"
-  sha256 "feb2c58e3c3ff34f0137257faddce5c04a35c0712782c30d9de7fca0701b5f63"
+  version "3.5.2"
+  sha256 "22298b75e839ab1884ba11619a0b713a0453ae22a6d51c71ab8a900b7787902f"
 
   url "https://download.poedit.net/Poedit-#{version}.zip"
   name "Poedit"
@@ -18,7 +18,7 @@ cask "poedit" do
   app "Poedit.app"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/net.poedit.poedit.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/net.poedit.poedit.sfl*",
     "~/Library/Application Support/Poedit",
     "~/Library/Caches/net.poedit.Poedit",
     "~/Library/HTTPStorages/net.poedit.Poedit.binarycookies",

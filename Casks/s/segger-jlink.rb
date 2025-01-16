@@ -1,6 +1,6 @@
 cask "segger-jlink" do
-  version "7.92m"
-  sha256 "36a4937f8d1bae6c11f1c2b6ff6b2c769c6b9b45514e55abc63609f5ae07ef26"
+  version "8.12b"
+  sha256 "2d0f7c7782a1972a2b770e2e11f26bde6211340b4e9e69a2c485e650a05e5789"
 
   url "https://www.segger.com/downloads/jlink/JLink_MacOSX_V#{version.no_dots}_universal.pkg",
       using: :post,
@@ -36,9 +36,9 @@ cask "segger-jlink" do
     "~/Library/Saved Application State/com.segger.JFlashLite.*savedState",
     "~/Library/Saved Application State/com.segger.JLinkGDBServer.*savedState",
     "~/Library/Saved Application State/com.segger.JLinkLicenseManager.*savedState",
-    "~/Library/Saved Application State/com.segger.JLinkRTTViewer.*savedState",
     "~/Library/Saved Application State/com.segger.JLinkRegistration.*savedState",
     "~/Library/Saved Application State/com.segger.JLinkRemoteServer.*savedState",
+    "~/Library/Saved Application State/com.segger.JLinkRTTViewer.*savedState",
   ]
 
   caveats do
