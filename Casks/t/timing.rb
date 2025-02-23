@@ -1,6 +1,6 @@
 cask "timing" do
-  version "2023.5.4"
-  sha256 "f1f064d54873a83e1256635a898467bcd652a757a24b2eccaf65910dc2ffd27e"
+  version "2025.2.2"
+  sha256 "e957f0fe9651f158c97191354d49607a94bbb01a01702d3eeab4a2a762f47489"
 
   url "https://updates.timingapp.com/download/Timing-#{version}.dmg"
   name "Timing"
@@ -12,13 +12,14 @@ cask "timing" do
   # work with all of the items in the feed (not just the newest one).
   livecheck do
     url "https://updates.timingapp.com/updates/timing2.xml"
-    strategy :sparkle do |items|
-      items.map(&:short_version)
+    regex(/Timing[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    strategy :sparkle do |items, regex|
+      items.map { |item| item.url[regex, 1] }
     end
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :catalina"
 
   app "Timing.app"
 
@@ -29,8 +30,8 @@ cask "timing" do
     "~/Library/Application Support/info.eurocomp.TimingHelper",
     "~/Library/Application Support/info.eurocomp.TimingHelper.InfoExtractorService",
     "~/Library/Caches/info.eurocomp.Timing2",
-    "~/Library/Caches/info.eurocomp.TimingHelper.InfoExtractorService",
     "~/Library/Caches/info.eurocomp.TimingHelper",
+    "~/Library/Caches/info.eurocomp.TimingHelper.InfoExtractorService",
     "~/Library/Preferences/info.eurocomp.Timing2.plist",
     "~/Library/Preferences/info.eurocomp.TimingHelper.InfoExtractorService.plist",
     "~/Library/Preferences/info.eurocomp.TimingHelper.plist",

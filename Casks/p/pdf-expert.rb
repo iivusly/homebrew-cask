@@ -1,6 +1,6 @@
 cask "pdf-expert" do
-  version "3.6,989"
-  sha256 "ea43c8330af18c9a61c4c2a330c83e1d97e3299ee42b8edb3908f16de73e72bd"
+  version "3.10.11,1097"
+  sha256 "3f260d9455173689a5c4fc0d2cefbb2cb63bb049b2de1241902d7f8e0f005336"
 
   url "https://downloads.pdfexpert.com/pem#{version.major}/versions/#{version.csv.second}/PDFExpert.zip"
   name "PDF Expert"
@@ -13,13 +13,13 @@ cask "pdf-expert" do
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/pdf-expert-beta"
-  depends_on macos: ">= :high_sierra"
+  conflicts_with cask: "pdf-expert@beta"
+  depends_on macos: ">= :monterey"
 
   app "PDF Expert.app"
 
   zap trash: [
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.readdle.pdfexpert-mac.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.readdle.pdfexpert-mac.sfl*",
     "~/Library/Application Support/com.readdle.PDFExpert-Mac",
     "~/Library/Application Support/PDF Expert",
     "~/Library/Caches/com.readdle.PDFExpert-Installer",

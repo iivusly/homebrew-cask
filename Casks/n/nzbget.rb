@@ -8,10 +8,8 @@ cask "nzbget" do
   desc "Usenet downloader focusing on efficiency"
   homepage "https://nzbget.net/"
 
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
+  deprecate! date: "2024-02-19", because: :discontinued
+  disable! date: "2025-02-19", because: :discontinued
 
   app "NZBGet.app"
 

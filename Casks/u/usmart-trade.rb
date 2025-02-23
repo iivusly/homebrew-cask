@@ -1,6 +1,6 @@
 cask "usmart-trade" do
-  version "3.26.0,a3ed432e-24eb-4ab8-bc2d-a0f71ef46ab9,2023-09-27"
-  sha256 "fb772248102213f474f5406edaf9d51df7d2dbc61c7781829201d344226f18d1"
+  version "3.30.1,eec61da0-e3d5-46ee-88cd-aa0349b1c9d3,2025-02-21"
+  sha256 "0d056e725a4e110df3bf9cb623281b7f122c3ae7ff69175a44851579d958e9d9"
 
   url "https://jy-common-prd-1257884527.cos.ap-guangzhou.myqcloud.com/admin/app-version-file/#{version.csv.third}/#{version.csv.second}/uSMART%20Trade-#{version.csv.first}.dmg",
       verified: "jy-common-prd-1257884527.cos.ap-guangzhou.myqcloud.com/"
@@ -10,8 +10,8 @@ cask "usmart-trade" do
 
   livecheck do
     url "https://www.usmart.hk/en/download"
-    regex(%r{href=['"].*?file/(\d+[-_]\d+[-_]\d+)/((?:\w+-)+(?:\w+))/.*?Trade[-_]?(\d+(?:\.\d+)+).dmg}i)
-    strategy :page_match do |page|
+    regex(%r{href=['"].*?file/(\d+[-_]\d+[-_]\d+)/((?:\w+-)+(?:\w+))/.*?Trade[-_]?(\d+(?:\.\d+)+)\.dmg}i)
+    strategy :page_match do |page, regex|
       page.scan(regex)
           .map { |match| "#{match[2]},#{match[1]},#{match[0]}" }
     end
@@ -24,4 +24,8 @@ cask "usmart-trade" do
     "~/Library/Preferences/com.usmart.mac.test.plist",
     "~/Library/Saved Application State/com.usmart.mac.test.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

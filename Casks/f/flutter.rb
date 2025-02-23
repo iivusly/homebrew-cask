@@ -1,9 +1,9 @@
 cask "flutter" do
   arch arm: "_arm64"
 
-  version "3.13.9"
-  sha256 arm:   "374615f834f23cff70eaef3ef1c3ebd3f8246ebf4c7b7f100115c98bb32858bb",
-         intel: "c14436a8b968d56616d8c99f646470160840f1047fd11e8124493c1c2706c4bf"
+  version "3.29.0"
+  sha256 arm:   "8c3196363c7e79ead5bd2bd657cad6915afdf5b315ca51bfa7e569f490ec3de4",
+         intel: "d3b2d01b7f6713f3a8c3c51ea4a4fb77a2775cfc69708f608bd2ff688493242a"
 
   url "https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos#{arch}_#{version}-stable.zip",
       verified: "storage.googleapis.com/flutter_infra_release/releases/stable/macos/"
@@ -13,13 +13,20 @@ cask "flutter" do
 
   livecheck do
     url "https://storage.googleapis.com/flutter_infra_release/releases/releases_macos.json"
-    regex(%r{/flutter[._-]macos[._-]v?(\d+(?:\.\d+)+)[._-]stable\.zip}i)
+    strategy :json do |json|
+      json["releases"]&.map do |release|
+        next if release["channel"] != "stable"
+
+        release["version"]
+      end
+    end
   end
 
   auto_updates true
 
   binary "flutter/bin/dart"
   binary "flutter/bin/flutter"
+  binary "flutter", target: "#{HOMEBREW_PREFIX}/share/flutter"
 
   zap trash: "~/.flutter"
 end

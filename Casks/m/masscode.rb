@@ -1,9 +1,9 @@
 cask "masscode" do
   arch arm: "-arm64"
 
-  version "3.10.0"
-  sha256 arm:   "e5f50023d2f3cfeafce1b79036703fbfb745c56ccb977bb073d45e2a2fa2a05f",
-         intel: "cbf4cfbcbb448582d00ed91b5ae8ea94531c31ce1fdb3368a26ee65fccf7ceea"
+  version "3.12.0"
+  sha256 arm:   "debc329c0d01d0b3213d39170fa1363422dda732ac0e7d7b9967fc4f7d315943",
+         intel: "54ed1eb5c11667afde667243dac4d7cd9edf31db64380cd30ff94db75683bde0"
 
   url "https://github.com/massCodeIO/massCode/releases/download/v#{version}/massCode-#{version}#{arch}.dmg",
       verified: "github.com/massCodeIO/massCode/"
@@ -12,7 +12,7 @@ cask "masscode" do
   homepage "https://masscode.io/"
 
   livecheck do
-    url :stable
+    url :url
     regex(/^v?(\d+(?:\.\d+)+)$/i)
   end
 

@@ -1,12 +1,12 @@
 cask "lulu" do
-  version "2.5.1"
-  sha256 "e9d55acc568c7037d435225c0c44759a10f605886161a60263a632f12806daf2"
+  version "3.1.2"
+  sha256 "b19ee034c4aadf44ad7303deb6d1e85058d3198b446312177ce19074048b8882"
 
   url "https://github.com/objective-see/LuLu/releases/download/v#{version}/LuLu_#{version}.dmg",
       verified: "github.com/objective-see/LuLu/"
   name "LuLu"
   desc "Open-source firewall to block unknown outgoing connections"
-  homepage "https://objective-see.com/products/lulu.html"
+  homepage "https://objective-see.org/products/lulu.html"
 
   livecheck do
     url :url
@@ -17,16 +17,12 @@ cask "lulu" do
 
   app "LuLu.app"
 
-  uninstall script: {
-    executable: "#{appdir}/LuLu.app/Contents/Resources/LuLu Uninstaller.app/Contents/MacOS/LuLu Uninstaller",
-    args:       ["-uninstall"],
-    sudo:       true,
-  }
+  # Lulu's uninstaller removes all preference files breaking brew upgrade
 
   zap trash: [
     "~/Library/Caches/com.objective-see.lulu",
     "~/Library/Caches/com.objective-see.lulu.helper",
-    "~/Library/Preferences/com.objective-see.lulu.plist",
     "~/Library/Preferences/com.objective-see.lulu.helper.plist",
+    "~/Library/Preferences/com.objective-see.lulu.plist",
   ]
 end

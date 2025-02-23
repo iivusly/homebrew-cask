@@ -1,6 +1,6 @@
 cask "fiji" do
-  version "20230801-1717"
-  sha256 "3f94a27a46152012017bad9367aa15721254075f135e0753d41c927159594a13"
+  version "20250219-1317"
+  sha256 "3e5e8605ded53cd5ccf4966d665a0fbf2ea77de3babfbb3ddbb9be1f70a84360"
 
   url "https://downloads.imagej.net/fiji/archive/#{version}/fiji-macosx.zip",
       verified: "downloads.imagej.net/fiji/archive/"
@@ -21,4 +21,8 @@ cask "fiji" do
     "~/Library/Preferences/sc.fiji.cellcounter.plist",
     "~/Library/Saved Application State/org.fiji.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

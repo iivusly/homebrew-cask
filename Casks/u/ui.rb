@@ -1,6 +1,6 @@
 cask "ui" do
-  version "0.67.4,786592d0-f9e4-46b6-bb37-e65264de04a5,213a"
-  sha256 "fb3a8e7ecd64fd46e46437e80d862b40d51ec30a071b4b0552806d8f0cb7341f"
+  version "0.83.2,fade75a5-ce7c-49e9-802b-5ac5150c6912,496a"
+  sha256 "bf74a06392706af488350f82c600ed649a3f8fd2f06d3ffb21dd14ff636d785c"
 
   url "https://fw-download.ubnt.com/data/uid-ui-desktop-app/#{version.csv.third}-macOS-#{version.csv.first}-#{version.csv.second}.pkg",
       verified: "fw-download.ubnt.com/data/uid-ui-desktop-app/"
@@ -10,9 +10,9 @@ cask "ui" do
 
   livecheck do
     url "https://api-gw.uid.alpha.ui.com:443/location/api/v1/public/fw/download/latest/?app=UI-DESKTOP-MACOS"
-    regex(/(\w+)[._-]macOS[._-](\d+(?:\.\d+)+)[._-]([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/i)
+    regex(/(\w+)[._-]macOS[._-](\d+(?:\.\d+)+)[._-](\h{8}-\h{4}-\h{4}-\h{4}-\h{12})/i)
     strategy :header_match do |headers, regex|
-      match = headers["location"].match(regex)
+      match = headers["location"]&.match(regex)
       next if match.blank?
 
       "#{match[2]},#{match[3]},#{match[1]}"
@@ -23,16 +23,16 @@ cask "ui" do
 
   pkg "#{version.csv.third}-macOS-#{version.csv.first}-#{version.csv.second}.pkg"
 
-  uninstall pkgutil:   [
-              "com.ui.uid.desktop",
-              "com.ui.uid.mac",
-            ],
-            launchctl: [
+  uninstall launchctl: [
               "application.com.ui.uid.desktop.25686722.25686727",
               "com.ui.uid.desktop.privilegedtool",
               "com.ui.uid.desktop.startup",
             ],
-            quit:      "com.ui.uid.desktop"
+            quit:      "com.ui.uid.desktop",
+            pkgutil:   [
+              "com.ui.uid.desktop",
+              "com.ui.uid.mac",
+            ]
 
   zap trash: [
     "~/Library/Application Support/com.ui.uid.desktop/",

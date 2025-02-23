@@ -1,15 +1,14 @@
 cask "textexpander" do
-  version "7.7,770.7"
-  sha256 "baa7bb6b62548ad6ff6abba6a8c32362e0c0bb7f9f4926d5dfe26734d76ef666"
+  version "8.2.2,822.4"
+  sha256 "13f0d5afd9262b77ff9bc786512e29315d70350b6251877e77cb732d226c945b"
 
-  url "https://cdn.textexpander.com/mac/#{version.csv.second}/TextExpander_#{version.csv.first}.dmg",
-      verified: "cdn.textexpander.com/mac/"
+  url "https://cdn.textexpander.com/mac/#{version.csv.second}/TextExpander_#{version.csv.first}.dmg"
   name "TextExpander"
   desc "Inserts pre-made snippets of text anywhere"
-  homepage "https://smilesoftware.com/TextExpander"
+  homepage "https://textexpander.com/"
 
   livecheck do
-    url "https://textexpander.com/appcast/TextExpander-macOS.xml"
+    url "https://cgi.textexpander.com/appcast/TextExpander-macOS.xml"
     strategy :sparkle
   end
 
@@ -18,5 +17,12 @@ cask "textexpander" do
 
   app "TextExpander.app"
 
-  zap trash: "~/Library/Application Support/TextExpander/"
+  zap trash: [
+    "~/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.smileonmymac.textexpander.json",
+    "~/Library/Application Support/TextExpander",
+    "~/Library/Caches/com.smileonmymac.textexpander",
+    "~/Library/Preferences/com.smileonmymac.textexpander.plist",
+    "~/Library/Saved Application State/com.smileonmymac.textexpander.savedState",
+    "~/Library/Webkit/com.smileonmymac.textexpander",
+  ]
 end

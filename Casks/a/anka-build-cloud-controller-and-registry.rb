@@ -1,20 +1,16 @@
 cask "anka-build-cloud-controller-and-registry" do
   arch arm: "Arm64", intel: "Amd64"
 
-  version "1.38.0-3989ee24"
-  sha256 arm:   "c2e9219337d842ae942d84691787a6e145b1cf56717821a18561aded50d36ad4",
-         intel: "0226f765bfffd43aa99310813aa47ef90c4582f6e9952f6950bc733f00e54376"
+  version "1.39.0-d35842e6"
+  sha256 arm:   "0b7cd5e1e27a6466380de772cfa26c97ca6544f71450086043ee55cd505c4ffc",
+         intel: "1205ac08ac225574e22097a1034d44f80f7d81d71309e0b610884228813c0832"
 
   url "https://downloads.veertu.com/anka/AnkaControllerRegistry#{arch}-#{version}.pkg"
   name "Anka Build Cloud Controller & Registry"
   desc "Virtual machine management GUI/API and registry"
   homepage "https://veertu.com/"
 
-  livecheck do
-    url "https://veertu.com/downloads/anka-build-cloud-controller-registry-darwin-#{arch.downcase}-latest"
-    regex(/AnkaControllerRegistry#{arch}[._-]?v?(\d+(?:\.\d+)*[._-]\h+)\.pkg/i)
-    strategy :header_match
-  end
+  disable! date: "2024-12-16", because: :discontinued
 
   pkg "AnkaControllerRegistry#{arch}-#{version}.pkg"
 
@@ -29,5 +25,11 @@ cask "anka-build-cloud-controller-and-registry" do
 
   caveats do
     license "https://veertu.com/terms-and-conditions/"
+
+    <<~EOS
+      This package has been replaced with two separate packages and will eventually be removed. For more information, please see
+
+      https://docs.veertu.com/anka/anka-build-cloud/release-notes/#1400-1400-95a63938---december-6th-2023
+    EOS
   end
 end

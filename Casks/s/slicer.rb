@@ -1,6 +1,6 @@
 cask "slicer" do
-  version "5.4.0,64e0c56306a93d6cff363e32"
-  sha256 "0255b1170a2563b1c6f8ce80989c8f8d2b86d20fbf585b8289d583503af11c31"
+  version "5.8.0,679333bb1357655fd5860245"
+  sha256 "2087fc62877cb2e5ef1f8885646794e51633db1df16bfeb44e8a9d2a4292b909"
 
   url "https://slicer-packages.kitware.com/api/v1/item/#{version.csv.second}/download",
       verified: "slicer-packages.kitware.com/"
@@ -9,23 +9,29 @@ cask "slicer" do
   homepage "https://www.slicer.org/"
 
   livecheck do
-    url "https://download.slicer.org"
+    url "https://download.slicer.org/?os=macosx&stability=release"
     regex(%r{href=.*?/bitstream/(\h+)["' >].+?["']header["'][^>]*?>\s*v?(\d+(?:\.\d+)+)}im)
     strategy :page_match do |page, regex|
-      match = page.scan(regex)
-      next if match.length < 2
+      match = page.match(regex)
+      next if match.blank?
 
-      "#{match[1][1]},#{match[1][0]}"
+      "#{match[2]},#{match[1]}"
     end
   end
+
+  conflicts_with cask: "slicer@preview"
 
   app "Slicer.app"
 
   zap trash: [
+    "~/.config/www.na-mic.org",
     "~/Library/Application Support/NA-MIC",
     "~/Library/Preferences/org.slicer.slicer.plist",
     "~/Library/Preferences/Slicer.plist",
     "~/Library/Saved Application State/org.slicer.slicer.savedState",
-    "~/.config/www.na-mic.org",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

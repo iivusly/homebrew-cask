@@ -38,15 +38,13 @@ cask "itsycal" do
     end
   end
   on_big_sur :or_newer do
-    version "0.15.0"
-    sha256 "d8f97b3576ce0d6a23ec15410c190befcefc737db7e37b4d4f65ae1eea35a414"
+    version "0.15.6"
+    sha256 "dc5b99a601796304a5386190c6ff6998057c59fcdabd3d5bb04b4b561d029484"
 
     livecheck do
       url "https://itsycal.s3.amazonaws.com/itsycal.xml"
       strategy :sparkle, &:short_version
     end
-
-    depends_on macos: ">= :big_sur"
   end
 
   url "https://itsycal.s3.amazonaws.com/Itsycal-#{version}.zip",
@@ -59,5 +57,10 @@ cask "itsycal" do
 
   app "Itsycal.app"
 
-  zap trash: "~/Library/Preferences/com.mowglii.ItsycalApp.plist"
+  uninstall quit: "com.mowglii.ItsycalApp"
+
+  zap trash: [
+    "~/Library/HTTPStorages/com.mowglii.ItsycalApp",
+    "~/Library/Preferences/com.mowglii.ItsycalApp.plist",
+  ]
 end

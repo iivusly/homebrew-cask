@@ -1,16 +1,21 @@
 cask "mubu" do
-  version "3.7.0"
-  sha256 "a58493fc1b185fdd808ab9167b7cdbe064418790d30dbb2b907147debbfedab0"
+  arch arm: "-arm64"
 
-  url "https://lf1-ttcdn-tos.pstatp.com/obj/mubu-assets/client/Mubu-#{version}.dmg",
-      verified: "lf1-ttcdn-tos.pstatp.com/obj/mubu-assets/"
+  version "4.1.3"
+  sha256 arm:   "dda96890073bfa5603f088d97cf8aa92b08f966aecc03dff445773c5017f1e19",
+         intel: "2265cf65506eb026ea64c1364a53ced30b9ae084d5c35d0fdaed226a13874124"
+
+  url "https://mubu-assets.tos-cn-shanghai.volces.com/client/Mubu-#{version}#{arch}.dmg",
+      verified: "mubu-assets.tos-cn-shanghai.volces.com/client/"
   name "Mubu"
   desc "Outline note taking and management app"
   homepage "https://mubu.com/"
 
   livecheck do
-    url "https://mubu.com/apps"
-    regex(/href=.*?Mubu[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    url "https://api2.mubu.com/v3/api/desktop_client/latest_version"
+    strategy :json do |json|
+      json.dig("data", "mac")
+    end
   end
 
   auto_updates true

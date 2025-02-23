@@ -1,15 +1,17 @@
 cask "min" do
   arch arm: "arm64", intel: "x86"
 
-  version "1.29.0"
-  sha256 arm:   "f9f95da94ff236f9f82e6b435a68e525610ce17a3c1655473ba3493fc5e5e7d4",
-         intel: "1155cb722144952d576abe4c1605545854bbac98d8cd7db9f41a110025928430"
+  version "1.34.0"
+  sha256 arm:   "0fd348204f4532942de88db6e30f1308a540b8c3fdf834323a49d8bc15c99f6d",
+         intel: "c3bd8caa8973b4ccf5580df228e28d8bcb7f768c4045257020422d12759be90d"
 
   url "https://github.com/minbrowser/min/releases/download/v#{version}/min-v#{version}-mac-#{arch}.zip",
       verified: "github.com/minbrowser/min/"
   name "Min"
   desc "Minimal browser that protects privacy"
   homepage "https://minbrowser.github.io/min/"
+
+  depends_on macos: ">= :catalina"
 
   app "Min.app"
 

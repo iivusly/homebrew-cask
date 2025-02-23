@@ -2,9 +2,9 @@ cask "dropbox" do
   arch arm: ".arm64"
   livecheck_query = on_arch_conditional arm: "&arch=arm64"
 
-  version "185.4.6054"
-  sha256 arm:   "ee8a2cda5307c36ff4fc93d14995591f04537f0c6df029c87a0ba10ab8e06cfb",
-         intel: "6a83a89fecc0d56652117b25c97c40cda0163393f164d68405e375007c427922"
+  version "218.4.4348"
+  sha256 arm:   "8f77422dcf0fec611eb5dd2a7dc12cd99758f9da387256d84a54bde9d199f37a",
+         intel: "e3a94876ae55360d9ec79846dabf66e9b87cd5586ab9e9ed55c242370e4c141f"
 
   url "https://edge.dropboxstatic.com/dbx-releng/client/Dropbox%20#{version}#{arch}.dmg",
       verified: "dropboxstatic.com/dbx-releng/client/"
@@ -19,7 +19,7 @@ cask "dropbox" do
   end
 
   auto_updates true
-  conflicts_with cask: "homebrew/cask-versions/dropbox-beta"
+  conflicts_with cask: "dropbox@beta"
 
   app "Dropbox.app"
 

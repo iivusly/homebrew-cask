@@ -1,6 +1,6 @@
 cask "the-archive" do
-  version "1.7.11"
-  sha256 "65cf6fb183aee30ca71a433d56eb5885e4188e30a2fd445140c2b2feda4c9794"
+  version "1.8.1"
+  sha256 "24daaced40fdc756d75c900e729e3cc38aefad1ab4a44e8886e3de85a863e688"
 
   url "https://dlyfuw95744jo.cloudfront.net/TheArchive-v#{version}.dmg",
       verified: "dlyfuw95744jo.cloudfront.net/"
@@ -14,7 +14,7 @@ cask "the-archive" do
   end
 
   auto_updates true
-  depends_on macos: ">= :el_capitan"
+  depends_on macos: ">= :high_sierra"
 
   app "The Archive.app"
 

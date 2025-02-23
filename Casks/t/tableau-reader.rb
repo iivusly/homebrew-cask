@@ -1,23 +1,21 @@
 cask "tableau-reader" do
-  version "2023.3.0"
-  sha256 "1eacaf5f0e4d14d2391c1826d4241775cc9f0fba0b522d100ee843e8d423837e"
+  arch arm: "-arm64"
 
-  url "https://downloads.tableau.com/tssoftware/TableauReader-#{version.dots_to_hyphens}.dmg"
+  version "2024.3.3"
+  sha256 arm:   "7d2c7789e9cb71169c70ed06508a1e3fdbe7357ad96cef1614b20f1743c8879c",
+         intel: "c92274f9ea83d36dac6e0475b636d6eb1ace6b5e1575f47f30ecfc8297aca280"
+
+  url "https://downloads.tableau.com/esdalt/#{version}/TableauReader-#{version.dots_to_hyphens}#{arch}.pkg",
+      user_agent: "curl/8.7.1"
   name "Tableau Reader"
-  desc "Open and interact with data visualizations built in Tableau Desktop"
+  desc "Open and interact with data visualisations built in Tableau Desktop"
   homepage "https://www.tableau.com/products/reader"
 
   livecheck do
-    url "https://www.tableau.com/downloads/reader/mac"
-    regex(/-(\d+(?:-\d+)+)\.dmg/i)
-    strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map do |match|
-        match[0].tr("-", ".").to_s
-      end
-    end
+    cask "tableau"
   end
 
-  pkg "Tableau Reader.pkg"
+  pkg "TableauReader-#{version.dots_to_hyphens}#{arch}.pkg"
 
   uninstall pkgutil: [
     "com.tableausoftware.FLEXNet.*",
@@ -25,12 +23,12 @@ cask "tableau-reader" do
     "com.tableausoftware.ReaderShortcuttab",
   ]
 
-  zap delete:  "/Library/Preferences/com.tableau.Tableau-Reader-*.plist",
-      pkgutil: [
+  zap pkgutil: [
         "com.tableausoftware.extensions",
         "com.tableausoftware.networkExtensions",
         "com.tableausoftware.telemetry",
       ],
+      delete:  "/Library/Preferences/com.tableau.Tableau-Reader-*.plist",
       trash:   [
         "~/Library/Caches/com.tableau.caching",
         "~/Library/Caches/com.tableausoftware.MapTiles",

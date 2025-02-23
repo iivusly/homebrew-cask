@@ -1,11 +1,12 @@
 cask "sf" do
   arch arm: "arm64", intel: "x64"
 
-  version "2.14.6,1f2724e"
-  sha256 arm:   "af37773f773cb2badb4b316459b2900f6d14960065863a80dfc0a0437858cd2d",
-         intel: "04c8d3d1c2203abed3de7250993fcffc51da9b58327e25709ceecae788522f57"
+  version "2.77.6,b32a695"
+  sha256 arm:   "0d76340ddd2b1b41c2b1ded7cbc857e748ba0680c2b2b45a7f0fce26f6b31e5e",
+         intel: "5dd54ce98c76879f54ae77433dd4a2900ff58b9e417629eab8e9a2d03ca34df4"
 
-  url "https://developer.salesforce.com/media/salesforce-cli/sf/versions/#{version.csv.first}/#{version.csv.second}/sf-v#{version.csv.first}-#{version.csv.second}-#{arch}.pkg"
+  url "https://github.com/salesforcecli/cli/releases/download/#{version.csv.first}/sf-v#{version.csv.first}-#{version.csv.second}-#{arch}.pkg",
+      verified: "github.com/salesforcecli/cli/"
   name "Salesforce CLI"
   desc "Salesforce CLI tools"
   homepage "https://developer.salesforce.com/tools/salesforcecli"
@@ -13,6 +14,8 @@ cask "sf" do
   livecheck do
     url "https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-darwin-#{arch}-buildmanifest"
     strategy :json do |json|
+      next if json["version"].blank? || json["sha"].blank?
+
       "#{json["version"]},#{json["sha"]}"
     end
   end

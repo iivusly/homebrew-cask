@@ -1,6 +1,6 @@
 cask "airtool" do
-  version "2.5.2"
-  sha256 "54fedd5b53feec42f3fda907681c59627ede0993f1e964dec937ee89059e79cd"
+  version "2.6"
+  sha256 "af24e20018d460181e6b52b3e42e649b8edd426b3538378dfbe1c4b9d13a27c5"
 
   url "https://www.intuitibits.com/downloads/Airtool_#{version}.pkg"
   name "Airtool"
@@ -21,12 +21,12 @@ cask "airtool" do
     set_ownership "/Library/Application Support/Airtool #{version.major}"
   end
 
-  uninstall pkgutil:    [
-              "com.intuitibits.airtool-helper.pkg",
-              "com.intuitibits.airtool#{version.major}.pkg",
-            ],
-            launchctl:  "com.intuitibits.airtool#{version.major}.airtool-bpf",
+  uninstall launchctl:  "com.intuitibits.airtool#{version.major}.airtool-bpf",
             login_item: "Airtool",
+            pkgutil:    [
+              "com.intuitibits.airtool#{version.major}.pkg",
+              "com.intuitibits.airtool-helper.pkg",
+            ],
             delete:     "/Library/Application Support/Airtool #{version.major}"
 
   zap trash: [

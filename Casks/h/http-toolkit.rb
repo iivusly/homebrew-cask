@@ -1,6 +1,6 @@
 cask "http-toolkit" do
-  version "1.14.7"
-  sha256 "87f7b15319d0393650035461a2e7be1f5c7873fa83f680fdc59290dda911ae89"
+  version "1.19.5"
+  sha256 "ed57c042dbce646041330fef24e744d41cd9436d609fadf0c0faafacae899847"
 
   url "https://github.com/httptoolkit/httptoolkit-desktop/releases/download/v#{version}/HttpToolkit-#{version}.dmg",
       verified: "github.com/httptoolkit/httptoolkit-desktop/"
@@ -13,6 +13,8 @@ cask "http-toolkit" do
     strategy :github_latest
   end
 
+  depends_on macos: ">= :catalina"
+
   app "HTTP Toolkit.app"
 
   zap trash: [
@@ -23,4 +25,8 @@ cask "http-toolkit" do
     "~/Library/Preferences/tech.httptoolkit.desktop.plist",
     "~/Library/Saved Application State/tech.httptoolkit.desktop.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

@@ -1,9 +1,9 @@
 cask "mattermost" do
   arch arm: "m1", intel: "x64"
 
-  version "5.5.1"
-  sha256 arm:   "a48597e69448a80e9a42f10657bf2529bdec894c17d7f05fb397c3f687df04b9",
-         intel: "6747b91d4f0f953f8d4a24363daea0f70f2fcf32162ac139a40d424010d144e1"
+  version "5.11.0"
+  sha256 arm:   "703f8d202e994e7305fae6e76bcf277c8955b59096fac2c9f5f18c042551e114",
+         intel: "105e5231b874c4b10b525e7f1ee7ce3d267f114822852d97749d258a26dcd225"
 
   url "https://releases.mattermost.com/desktop/#{version}/mattermost-desktop-#{version}-mac-#{arch}.zip"
   name "Mattermost"
@@ -11,17 +11,18 @@ cask "mattermost" do
   homepage "https://mattermost.com/"
 
   livecheck do
-    url "https://github.com/mattermost/desktop/"
-    strategy :github_latest
+    url "https://releases.mattermost.com/desktop/latest-mac.yml"
+    strategy :electron_builder
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "Mattermost.app"
 
   zap trash: [
     "~/Library/Application Support/Mattermost",
+    "~/Library/Containers/Mattermost.Desktop",
     "~/Library/Logs/Mattermost",
     "~/Library/Preferences/Mattermost.Desktop.plist",
     "~/Library/Saved Application State/Mattermost.Desktop.savedState",

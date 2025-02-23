@@ -1,9 +1,9 @@
 cask "android-studio" do
   arch arm: "mac_arm", intel: "mac"
 
-  version "2022.3.1.20"
-  sha256 arm:   "62fcdeece46b0e816925a437dea7cbfd2921a943cc0fdeccfbe42c0346822ef9",
-         intel: "2c3c4f44b015ff43ab350ed6218d24755835967bd3e3f1be6984d5334d0250f8"
+  version "2024.2.2.14"
+  sha256 arm:   "e58381031e32e9d2792a9b62561837b00d23fd48f662cc3cd242821ae6844d45",
+         intel: "de246ff95d635a4df642e3f7e64457d384c72f1916a2a318a630d8a43219b9c3"
 
   url "https://redirector.gvt1.com/edgedl/android/studio/install/#{version}/android-studio-#{version}-#{arch}.dmg",
       verified: "redirector.gvt1.com/edgedl/android/studio/"
@@ -17,8 +17,10 @@ cask "android-studio" do
   end
 
   auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "Android Studio.app"
+  binary "#{appdir}/Android Studio.app/Contents/MacOS/studio"
 
   zap trash: [
         "~/.android",
