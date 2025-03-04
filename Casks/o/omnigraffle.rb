@@ -6,7 +6,7 @@ cask "omnigraffle" do
     url "https://downloads.omnigroup.com/software/MacOSX/10.11/OmniGraffle-#{version}.dmg"
 
     livecheck do
-      skip "Legacy version for El Capitan"
+      skip "Legacy version"
     end
   end
   on_sierra do
@@ -16,7 +16,7 @@ cask "omnigraffle" do
     url "https://downloads.omnigroup.com/software/MacOSX/10.12/OmniGraffle-#{version}.dmg"
 
     livecheck do
-      skip "Legacy version for Sierra"
+      skip "Legacy version"
     end
   end
   on_high_sierra do
@@ -26,7 +26,7 @@ cask "omnigraffle" do
     url "https://downloads.omnigroup.com/software/MacOSX/10.13/OmniGraffle-#{version}.dmg"
 
     livecheck do
-      skip "Legacy version for High Sierra"
+      skip "Legacy version"
     end
   end
   on_mojave do
@@ -36,7 +36,7 @@ cask "omnigraffle" do
     url "https://downloads.omnigroup.com/software/MacOSX/10.14/OmniGraffle-#{version}.dmg"
 
     livecheck do
-      skip "Legacy version for Mojave"
+      skip "Legacy version"
     end
   end
   on_catalina do
@@ -46,14 +46,24 @@ cask "omnigraffle" do
     url "https://downloads.omnigroup.com/software/MacOSX/10.14/OmniGraffle-#{version}.dmg"
 
     livecheck do
-      skip "Legacy version for Catalina"
+      skip "Legacy version"
     end
   end
-  on_big_sur :or_newer do
-    version "7.22.2"
-    sha256 "0f06c44fe21ea55bd5e83e5b9a4c515c20e9b2521f332b4f4b7d5bade2c97f66"
+  on_big_sur do
+    version "7.22.6"
+    sha256 "1159e731ab282b2f2b3881cbc75cc7bb40263cb3b56826f4ef6334295b47a883"
 
     url "https://downloads.omnigroup.com/software/macOS/11/OmniGraffle-#{version}.dmg"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_monterey :or_newer do
+    version "7.24.2"
+    sha256 "0ef1b4b914ba888dfc2f7ed1c87c4b911d2c37ba9ca83a4bd23745dd466d65da"
+
+    url "https://downloads.omnigroup.com/software/macOS/12/OmniGraffle-#{version}.dmg"
 
     livecheck do
       url "https://www.omnigroup.com/download/latest/omnigraffle/"
@@ -73,7 +83,7 @@ cask "omnigraffle" do
     "~/Library/Application Scripts/com.omnigroup.OmniGraffle#{version.major}",
     "~/Library/Application Support/CloudDocs/session/containers/iCloud.com.omnigroup.OmniGraffle.plist",
     "~/Library/Application Support/CloudDocs/session/containers/iCloud.com.omnigroup.OmniGraffle/",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.omnigroup.omnigraffle#{version.major}.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.omnigroup.omnigraffle#{version.major}.sfl*",
     "~/Library/Containers/com.omnigroup.OmniGraffle#{version.major}",
     "~/Library/Mobile Documents/iCloud~com~omnigroup~OmniGraffle",
   ]

@@ -1,6 +1,6 @@
 cask "p4v" do
-  version "2023.3,2495381"
-  sha256 "2f846b6a2db71f44292f2137c4289f1294ab0c4ba55ab2f2495befd78b6a85c0"
+  version "2024.4,2711678"
+  sha256 "348f0b71110eb8ea09903ced4af156f2f003ec809fdf111dd276a3598f497486"
 
   url "https://filehost.perforce.com/perforce/r#{version.major[-2..]}.#{version.minor}/bin.macosx12u/P4V.dmg"
   name "Perforce Helix Visual Client"

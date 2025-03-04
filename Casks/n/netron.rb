@@ -1,13 +1,14 @@
 cask "netron" do
-  version "7.2.7"
-  sha256 "25e4ddba9993a44a5baf9d358f453776e530eb9d7f77165d346325dd3bbe02f7"
+  version "8.1.9"
+  sha256 "28bfcfb9abedd5ff1f47743324c5110c96db284a99685b6e4c54886406f6b321"
 
   url "https://github.com/lutzroeder/netron/releases/download/v#{version}/Netron-#{version}-mac.zip"
   name "Netron"
-  desc "Visualizer for neural network, deep learning, and machine learning models"
+  desc "Visualiser for neural network, deep learning, and machine learning models"
   homepage "https://github.com/lutzroeder/netron"
 
   auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Netron.app"
 

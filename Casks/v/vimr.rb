@@ -1,12 +1,11 @@
 cask "vimr" do
-  version "0.44.0,20230103.174333"
-  sha256 "891783f6889ed66b745480cdcc9b18055b7f6d430d1228a887f68ed7ed1ff3ac"
+  version "0.51.1,20250215.143933"
+  sha256 "5fd9bc76f384e42fc5681ce96626f82f23a2cfe3a3ca07f611153947d546361e"
 
-  url "https://github.com/qvacua/vimr/releases/download/v#{version.csv.first}-#{version.csv.second}/VimR-v#{version.csv.first}.tar.bz2",
-      verified: "github.com/qvacua/vimr/"
+  url "https://github.com/qvacua/vimr/releases/download/v#{version.csv.first}-#{version.csv.second}/VimR-v#{version.csv.first}.tar.bz2"
   name "VimR"
   desc "GUI for the Neovim text editor"
-  homepage "http://vimr.org/"
+  homepage "https://github.com/qvacua/vimr"
 
   livecheck do
     url :url
@@ -20,7 +19,7 @@ cask "vimr" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :monterey"
 
   app "VimR.app"
   binary "#{appdir}/VimR.app/Contents/Resources/vimr"

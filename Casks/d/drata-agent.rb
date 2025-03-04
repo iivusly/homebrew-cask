@@ -1,17 +1,19 @@
 cask "drata-agent" do
-  version "3.4.1"
-  sha256 "bb767633658367bd4f81e5f0343a1eeb8b129578343e8726d66b38d19a92fd47"
+  version "3.7.0"
+  sha256 "5284e3c6f95cc701a484c23284dede4831a8deca8949e1bc09d9147bc4626afb"
 
-  url "https://cdn.drata.com/agent/dist/mac/drata-agent-#{version}.dmg"
+  url "https://github.com/drata/agent-releases/releases/download/v#{version}/Drata-Agent-mac.dmg",
+      verified: "github.com/drata/agent-releases/"
   name "Drata Agent"
   desc "Security audit software"
   homepage "https://drata.com/"
 
   livecheck do
-    url "https://github.com/drata/drata-agent"
+    url :url
+    strategy :github_latest
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Drata Agent.app"
 

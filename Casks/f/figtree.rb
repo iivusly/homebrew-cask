@@ -4,8 +4,15 @@ cask "figtree" do
 
   url "https://github.com/rambaut/figtree/releases/download/v#{version}/FigTree.v#{version}.dmg"
   name "FigTree"
+  desc "Phylogenetic tree viewer"
   homepage "https://github.com/rambaut/figtree/"
+
+  deprecate! date: "2025-03-02", because: :unmaintained
 
   app "FigTree v#{version}.app"
   qlplugin "QuickLook Plugin/FigTreeQuickLookPlugin.qlgenerator"
+
+  caveats do
+    requires_rosetta
+  end
 end

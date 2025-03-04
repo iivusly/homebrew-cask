@@ -1,35 +1,27 @@
 cask "santa" do
-  version "2023.8"
-  sha256 "e63f5ea42520a38d6c736cbf153723b92b48760ab8c5835249aac12c52b1b99e"
+  version "2025.2"
+  sha256 "f66bc5fe463687f281c678a5cb52b5c6e505f2979a5b145f8ad82a6d2b497ef3"
 
-  url "https://github.com/google/santa/releases/download/#{version}/santa-#{version}.dmg"
+  url "https://github.com/northpolesec/santa/releases/download/#{version}/santa-#{version}.dmg"
   name "Santa"
   desc "Binary authorization system"
-  homepage "https://github.com/google/santa"
-
-  livecheck do
-    url :url
-    strategy :github_latest
-  end
+  homepage "https://github.com/northpolesec/santa"
 
   pkg "santa-#{version}.pkg"
 
-  uninstall delete:    [
+  uninstall launchctl: [
+              "com.northpolesec.santa",
+              "com.northpolesec.santa.bundleservice",
+              "com.northpolesec.santa.metricservice",
+              "com.northpolesec.santa.syncservice",
+              "com.northpolesec.santad",
+            ],
+            kext:      "com.northpolesec.santa-driver",
+            pkgutil:   "com.northpolesec.santa",
+            delete:    [
               "/Applications/Santa.app",
               "/usr/local/bin/santactl",
-            ],
-            kext:      "com.google.santa-driver",
-            launchctl: [
-              "com.google.santa",
-              "com.google.santa.bundleservice",
-              "com.google.santa.metricservice",
-              "com.google.santa.syncservice",
-              "com.google.santad",
-            ],
-            pkgutil:   "com.google.santa"
+            ]
 
   # No zap stanza required
-
-  caveats "For #{token} to use EndpointSecurity, it must be granted Full Disk Access under " \
-          "System Preferences → Security & Privacy → Privacy"
 end

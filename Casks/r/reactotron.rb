@@ -1,24 +1,28 @@
 cask "reactotron" do
-  version "2.17.1"
-  sha256 "0b498386dd5feecd8f5137a629cf2f3170c6c92f1d33eb8e40831e4daddfc959"
+  arch arm: "-arm64"
 
-  url "https://github.com/infinitered/reactotron/releases/download/v#{version}/Reactotron-#{version}-mac.zip"
+  version "3.7.7"
+  sha256 arm:   "cd33d4a2f6b5a300d669462bfb7e75a305dab9eb6ce7f214631d715868c4dba2",
+         intel: "7e593fa11b01b6d801382fd9ca258cd22696031bf893d4a7885daef19c079df5"
+
+  url "https://github.com/infinitered/reactotron/releases/download/reactotron-app%40#{version}/Reactotron-#{version}#{arch}-mac.zip"
   name "Reactotron"
   desc "Desktop app for inspecting React JS and React Native projects"
   homepage "https://github.com/infinitered/reactotron"
 
-  # Upstream publishes multiple packages in the same repository, so we can't
-  # rely on the "latest" release being for the application and we can't even
-  # guarantee that the most recent releases will contain a release of the app
-  # (as of writing, the `GithubReleases` strategy doesn't work for this reason).
-  # For the time being, we check the "Quick Installation Guide" file that's
-  # linked in the README.
+  # Upstream publishes multiple packages in the same repository and, due to the
+  # number of packages that are updated around the same time, the most recent
+  # releases may not be for the app. This check searches for `reactotron-app`
+  # releases, as the `GithubReleases` strategy may be unreliable in this
+  # scenario.
   livecheck do
-    url "https://raw.githubusercontent.com/infinitered/reactotron/master/docs/installing.md"
-    regex(%r{releases/tag/v?(\d+(?:\.\d+)+)\)}i)
+    url "https://github.com/infinitered/reactotron/releases?q=reactotron-app+prerelease%3Afalse"
+    regex(%r{href=["']?[^"' >]*?/tag/reactotron-app(?:%40|@)v?(\d+(?:\.\d+)+)["' >]}i)
+    strategy :page_match
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Reactotron.app"
 

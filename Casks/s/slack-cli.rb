@@ -1,6 +1,6 @@
 cask "slack-cli" do
-  version "2.11.0"
-  sha256 "b80e8144af2940290f9cb81e93861f806822010ce27481b5f7c80a658cabc652"
+  version "3.0.0"
+  sha256 "27191550bad2e5b64324003f5b66e68fa245e063882259e0fea48c0054687475"
 
   url "https://downloads.slack-edge.com/slack-cli/slack_cli_#{version}_macOS_64-bit.tar.gz",
       verified: "downloads.slack-edge.com/slack-cli/"
@@ -9,8 +9,10 @@ cask "slack-cli" do
   homepage "https://api.slack.com/future/tools/cli"
 
   livecheck do
-    url "https://api.slack.com/future/changelog"
-    regex(%r{h2.*?v?(\d+(?:\.\d+)+).*?/h2}i)
+    url "https://api.slack.com/slackcli/metadata.json"
+    strategy :json do |json|
+      json.dig("slack-cli", "releases")&.map { |release| release["version"] }
+    end
   end
 
   depends_on formula: "deno"
@@ -18,4 +20,7 @@ cask "slack-cli" do
   binary "bin/slack"
 
   # No zap stanza required
+  caveats do
+    requires_rosetta
+  end
 end

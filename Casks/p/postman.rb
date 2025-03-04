@@ -1,9 +1,9 @@
 cask "postman" do
   arch arm: "osx_arm64", intel: "osx64"
 
-  version "10.19.7"
-  sha256 arm:   "55196dc58a149d8c86ea2c25c925b8cec47607e3cd8d18870e9d8b99ab05b8ea",
-         intel: "c6c9824d8a66a4f80aa3e57f612372d81fdbdad14a97594f658055cb84bdf4c1"
+  version "11.35.0-r250304-1730"
+  sha256 arm:   "bcabe7b6fa120a50d641fd7fa23a893dbd123e9c5ff1e03cd9383c7b850eadec",
+         intel: "e896035e6c04adbe35997bff604ddabc657ea619def3ada551779c2339b47a7e"
 
   url "https://dl.pstmn.io/download/version/#{version}/#{arch}",
       verified: "dl.pstmn.io/download/version/"
@@ -23,14 +23,15 @@ cask "postman" do
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Postman.app"
 
   zap trash: [
     "~/Library/Application Support/com.postmanlabs.mac.ShipIt",
     "~/Library/Application Support/Postman",
-    "~/Library/Caches/com.postmanlabs.mac.ShipIt",
     "~/Library/Caches/com.postmanlabs.mac",
+    "~/Library/Caches/com.postmanlabs.mac.ShipIt",
     "~/Library/Caches/Postman",
     "~/Library/HTTPStorages/com.postmanlabs.mac",
     "~/Library/Preferences/ByHost/com.postmanlabs.mac.ShipIt.*.plist",

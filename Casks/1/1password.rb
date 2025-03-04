@@ -1,9 +1,9 @@
 cask "1password" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "8.10.18"
-  sha256 arm:   "bf515922cbc5c88c7cd41391803b5904ff634d163aff4a79dfbb6b3867fc99c3",
-         intel: "c28cf29b640e2cb51fe05f8cc1d2197f037e54790d7b007e6496449153676ff7"
+  version "8.10.64"
+  sha256 arm:   "eaa08c27cb4a1cbb97fadac6bdbca0309b710ae177b2ceb9c3678ff6b3b4d578",
+         intel: "0ba87f6caa3fb8172055da87c26637df1ff785ff932c2fb61f3431facf169d60"
 
   url "https://downloads.1password.com/mac/1Password-#{version}-#{arch}.zip"
   name "1Password"
@@ -12,15 +12,15 @@ cask "1password" do
 
   livecheck do
     url "https://app-updates.agilebits.com/product_history/OPM#{version.major}"
-    regex(%r{href=.*?/1Password[._-]?v?(\d+(?:.\d+)*)(?:[._-]\d+[._-]?PRODUCTION)?[._-]?\$ARCH\.zip}i)
+    regex(%r{href=.*?/1Password[._-]?v?(\d+(?:\.\d+)*)(?:[._-]\d+[._-]?PRODUCTION)?[._-]?\$ARCH\.zip}i)
   end
 
   auto_updates true
   conflicts_with cask: [
-    "homebrew/cask-versions/1password-beta",
-    "homebrew/cask-versions/1password-nightly",
+    "1password@beta",
+    "1password@nightly",
   ]
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :monterey"
 
   app "1Password.app"
 
@@ -31,6 +31,7 @@ cask "1password" do
     "~/Library/Application Scripts/com.1password.browser-support",
     "~/Library/Application Support/1Password",
     "~/Library/Application Support/Arc/User Data/NativeMessagingHosts/com.1password.1password.json",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.1password.1password.sfl*",
     "~/Library/Application Support/CrashReporter/1Password*",
     "~/Library/Application Support/Google/Chrome Beta/NativeMessagingHosts/com.1password.1password.json",
     "~/Library/Application Support/Google/Chrome Canary/NativeMessagingHosts/com.1password.1password.json",
@@ -42,7 +43,6 @@ cask "1password" do
     "~/Library/Application Support/Microsoft Edge/NativeMessagingHosts/com.1password.1password.json",
     "~/Library/Application Support/Mozilla/NativeMessagingHosts/com.1password.1password.json",
     "~/Library/Application Support/Vivaldi/NativeMessagingHosts/com.1password.1password.json",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.1password.1password.sfl2",
     "~/Library/Containers/2BUA8C4S2C.com.1password.browser-helper",
     "~/Library/Containers/com.1password.1password*",
     "~/Library/Containers/com.1password.browser-support",

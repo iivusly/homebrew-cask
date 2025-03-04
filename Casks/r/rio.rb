@@ -1,8 +1,8 @@
 cask "rio" do
-  version "0.0.25"
-  sha256 "5f11751efc67f57eb283a0a21ec5776c42ec7300e811a9f184ebacc7a3b9fbcd"
+  version "0.2.8"
+  sha256 "c996d3ca6baa5dff4e610748c040e5373eb25d2a7bc6fa4815234d54ad716c27"
 
-  url "https://github.com/raphamorim/rio/releases/download/v#{version}/Rio-v#{version}.dmg"
+  url "https://github.com/raphamorim/rio/releases/download/v#{version}/rio.dmg"
   name "Rio"
   desc "Hardware-accelerated GPU terminal emulator"
   homepage "https://github.com/raphamorim/rio/"
@@ -11,6 +11,8 @@ cask "rio" do
     url :url
     strategy :github_latest
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Rio.app"
   binary "Rio.app/Contents/MacOS/rio"

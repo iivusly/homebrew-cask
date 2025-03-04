@@ -1,6 +1,6 @@
 cask "ableton-live-intro" do
-  version "11.3.13"
-  sha256 "40624ad7a248284aadd631ff74c4fe3b5a62340094cac1dc552b519d65d5283c"
+  version "12.1.10"
+  sha256 "7f17fb055245a0fadd10c36934e95280d2799e0741ddbd7a44d8e0ed386ae87a"
 
   url "https://cdn-downloads.ableton.com/channels/#{version}/ableton_live_intro_#{version}_universal.dmg"
   name "Ableton Live Intro"
@@ -12,7 +12,7 @@ cask "ableton-live-intro" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "Ableton Live #{version.major} Intro.app"
 

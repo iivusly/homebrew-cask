@@ -1,9 +1,9 @@
 cask "jabref" do
   arch arm: "-arm64"
 
-  version "5.11"
-  sha256 arm:   "d53875651ef86c617b0728b20513552c9ce6065b09fefb5e6daa448eaf20976e",
-         intel: "71becc574eaf8cfe741a033fd1458d612d18a6f9c5463c837b83b8c0594738c2"
+  version "5.15"
+  sha256 arm:   "c4637b9bbfa075c9e25636203e0fda73bbf8ef0166ca35866dbdd13d9f589430",
+         intel: "d668ef907b02dfb1941deef5b2896e6bfa343e7ef1aa776effdf248536ae4f99"
 
   url "https://github.com/JabRef/jabref/releases/download/v#{version}/JabRef-#{version}#{arch}.dmg",
       verified: "github.com/JabRef/jabref/"
@@ -19,11 +19,11 @@ cask "jabref" do
   app "JabRef.app"
 
   zap trash: [
+    "/var/db/receipts/JabRef.bom",
+    "/var/db/receipts/JabRef.plist",
     "~/Library/Application Support/JabRef",
     "~/Library/Logs/jabref",
     "~/Library/Preferences/org.jabref.cli.plist",
     "~/Library/Saved Application State/org.jabref.cli.savedState",
-    "/var/db/receipts/JabRef.bom",
-    "/var/db/receipts/JabRef.plist",
   ]
 end

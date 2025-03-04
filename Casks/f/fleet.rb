@@ -2,9 +2,9 @@ cask "fleet" do
   arch arm: "aarch64", intel: "x64"
   arch_suffix = on_arch_conditional arm: "-aarch64"
 
-  version "1.25.206"
-  sha256 arm:   "4b43ff68a6d0aa65c199aa69d6d649d3cac7dda50c655e32fe40752ab26b25f5",
-         intel: "38d2428a404bacd99dad646083cc9250920c9efb9726617130eea919c5a2426e"
+  version "1.46.97"
+  sha256 arm:   "b70ea5c533f23a138d77c8de0ca3f47e7f108e1e1aa6127875b470519e656eb1",
+         intel: "4544eaa97b34d9191bb01957898688d2e61ccaa1f7299492e2260e38502d010c"
 
   url "https://download.jetbrains.com/fleet/installers/macos_#{arch}/Fleet-#{version}#{arch_suffix}.dmg"
   name "Fleet"
@@ -13,10 +13,8 @@ cask "fleet" do
 
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=FL&latest=true&type=preview"
-    strategy :page_match do |page|
-      JSON.parse(page)["FL"].map do |release|
-        (release["version"]).to_s
-      end
+    strategy :json do |json|
+      json["FL"]&.map { |release| release["version"] }
     end
   end
 

@@ -1,6 +1,6 @@
 cask "imazing" do
-  version "2.17.11,17615"
-  sha256 "9478a19301f84b8f5da545609bd6026d46d5c433182aba00c30c2fa0af5e1536"
+  version "3.1.0,21270"
+  sha256 "b678d6565960b8eb996a5a9553343d2c220c801c31693cba74411c8ffe8039b2"
 
   url "https://downloads.imazing.com/mac/iMazing/#{version.csv.first}.#{version.csv.second}/iMazing_#{version.csv.first}.#{version.csv.second}.dmg"
   name "iMazing"
@@ -16,28 +16,23 @@ cask "imazing" do
 
   app "iMazing.app"
 
-  uninstall login_item: "iMazing Mini",
-            quit:       [
+  uninstall quit:       [
               "com.DigiDNA.iMazing#{version.csv.first}.#{version.csv.second}Mac",
               "com.DigiDNA.iMazing#{version.csv.first}.#{version.csv.second}Mac.Mini",
-            ]
+            ],
+            login_item: "iMazing Mini"
 
   zap trash: [
-    "~/Library/Application Support/iMazing",
+    "/Users/Shared/iMazing Mini",
+    "/Users/Shared/iMazing",
     "~/Library/Application Support/iMazing Mini",
+    "~/Library/Application Support/iMazing",
     "~/Library/Application Support/MobileSync/Backup/iMazing.Versions",
     "~/Library/Caches/com.DigiDNA.iMazing#{version.major}Mac",
     "~/Library/Caches/com.DigiDNA.iMazing#{version.major}Mac.Mini",
     "~/Library/Caches/com.plausiblelabs.crashreporter.data/com.DigiDNA.iMazing#{version.major}Mac.Mini",
     "~/Library/Caches/iMazing",
-    "~/Library/Preferences/com.DigiDNA.iMazing#{version.major}Mac.plist",
     "~/Library/Preferences/com.DigiDNA.iMazing#{version.major}Mac.Mini.plist",
-    "/Users/Shared/iMazing Mini",
-    "/Users/Shared/iMazing",
+    "~/Library/Preferences/com.DigiDNA.iMazing#{version.major}Mac.plist",
   ]
-
-  caveats <<~EOS
-    Performing a zap on this cask removes files pertaining to both #{token}
-    and imazing-mini. It should be done only if you want to uninstall both.
-  EOS
 end

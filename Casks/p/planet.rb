@@ -1,19 +1,20 @@
 cask "planet" do
-  version "0.15.1"
-  sha256 "fc1f091c7a9ec19852c805865c6d2e09214eb17d6f99581652c7790eab783cb8"
+  version "0.20.2"
+  sha256 "98988af2d9bbf7e8e5e6912ed0a0b80a11eaa3504a603d27aa933ef8d9c2e887"
 
   url "https://github.com/Planetable/Planet/releases/download/release-#{version}/Planet.zip",
       verified: "github.com/Planetable/Planet/"
   name "Planet"
-  desc "Decentralized blogs and websites powered by IPFS and Ethereum Name System"
+  desc "Decentralised blogs and websites powered by IPFS and Ethereum Name System"
   homepage "https://www.planetable.xyz/"
 
   livecheck do
     url :url
-    regex(/^release-(\d+(?:[.-]\d+)+)$/i)
+    regex(/^release[._-](\d+(?:[.-]\d+)+)$/i)
   end
 
   auto_updates true
+  depends_on macos: ">= :monterey"
 
   app "Planet.app"
 

@@ -1,15 +1,15 @@
 cask "mactracker" do
-  version "7.12.12"
-  sha256 "820833550fcc471d49b6ae3bd3aac47fcc55511c7c28adcaafc0bb91a5ffd222"
+  version "7.13.4"
+  sha256 "d17610cade56c2303c256633dbc8983a333a194ebc09077190ab281e2116e64f"
 
-  url "https://www.mactracker.ca/downloads/Mactracker_#{version}.zip"
+  url "https://mactracker.ca/downloads/Mactracker_#{version}.zip"
   name "Mactracker"
   desc "Detailed information on every Apple product ever made"
   homepage "https://mactracker.ca/"
 
   livecheck do
     url "https://update.mactracker.ca/appcast-b.xml"
-    strategy :sparkle, &:version
+    strategy :sparkle
   end
 
   auto_updates true

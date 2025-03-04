@@ -1,6 +1,6 @@
 cask "cleanshot" do
-  version "4.6.1"
-  sha256 "a110f3e4271fc547deb9dc8ad7e6800723b93a731950abc2d8aa7f546aad4490"
+  version "4.7.5"
+  sha256 "cb8639ee68637d7d2dc69355a5c24a6d432be2f5755c5b3c2630b93eee0105b2"
 
   url "https://updates.getcleanshot.com/v3/CleanShot-X-#{version}.dmg"
   name "CleanShot"
@@ -13,7 +13,7 @@ cask "cleanshot" do
   end
 
   auto_updates true
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :mojave"
 
   app "CleanShot X.app"
 

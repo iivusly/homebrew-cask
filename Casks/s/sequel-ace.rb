@@ -1,6 +1,6 @@
 cask "sequel-ace" do
-  version "4.0.11,20057"
-  sha256 "d0a77412873b260f685c4377635e56252d6b530faeba7497b4a615b46480903d"
+  version "5.0.1,20087"
+  sha256 "e357bbd172259bd18affed5f22fffb0caea767daf971f14b89e07886f31573c5"
 
   url "https://github.com/Sequel-Ace/Sequel-Ace/releases/download/production/#{version.csv.first}-#{version.csv.second}/Sequel-Ace-#{version.csv.first}.zip"
   name "Sequel Ace"
@@ -16,6 +16,8 @@ cask "sequel-ace" do
       end
     end
   end
+
+  depends_on macos: ">= :monterey"
 
   app "Sequel Ace.app"
 

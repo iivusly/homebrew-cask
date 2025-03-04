@@ -1,6 +1,6 @@
 cask "prezi-video" do
-  version "2.22.0"
-  sha256 "198dc989463be000179d5828e1e9da8bc06cd24a5a2865ac0fa083e5a836f6a4"
+  version "2.30.0"
+  sha256 "d509fb18591e41ba001e08ea5b6da4f9af41658deafae767ce1ea7d562520b88"
 
   url "https://desktopassets.prezi.com/mac/prezi-video/releases/Prezi_Video_#{version}.zip"
   name "Prezi Video"
@@ -8,7 +8,7 @@ cask "prezi-video" do
   homepage "https://prezi.com/video/"
 
   livecheck do
-    url "https://s3.amazonaws.com/prezidesktop/assets/mac/prezi-video/updates/prezi-video.xml"
+    url "https://prezidesktop.s3.amazonaws.com/assets/mac/prezi-video/updates/prezi-video.xml"
     strategy :sparkle, &:short_version
   end
 
@@ -17,8 +17,8 @@ cask "prezi-video" do
 
   pkg "Prezi_Video.pkg"
 
-  uninstall quit:      "com.prezi.PreziCast",
-            launchctl: "com.prezi.prezivideo.vcam.assistant",
+  uninstall launchctl: "com.prezi.prezivideo.vcam.assistant",
+            quit:      "com.prezi.PreziCast",
             pkgutil:   [
               "com.prezi.PreziCast",
               "com.prezi.prezivideo.vcam.plugin",

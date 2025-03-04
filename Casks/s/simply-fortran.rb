@@ -1,20 +1,53 @@
 cask "simply-fortran" do
   arch arm: "-arm64", intel: "-x86_64"
 
+  version "3.39.4385"
+
   on_big_sur :or_older do
-    version "3.25.3757"
-    sha256 "0975462a1593bdc976dc87d6a9da88b97d8268a1a97caebeefd359e56ef73195"
+    sha256 "50ad3792ea1db61bed86e86181101e482ee86dbf3422fe0ec56b15f12813d6c8"
 
     url "https://download.simplyfortran.com/#{version.major_minor}/macos/simplyfortran-#{version}-x86_64.legacy.dmg"
 
     livecheck do
-      skip "Legacy version"
+      url "https://simplyfortran.com/download/?platform=macos"
+      regex(/href=.*?simplyfortran[._-]v?(\d+(?:\.\d+)+)[._-]x86_64\.legacy\.dmg/i)
+    end
+
+    caveats do
+      requires_rosetta
     end
   end
-  on_monterey :or_newer do
-    version "3.31.3974"
-    sha256 arm:   "df268483c68a69b20a3ece063ff4ecf88933659a96d8bd80b4d4c94371ecbf34",
-           intel: "0ab201d3165f9562bb413d7fd4c2ad234ae17c89919b36f5a8ea21b35b3f2640"
+  on_monterey do
+    sha256 "e560b0c87f9b1ced5a831f6cf50f27a322955d784c1988fa0e32d87ac2b1ab14"
+
+    url "https://download.simplyfortran.com/#{version.major_minor}/macos/simplyfortran-#{version}-x86_64.dmg"
+
+    livecheck do
+      url "https://simplyfortran.com/download/?platform=macos"
+      regex(/href=.*?simplyfortran[._-]v?(\d+(?:\.\d+)+)[._-]x86_64\.dmg/i)
+    end
+
+    caveats do
+      requires_rosetta
+    end
+  end
+  on_ventura do
+    sha256 "e560b0c87f9b1ced5a831f6cf50f27a322955d784c1988fa0e32d87ac2b1ab14"
+
+    url "https://download.simplyfortran.com/#{version.major_minor}/macos/simplyfortran-#{version}-x86_64.dmg"
+
+    livecheck do
+      url "https://simplyfortran.com/download/?platform=macos"
+      regex(/href=.*?simplyfortran[._-]v?(\d+(?:\.\d+)+)[._-]x86_64\.dmg/i)
+    end
+
+    caveats do
+      requires_rosetta
+    end
+  end
+  on_sonoma :or_newer do
+    sha256 arm:   "b9fac5a1947c35a5b525a1a382cf7814504ca4fa7f1960625ddbf161929fdf20",
+           intel: "e560b0c87f9b1ced5a831f6cf50f27a322955d784c1988fa0e32d87ac2b1ab14"
 
     url "https://download.simplyfortran.com/#{version.major_minor}/macos/simplyfortran-#{version}#{arch}.dmg"
 
@@ -32,7 +65,7 @@ cask "simply-fortran" do
 
   zap trash: [
     "~/.simplyfortran",
-    "~/Library/Caches/com.apple.helpd/Generated/com.approximatrix.simplyfortran.help*3.29",
+    "~/Library/Caches/com.apple.helpd/Generated/com.approximatrix.simplyfortran.help*",
     "~/Library/Saved Application State/com.approximatrix.simplyfortran.savedState",
   ]
 end

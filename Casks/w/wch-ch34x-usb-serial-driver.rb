@@ -1,5 +1,5 @@
 cask "wch-ch34x-usb-serial-driver" do
-  version "1.8"
+  version "1.9"
   sha256 :no_check
 
   url "https://www.wch.cn/downloads/file/369.html"
@@ -15,11 +15,11 @@ cask "wch-ch34x-usb-serial-driver" do
   pkg "CH341SER_MAC/CH34xVCPDriver.pkg"
 
   uninstall quit:    "cn.wch.CH34xVCPDriver",
-            pkgutil: "cn.wch.pkg.CH34xVCPDriver",
             kext:    [
-              "cn.wch.CH34xVCPDriver",
               "cn.wch.CH34xVCPControlDriver",
-            ]
+              "cn.wch.CH34xVCPDriver",
+            ],
+            pkgutil: "cn.wch.pkg.CH34xVCPDriver"
 
   caveats do
     reboot

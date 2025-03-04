@@ -1,9 +1,9 @@
 cask "webstorm" do
   arch arm: "-aarch64"
 
-  version "2023.2.4,232.10203.14"
-  sha256 arm:   "4fae9ae2fbd319ae3597e6da3da0e7973b82bad95afddce7264632b067f23e54",
-         intel: "70f751c7f5fd9c3d3af7a3f4ef9a55f08bf895c8a43f776aebc10255a3a130e0"
+  version "2024.3.4,243.25659.40"
+  sha256 arm:   "7e7745429e3541bd6cfaffda84aba4bcfe252db5cf93c7b2e2c75205217af57a",
+         intel: "337f80f0a5a9179b64ac4552a89ffc93a1e3f1b5c8a1b94a04a9cad9d0d18808"
 
   url "https://download.jetbrains.com/webstorm/WebStorm-#{version.csv.first}#{arch}.dmg"
   name "WebStorm"
@@ -13,8 +13,12 @@ cask "webstorm" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=WS&latest=true&type=release"
     strategy :json do |json|
-      json["WS"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["WS"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
@@ -23,23 +27,17 @@ cask "webstorm" do
   depends_on macos: ">= :high_sierra"
 
   app "WebStorm.app"
-
-  uninstall_postflight do
-    ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "wstorm") }.each do |path|
-      if File.readable?(path) &&
-         File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
-        File.delete(path)
-      end
-    end
-  end
+  binary "#{appdir}/WebStorm.app/Contents/MacOS/webstorm"
 
   zap trash: [
     "~/Library/Application Support/JetBrains/WebStorm#{version.major_minor}",
+    "~/Library/Caches/com.apple.nsurlsessiond/Downloads/com.jetbrains.WebStorm",
     "~/Library/Caches/JetBrains/WebStorm#{version.major_minor}",
     "~/Library/Logs/JetBrains/WebStorm#{version.major_minor}",
     "~/Library/Preferences/com.jetbrains.WebStorm.plist",
     "~/Library/Preferences/jetbrains.webstorm.*.plist",
     "~/Library/Preferences/WebStorm#{version.major_minor}",
+    "~/Library/Preferences/webstorm.plist",
     "~/Library/Saved Application State/com.jetbrains.WebStorm.savedState",
   ]
 end

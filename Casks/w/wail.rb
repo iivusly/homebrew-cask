@@ -1,6 +1,6 @@
 cask "wail" do
-  version "0.2019.05.21"
-  sha256 "45a50a28bfe4c385e93b4053259fdc35265ef0603a3e65e5caf37f1432788b79"
+  version "0.2025.03.03"
+  sha256 "db042c83e8617f9e288207fe12f10ccc8af31ac70e07d1d01953c0b95a5ca835"
 
   url "https://github.com/machawk1/wail/releases/download/v#{version}/WAIL_v#{version}_macOS.dmg"
   name "WAIL"
@@ -8,4 +8,11 @@ cask "wail" do
   homepage "https://github.com/machawk1/wail"
 
   app "WAIL.app"
+
+  zap trash: [
+    "~/Library/Application Support/WAIL",
+    "~/Library/Preferences/com.matkelly.wail.plist",
+    "~/Library/Preferences/WAIL_cli.plist",
+    "~/Library/Saved Application State/com.matkelly.wail.savedState",
+  ]
 end

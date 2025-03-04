@@ -1,6 +1,6 @@
 cask "tuple" do
-  version "0.110.1,2023-10-27,0c19036a4"
-  sha256 "e3873ecd6579969e7a60cc1ec8e962db1965dd12381402d0bb3a2c874c1fa5b8"
+  version "1.120.3,2025-03-04,ca7556f5c"
+  sha256 "cbe16a4e9a6a2920dd5418c69056a8e0a9ed85c584a03d7475a8fc8dc4313f36"
 
   url "https://d32ifkf9k9ezcg.cloudfront.net/production/sparkle/tuple-#{version.tr(",", "-")}.zip",
       verified: "d32ifkf9k9ezcg.cloudfront.net/"
@@ -10,8 +10,9 @@ cask "tuple" do
 
   livecheck do
     url "https://d32ifkf9k9ezcg.cloudfront.net/production/sparkle/appcast.xml"
-    strategy :sparkle do |item|
-      match = item.version.match(/^v?(\d+(?:\.\d+)+)[._-](\d+(?:-\d+)+)[._-](\h+)$/i)
+    regex(/^v?(\d+(?:\.\d+)+)[._-](\d+(?:-\d+)+)[._-](\h+)$/i)
+    strategy :sparkle do |item, regex|
+      match = item.version.match(regex)
       next if match.blank?
 
       "#{match[1]},#{match[2]},#{match[3]}"
@@ -19,12 +20,12 @@ cask "tuple" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :ventura"
 
   app "Tuple.app"
 
-  uninstall quit:      "app.tuple.app",
-            launchctl: "app.tuple.app-LaunchAtLoginHelper"
+  uninstall launchctl: "app.tuple.app-LaunchAtLoginHelper",
+            quit:      "app.tuple.app"
 
   zap trash: [
     "~/Library/Application Scripts/app.tuple.app-LaunchAtLoginHelper",

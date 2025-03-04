@@ -1,15 +1,15 @@
 cask "calmly-writer" do
   arch arm: "arm64", intel: "x64"
 
-  version "2.0.53"
+  version "2.0.58"
 
   on_arm do
-    sha256 "1f9d4f4e31d5bd8306c9e7dc206cc2f077f185c3bae1286f48ec92d678630cb0"
+    sha256 "b1b82148ac1b90980c3e9a50663325363e257970bb1dd28738f11b61f4a5228a"
 
     url "https://www.calmlywriter.com/releases/Calmly%20Writer-#{version}-#{arch}.dmg"
   end
   on_intel do
-    sha256 "6af72b32bafdf741dfcc26167270757738c2a3b362090190d24b9b35e0b1a831"
+    sha256 "4b63e139037642c56faf8e6dc670401811e10f762e08a3ef6e0f453026b8f4fa"
 
     url "https://www.calmlywriter.com/releases/Calmly%20Writer-#{version}.dmg"
   end
@@ -20,12 +20,11 @@ cask "calmly-writer" do
 
   livecheck do
     url "https://calmlywriter.com/releases/#{arch}/download.php"
-    strategy :header_match do |headers|
-      headers["location"][/Calmly(?:\s|%20)Writer[._-]v?(\d+(?:\.\d+)+)/i, 1]
-    end
+    regex(/Calmly(?:\s+|%20|[._-])?Writer[._-]v?(\d+(?:\.\d+)+)/i)
+    strategy :header_match
   end
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :high_sierra"
 
   app "Calmly Writer.app"
 

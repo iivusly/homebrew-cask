@@ -7,9 +7,25 @@ cask "araxis-merge" do
       skip "Legacy version"
     end
   end
-  on_catalina :or_newer do
-    version "2023.5973"
-    sha256 "f88a0c7a3eda633d63f73dde015a7a44cf238a9e0de0f9c46ec9cbd176906891"
+  on_catalina do
+    version "2022.5786"
+    sha256 "a8a65089d7965a3ecdf3b65dbeaed54f4f31d0bc7b85c9d970aa999ab5cfa4df"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_big_sur do
+    version "2023.5915"
+    sha256 "8e9372f56a3597bdea49caadab1f11e998d8686c5e2d19472ec9470db643032e"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_monterey :or_newer do
+    version "2024.6001"
+    sha256 "d6db320ebf11b4a1219c5f848589dea0ee2fdf1aae96195bd71517cdd63148ba"
 
     livecheck do
       url "https://www.araxis.com/merge/download.en"
@@ -19,7 +35,7 @@ cask "araxis-merge" do
 
   url "https://www.araxis.com/download/Merge#{version}-macOS.dmg"
   name "Araxis Merge"
-  desc "Two and three-way file comparison, merging and folder synchronization"
+  desc "Two and three-way file comparison, merging and folder synchronisation"
   homepage "https://www.araxis.com/merge/"
 
   depends_on macos: ">= :mojave"
@@ -43,5 +59,10 @@ cask "araxis-merge" do
   caveats <<~EOS
     For instructions to integrate Araxis Merge with Finder or other applications,
     see https://www.araxis.com/merge/documentation-os-x/installing.en
+
+    Note that integrations that depend on the `compare` tool will require adjustment,
+    e.g. for git:
+      [mergetool "araxis"]
+	    path = "#{HOMEBREW_PREFIX}/bin/araxiscompare"
   EOS
 end

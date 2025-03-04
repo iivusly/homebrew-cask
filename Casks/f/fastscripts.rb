@@ -1,6 +1,6 @@
 cask "fastscripts" do
-  version "3.2.7"
-  sha256 "bd88ca14b468ef59b327ce8e5ed7ed6e33e841314419d9298a2b46ca6c75c098"
+  version "3.3.6"
+  sha256 "a018d49516e82fcf6078f687db702345214a67b691ff1a30ab78c42207b15e1d"
 
   url "https://redsweater.com/fastscripts/FastScripts#{version}.zip"
   name "FastScripts"
@@ -13,13 +13,13 @@ cask "fastscripts" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :catalina"
 
   app "FastScripts.app"
 
   zap trash: [
-    "~/Library/Application Support/FastScripts",
     "~/Library/Application Support/FastScripts Script Runner",
+    "~/Library/Application Support/FastScripts",
     "~/Library/Caches/com.red-sweater.fastscripts#{version.major}",
     "~/Library/Preferences/com.red-sweater.fastscripts#{version.major}.plist",
     "~/Library/WebKit/com.red-sweater.fastscripts#{version.major}",

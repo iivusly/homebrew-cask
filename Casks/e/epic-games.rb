@@ -1,6 +1,6 @@
 cask "epic-games" do
-  version "15.17.1"
-  sha256 "35cd6de6f2726794c6bf680de975cce463d03790ae14c4b522a2db1cf1ad7d23"
+  version "18.0.0"
+  sha256 "541f5aa674420e8ce9f037449ddb4eb9941968fdcf4e32f76e8adda103e193fb"
 
   url "https://epicgames-download1.akamaized.net/Builds/UnrealEngineLauncher/Installers/Mac/EpicInstaller-#{version}.dmg",
       verified: "epicgames-download1.akamaized.net/"
@@ -19,10 +19,16 @@ cask "epic-games" do
   app "Epic Games Launcher.app"
 
   zap trash: [
-    "~/Library/Caches/com.epicgames.EpicGamesLauncher",
     "~/Library/Application Support/Epic",
+    "~/Library/Caches/com.epicgames.EpicGamesLauncher",
     "~/Library/Cookies/com.epicgames.EpicGamesLauncher.binarycookies",
+    "~/Library/HTTPStorages/com.epicgames.CrashReportClient",
+    "~/Library/HTTPStorages/com.epicgames.EpicGamesLauncher",
     "~/Library/Logs/Unreal Engine/EpicGamesLauncher",
     "~/Library/Preferences/Unreal Engine/EpicGamesLauncher",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

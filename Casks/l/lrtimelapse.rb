@@ -1,8 +1,8 @@
 cask "lrtimelapse" do
-  version "6.5.2"
-  sha256 "a3ce7bf99621942d6fbdc3b0081b42f504b05a69c6830237456ba758dd3fc911"
+  version "7.3.0"
+  sha256 "1228ba2aef632265b514af0d177f5bbcaebd464bccd6aa6a2e4d9b8cd6186f27"
 
-  url "https://lrtimelapse.com/files/lrtimelapse-#{version.major}-mac-universal/?version=#{version}"
+  url "https://lrtimelapse.com/files/lrtimelapse-#{version.major}-mac/?version=#{version}"
   name "LRTimelapse"
   desc "Time lapse editing, keyframing, grading and rendering"
   homepage "https://lrtimelapse.com/"

@@ -1,14 +1,17 @@
 cask "imhex" do
-  version "1.31.0"
-  sha256 "4f8b4256f5f3c8d7d7fb42ee8905f09b13b3b3e1ebe32abe10bf855f6ee35ce0"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/WerWolv/ImHex/releases/download/v#{version}/imhex-#{version}-macOS-x86_64.dmg",
+  version "1.37.4"
+  sha256 arm:   "de93acf0b1ae4c45812270061e7ad8b82e29e4b16fe15fc35a063e4050568d4e",
+         intel: "d84c88246ca98b2462e970ff517bbcc351bda481bd34ab2d6e1fe14ee088e359"
+
+  url "https://github.com/WerWolv/ImHex/releases/download/v#{version}/imhex-#{version}-macOS-#{arch}.dmg",
       verified: "github.com/WerWolv/ImHex/"
   name "ImHex"
   desc "Hex editor for reverse engineers"
   homepage "https://imhex.werwolv.net/"
 
-  app "imhex.app"
+  app "ImHex.app"
 
   zap trash: [
     "~/Library/Application Support/imhex",

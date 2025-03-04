@@ -1,15 +1,14 @@
 cask "macupdater" do
   on_monterey :or_older do
-    version "2.3.10"
-    sha256 "782e017d1886ec11eac8c489a358a301bad2f10758408c51cada087bb45dc704"
-
-    depends_on macos: ">= :mojave"
+    version "2.3.18"
+    sha256 "81e7a1f64499128c131d169408829962ca913996830a7e19d372099e657d5894"
   end
   on_ventura :or_newer do
-    version "3.2.2"
-    sha256 "a028a675aa5d23880b0b834e63f2650192187bdeb1b0122ff75143f46a4d4d4c"
+    version "3.4.0"
+    # required as upstream package is regularly updated in-place https://github.com/Homebrew/homebrew-cask/pull/182188#issuecomment-2284199515
+    sha256 :no_check
 
-    depends_on macos: ">= :ventura"
+    binary "#{appdir}/MacUpdater.app/Contents/Resources/macupdater_install"
   end
 
   url "https://www.corecode.io/downloads/macupdater_#{version}.dmg"
@@ -23,17 +22,17 @@ cask "macupdater" do
   end
 
   auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "MacUpdater.app"
   binary "#{appdir}/MacUpdater.app/Contents/Resources/macupdater_client"
 
-  uninstall quit:      "com.corecode.MacUpdater",
-            launchctl: "com.corecode.MacUpdaterLaunchHelper"
+  uninstall launchctl: "com.corecode.MacUpdaterLaunchHelper",
+            quit:      "com.corecode.MacUpdater"
 
   zap trash: [
     "~/Library/Application Scripts/com.corecode.MacUpdaterLaunchHelper",
-    "~/Library/Application Support/MacUpdater",
-    "~/Library/Application Support/MacUpdaterInstallHelper",
+    "~/Library/Application Support/MacUpdater*",
     "~/Library/Caches/com.corecode.MacUpdater",
     "~/Library/Containers/com.corecode.MacUpdaterLaunchHelper",
     "~/Library/Cookies/com.corecode.MacUpdater.binarycookies",

@@ -1,11 +1,11 @@
 cask "affine" do
   arch arm: "arm64", intel: "x64"
 
-  version "0.8.4"
-  sha256 arm:   "61229f921052ecb31c8fff3db8bae9fadc0f246aa937702afa723e0a9710cf1b",
-         intel: "c310add92764b42a029d5139807583308291a5d833adc39bf75913e90331b717"
+  version "0.20.4"
+  sha256 arm:   "c3a17d398e7b16e4161169feb7176d5dc1387c5e60eaf619e8c0c0071571f4a1",
+         intel: "c50b32bcffb0ee36768d9b9acefbabe60ab9d84eec1f73b6935fdeae59749954"
 
-  url "https://github.com/toeverything/AFFiNE/releases/download/v#{version}/affine-stable-macos-#{arch}.zip",
+  url "https://github.com/toeverything/AFFiNE/releases/download/v#{version}/affine-#{version}-stable-macos-#{arch}.zip",
       verified: "github.com/toeverything/AFFiNE/"
   name "AFFiNE"
   desc "Note editor and whiteboard"
@@ -17,7 +17,7 @@ cask "affine" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "AFFiNE.app"
 

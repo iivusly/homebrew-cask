@@ -1,9 +1,9 @@
 cask "miniconda" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "py311_23.9.0-0"
-  sha256 arm:   "4215f6fc572207f73a8f64692b4936b1952051f4cd620eec2ebd1f946e98b886",
-         intel: "4b60eb49cf8fea6272bd2060878ab02cbab187dffd2fd732685c3c92a60b62ed"
+  version "py312_25.1.1-2"
+  sha256 arm:   "16e7eea739d470d0c3451e9bb779bbfa169b98cfb283d2d6508945e0c6b36ada",
+         intel: "0df9f4b7d063a78d18fd02af2b0a97121879af00b535ea79ee23d68d1005e6f8"
 
   url "https://repo.anaconda.com/miniconda/Miniconda3-#{version}-MacOSX-#{arch}.sh",
       verified: "repo.anaconda.com/miniconda/"
@@ -13,14 +13,17 @@ cask "miniconda" do
 
   livecheck do
     url "https://repo.anaconda.com/miniconda/"
-    strategy do |content|
-      sha256 = content.scan(/>Miniconda3-latest-MacOSX-#{arch}\.sh<.{,99}>(\w{64})</im).first.first
-      content.scan(/>Miniconda3-(py\d+_[\d.-]+)-MacOSX-#{arch}\.sh<.{,99}>#{sha256}</im).first.first
+    strategy :page_match do |page|
+      sha256 = page.scan(/>Miniconda3-latest-MacOSX-#{arch}\.sh<.{,99}>(\w{64})</im).first.first
+      page.scan(/>Miniconda3-(py\d+_[\d.-]+)-MacOSX-#{arch}\.sh<.{,99}>#{sha256}</im).first.first
     end
   end
 
   auto_updates true
-  conflicts_with cask: "miniforge"
+  conflicts_with cask: [
+    "mambaforge",
+    "miniforge",
+  ]
   container type: :naked
 
   installer script: {

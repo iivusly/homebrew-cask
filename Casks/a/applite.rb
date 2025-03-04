@@ -1,6 +1,6 @@
 cask "applite" do
-  version "1.2.1"
-  sha256 "84009e312a69e1c692e23732bf16e6af8e207b381561d87632ca510ed29f11ff"
+  version "1.3.0"
+  sha256 "380dc4b18a3e387b8939d89c1ce4968641e74669c2f2f6a92fd6a2d72311ae2b"
 
   url "https://github.com/milanvarady/Applite/releases/download/v#{version}/Applite.dmg",
       verified: "github.com/milanvarady/Applite/"
@@ -15,7 +15,6 @@ cask "applite" do
 
   auto_updates true
   depends_on macos: ">= :ventura"
-  depends_on formula: "pinentry-mac"
 
   app "Applite.app"
 

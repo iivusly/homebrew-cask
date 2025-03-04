@@ -1,16 +1,24 @@
 cask "texworks" do
-  version "0.6.8,202302181247,6b1c6ab"
-  sha256 "9c7585bb2dc3ecf7f190d1af09d063801f912d7be8825e503bd11d69f2f3081e"
+  arch arm: "arm64", intel: "x86_64"
 
-  url "https://github.com/TeXworks/texworks/releases/download/release-#{version.csv.first}/TeXworks-macos10.15-#{version.csv.first}-#{version.csv.second}-git_#{version.csv.third}.dmg",
+  on_arm do
+    version "0.6.10,202502131353,7380941"
+    sha256 "813964827bbea219f7f05d7a03c76260162010bebc70746ccce60c77a3537b24"
+  end
+  on_intel do
+    version "0.6.10,202502131354,7380941"
+    sha256 "c0561bd2bf185a7783ae201af041506cf634fcb373c58027a5c203abada8ead0"
+  end
+
+  url "https://github.com/TeXworks/texworks/releases/download/release-#{version.csv.first}/TeXworks-macos11-#{version.csv.first}-#{arch}-#{version.csv.second}-git_#{version.csv.third}.dmg",
       verified: "github.com/TeXworks/texworks/"
   name "TeXworks"
-  desc "Main codebase"
+  desc "LaTeX editor"
   homepage "https://www.tug.org/texworks/"
 
   livecheck do
     url :url
-    regex(/^TeXworks-macos10.15[._-]v?(\d+(?:\.\d+)+)-(\d+)-git_(.*?)\.dmg$/i)
+    regex(/^TeXworks[._-]macos11[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}[._-](\d+)[._-]git[._-](.*?)\.dmg$/i)
     strategy :github_latest do |json, regex|
       json["assets"]&.map do |asset|
         match = asset["name"]&.match(regex)
@@ -21,7 +29,7 @@ cask "texworks" do
     end
   end
 
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :big_sur"
 
   app "TeXworks.app"
 

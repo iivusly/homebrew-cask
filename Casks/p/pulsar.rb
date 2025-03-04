@@ -2,9 +2,9 @@ cask "pulsar" do
   arch arm: "Silicon", intel: "Intel"
   arch_suffix = on_arch_conditional arm: "-arm64"
 
-  version "1.110.0"
-  sha256 arm:   "874397d93bb340e7548b794cc496c85ca348697489700a45fc8e273971b09461",
-         intel: "b9b64d2f01059c3f98e12b72bd6455d3f7cf039f7e1ea73cbc96023e8fca71da"
+  version "1.125.0"
+  sha256 arm:   "e5d1911c320ccf016596916e6e5686edc0823b22864cd50b8ca54c458cc62c6f",
+         intel: "e51bed8011a77535e37357315ac6090dd829358e8b2150435a29bfd81148d06e"
 
   url "https://github.com/pulsar-edit/pulsar/releases/download/v#{version}/#{arch}.Mac.Pulsar-#{version}#{arch_suffix}-mac.zip",
       verified: "github.com/pulsar-edit/pulsar/"
@@ -25,7 +25,7 @@ cask "pulsar" do
     "~/.pulsar",
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/dev.pulsar-edit.pulsar.sfl*",
     "~/Library/Application Support/Pulsar",
-    "~/Library/Preferences/div.pulsar-edit.pulsar.plist",
+    "~/Library/Preferences/dev.pulsar-edit.pulsar.plist",
     "~/Library/Saved Application State/dev.pulsar-edit.pulsar.savedState",
   ]
 end
