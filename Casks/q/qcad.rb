@@ -1,23 +1,26 @@
 cask "qcad" do
-  arch arm: "11-13-qt6-arm64", intel: "10.14-13"
+  arch arm: "-arm64"
 
   on_arm do
-    version "3.28.2.4"
-    sha256 "863efc7a245efaea6d63aa8f9433b7e87bff5211d771508304d4a672531917e7"
+    version "3.32.2,12.7-15-qt6"
+    sha256 "332b74c6d87929b3889327d7fe05f5027ed658d1dc6f0dcfc38d129efa5df353"
   end
   on_intel do
-    version "3.28.2"
-    sha256 "02c44a3bffaf4224f603933786c502c2cf7a1107e97ac6d90c5e095581b8bdea"
+    version "3.32.2,10.14-15"
+    sha256 "3a38f0435394180fc2417e9e291f23d95550776758e33ba45dcf3b23d9675da0"
   end
 
-  url "https://www.qcad.org/archives/qcad/qcad-#{version}-trial-macos-#{arch}.dmg"
+  url "https://www.qcad.org/archives/qcad/qcad-#{version.csv.first}-trial-macos-#{version.csv.second}#{arch}.dmg"
   name "QCAD"
   desc "Free, open source application for computer aided drafting in 2D"
   homepage "https://www.qcad.org/"
 
   livecheck do
     url "https://www.qcad.org/en/download"
-    regex(/qcad[._-]v?(\d+(?:\.\d+)+)[._-]trial[._-]macos[._-]#{arch}\.dmg/i)
+    regex(/qcad[._-]v?(\d+(?:\.\d+)+)[._-]trial[._-]macos[._-](\d+(?:[._-]\d+)+(?:[._-]qt\d)?)#{arch}\.dmg/i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+    end
   end
 
   app "QCAD.app"

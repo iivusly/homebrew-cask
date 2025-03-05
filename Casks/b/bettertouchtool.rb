@@ -1,10 +1,10 @@
 cask "bettertouchtool" do
-  version "4.299,42990"
-  sha256 "aef3d7031ec8d51294578c9b427209ba84a94565f81d15a862385c51b162011d"
+  version "5.252,2025030501"
+  sha256 "5de3cd6b264338ccbbeedbeae3ce1855cffe21386c4e87b4719b60ef80e2349a"
 
   url "https://folivora.ai/releases/btt#{version.csv.first}-#{version.csv.second}.zip"
   name "BetterTouchTool"
-  desc "Tool to customize input devices and automate computer systems"
+  desc "Tool to customise input devices and automate computer systems"
   homepage "https://folivora.ai/"
 
   livecheck do
@@ -25,7 +25,7 @@ cask "bettertouchtool" do
   end
 
   auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :big_sur"
 
   app "BetterTouchTool.app"
 

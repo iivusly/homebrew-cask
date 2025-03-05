@@ -1,24 +1,19 @@
 cask "raze" do
-  version "1.7.1"
-  sha256 "b2b262b029fff58575cd5f5a9a2df65bf8fe3770d68a27ef45d5ecabee467be8"
+  version "1.11.0"
+  sha256 "b7980849a507cfcfeaf8f76298c032bfe4415b2f246f41e3c0c9a6291770c70c"
 
-  url "https://github.com/coelckers/Raze/releases/download/#{version}/raze-macos-#{version}.zip"
+  url "https://github.com/coelckers/Raze/releases/download/#{version}/raze-macos-#{version}.zip",
+      verified: "github.com/coelckers/Raze/"
   name "Raze"
   desc "Build engine port backed by GZDoom tech"
-  homepage "https://github.com/coelckers/Raze"
+  homepage "https://raze.zdoom.org/about"
 
   livecheck do
-    url :url
-    regex(/^raze[._-]macos[._-]v?(\d+(?:\.\d+)+)\.zip$/i)
-    strategy :github_latest do |json, regex|
-      json["assets"]&.map do |asset|
-        match = asset["name"]&.match(regex)
-        next if match.blank?
-
-        match[1]
-      end
-    end
+    url "https://raze.zdoom.org/downloads"
+    regex(/href=.*?raze[._-]macos[._-]v?(\d+(?:\.\d+)+)\.zip/i)
   end
+
+  depends_on macos: ">= :catalina"
 
   app "Raze.app"
 

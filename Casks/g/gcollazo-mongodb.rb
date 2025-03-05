@@ -1,17 +1,19 @@
 cask "gcollazo-mongodb" do
-  version "6.0.0-build.1"
-  sha256 "1853dff4712987a22ef586caa425702b51892fe2128e9d35fc14e9edf2d34eb3"
+  version "8.0.5-build.1"
+  sha256 "bc545179d510b4fc80ac9866d34228faa7153137eea8f5ebcac957abf9d3ef89"
 
   url "https://github.com/gcollazo/mongodbapp/releases/download/#{version}/MongoDB.zip",
       verified: "github.com/gcollazo/mongodbapp/"
   name "MongoDB"
   desc "App wrapper for MongoDB"
-  homepage "https://elweb.co/mongodb-app/"
+  homepage "https://gcollazo.com/mongodb-app/"
 
   livecheck do
     url :url
     regex(/^v?(\d+(?:\.\d+)+(?:-build[._-]?\d+)?)$/i)
   end
+
+  depends_on macos: ">= :mojave"
 
   app "MongoDB.app"
 

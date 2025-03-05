@@ -1,9 +1,9 @@
 cask "cryptomator" do
   arch arm: "-arm64", intel: "-x64"
 
-  version "1.10.1"
-  sha256 arm:   "11d246ef595b414c1910ac1ce6b1b10d76dba404f040c091da4d19a9f0f5427f",
-         intel: "692154d881066c28b60db493940675a2e91859a2ab7e94487a86d405c0e86d35"
+  version "1.15.1"
+  sha256 arm:   "ecbd58228d3407d3f4c801c633006d4f9e836a758bc6db25d022830365ed3ed1",
+         intel: "bf83c62e28c978706e8d2ffb89e5c1ef2d513355517c39650ee0dc2a1583d4b3"
 
   url "https://github.com/cryptomator/cryptomator/releases/download/#{version}/Cryptomator-#{version}#{arch}.dmg",
       verified: "github.com/cryptomator/cryptomator/"
@@ -11,7 +11,14 @@ cask "cryptomator" do
   desc "Multi-platform client-side cloud file encryption tool"
   homepage "https://cryptomator.org/"
 
-  depends_on macos: ">= :high_sierra"
+  livecheck do
+    url "https://api.cryptomator.org/desktop/latest-version.json"
+    strategy :json do |json|
+      json["mac"]
+    end
+  end
+
+  depends_on macos: ">= :big_sur"
 
   app "Cryptomator.app"
 

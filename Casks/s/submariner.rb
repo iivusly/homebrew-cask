@@ -1,14 +1,14 @@
 cask "submariner" do
-  version "2.4.2"
-  sha256 "4f306b69115f33f46d41fbf1623a8f8a01e1101e26456a15470e40caa472991a"
+  version "3.3.1"
+  sha256 "e618e4c6bdefdf2ec876b5f532e8519597f6d123665173f5353a75ff21bbdbc8"
 
   url "https://github.com/NattyNarwhal/Submariner/releases/download/v#{version}/Submariner-#{version}.zip",
       verified: "github.com/NattyNarwhal/Submariner/"
   name "Submariner"
   desc "Subsonic client"
-  homepage "http://submarinerapp.com/"
+  homepage "https://submarinerapp.com/"
 
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :monterey"
 
   app "Submariner.app"
 

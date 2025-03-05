@@ -1,6 +1,6 @@
 cask "zalo" do
-  version "23.10.2"
-  sha256 "df6a4ad9351c25ea4df375a7dc0767c32ebd1082d88b97ea46d7b61232204ef5"
+  version "25.1.1"
+  sha256 "831d70cac1f51094641339e37fbe10c730c8d4e71861c91b25ded99dee7c7a23"
 
   url "https://res-zaloapp-aka.zdn.vn/mac/ZaloSetup-universal-#{version}.dmg",
       verified: "res-zaloapp-aka.zdn.vn/mac/"
@@ -12,6 +12,8 @@ cask "zalo" do
     url "https://zalo.me/download/zalo-pc"
     strategy :header_match
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Zalo.app"
 

@@ -7,13 +7,14 @@ cask "leela" do
   desc "Go playing program with easy to use graphical interface"
   homepage "https://sjeng.org/leela.html"
 
-  livecheck do
-    url :homepage
-    regex(%r{href=.*?/Leela[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
-  end
+  deprecate! date: "2025-03-04", because: :discontinued
 
   depends_on macos: ">= :sierra"
 
   app "Leela.app"
   app "Leela OpenCL.app"
+
+  caveats do
+    requires_rosetta
+  end
 end

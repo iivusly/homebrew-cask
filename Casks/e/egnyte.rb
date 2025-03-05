@@ -1,6 +1,6 @@
 cask "egnyte" do
-  version "0.9.3,2070"
-  sha256 "97215207e92399ac6cd83a8dad5878fd5fb7eff0cff47dbc1197d43625e80df2"
+  version "1.5.0,2199"
+  sha256 "3a2f9f189a513c095dda2a480472fe4b1bbdf156d737f47c31a5abc6d645234e"
 
   url "https://egnyte-cdn.egnyte.com/desktopapp/mac/en-us/#{version.csv.first}/Egnyte_#{version.csv.first}_#{version.csv.second}.dmg"
   name "Egnyte"
@@ -12,17 +12,17 @@ cask "egnyte" do
     strategy :sparkle
   end
 
-  depends_on macos: ">= :monterey"
+  depends_on macos: ">= :ventura"
 
   app "Egnyte.app"
 
   zap trash: [
-    "~/Library/Application Scripts/FELUD555VC.group.com.egnyte.DesktopApp/",
-    "~/Library/Application Scripts/com.egnyte.DesktopApp/",
     "~/Library/Application Scripts/com.egnyte.DesktopApp.FileProvider/",
     "~/Library/Application Scripts/com.egnyte.DesktopApp.FinderHelper",
     "~/Library/Application Scripts/com.egnyte.DesktopApp.FinderHelper.FinderSync",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.egnyte.desktopapp.sfl2",
+    "~/Library/Application Scripts/com.egnyte.DesktopApp/",
+    "~/Library/Application Scripts/FELUD555VC.group.com.egnyte.DesktopApp/",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.egnyte.desktopapp.sfl*",
     "~/Library/Application Support/FileProvider/com.egnyte.DesktopApp.FileProvider/",
     "~/Library/Caches/SentryCrash/EgnyteLaunchHelper/",
     "~/Library/Caches/SentryCrash/EgnyteUpgradeChecker/",

@@ -1,6 +1,6 @@
 cask "menubarx" do
-  version "1.6.4"
-  sha256 "52b52f70950c0241c08d2187958f686b061734477502112de7944cdb2ac1ca28"
+  version "1.7.5"
+  sha256 "7b996a4e0cd0159d7eaae29fff15628a259ebaae83ed6af527377852d698d6a2"
 
   url "https://menubarx-1251679148.file.myqcloud.com/download/MenubarX-#{version}.dmg",
       verified: "menubarx-1251679148.file.myqcloud.com/download/"
@@ -14,7 +14,7 @@ cask "menubarx" do
   end
 
   auto_updates true
-  depends_on macos: ">= :mojave"
+  depends_on macos: ">= :catalina"
 
   app "MenubarX.app"
 

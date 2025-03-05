@@ -1,11 +1,12 @@
 cask "mplabx-ide" do
-  version "6.15"
-  sha256 "bcf010bfa89e9e4128cd456bfe77ae2e66fb489090e97c56fda599e6b285578a"
+  version "6.25"
+  sha256 "289fd90eef9e9399623e2313cef81f13e2e9709743a403a6e8e2a01160438292"
 
-  url "https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/MPLABX-v#{version}-osx-installer.dmg"
+  url "https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/MPLABX-v#{version}-osx-installer.dmg",
+      referer: "https://www.microchip.com/"
   name "MPLab X IDE"
   desc "IDE for Microchip's microcontrollers and digital signal controllers"
-  homepage "https://www.microchip.com/en-us/development-tools-tools-and-software/mplab-x-ide"
+  homepage "https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide"
 
   livecheck do
     url :homepage
@@ -20,7 +21,6 @@ cask "mplabx-ide" do
       "--ide", "1",
       "--ipe", "1",
       "--othermcu", "0",
-      "--exepermission", "no",
       "--collectInfo", "0",
       "--collectMyMicrochipInfo", "0",
       "--installdir", staged_path.to_s
@@ -57,14 +57,13 @@ cask "mplabx-ide" do
               sudo:       true,
             },
             delete: [
+              # The below version number needs to be updated manually each time this Cask is updated
+              "/Applications/microchip/mplabcomm/3.54.00",
               "/Applications/microchip/mplabx/#{version}",
-              # The below version number needs to be updated
-              # manually each time this Cask is updated
-              "/Applications/microchip/mplabcomm/3.53.00",
             ],
             rmdir:  [
-              "/Applications/microchip/mplabx",
               "/Applications/microchip/mplabcomm",
+              "/Applications/microchip/mplabx",
             ]
 
   zap trash: "/Applications/microchip"

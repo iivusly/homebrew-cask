@@ -1,6 +1,6 @@
 cask "cinderella" do
-  version "3.0b.2080"
-  sha256 "68327532da85e372712662f9c4fd005966ddc0515364ef0bfb4011f803bee781"
+  version "3.0b.2091"
+  sha256 "d0664131fcfa124ffabcd770ff3dee1dc93a3090cb76c008451e12738556fe7b"
 
   url "https://beta.cinderella.de/Cinderella-#{version}.dmg"
   name "Cinderella"
@@ -9,13 +9,13 @@ cask "cinderella" do
 
   livecheck do
     url "https://beta.cinderella.de/"
-    regex(/href="Cinderella-(\d+.\d+b?.+)\.dmg"/i)
+    regex(/href=.*?Cinderella[._-](\d+(?:\.[\db]+)*)\.dmg/i)
   end
 
   app "Cinderella.app"
 
   zap trash: [
-    "~/Library/Preferences/cinderella2-user.properties",
     "~/Library/Preferences/cinderella2-global.properties",
+    "~/Library/Preferences/cinderella2-user.properties",
   ]
 end

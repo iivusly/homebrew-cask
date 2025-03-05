@@ -1,19 +1,25 @@
 cask "proclaim" do
-  version "3.1.0.0092"
-  sha256 "03263a343503e041755e41b223ec1d23d8b110232cc2298fada55175b9a698d1"
+  arch arm: "-arm"
 
-  url "https://downloads.logoscdn.com/Proclaim/Installer/#{version}/Proclaim.dmg",
+  version "4.9.0.0204"
+  sha256 arm:   "a5d79999c76d76fd2d0c2d0f1ca0db2c970cb15f2e4cedbfa64a826fb7a525a5",
+         intel: "ca60fe2d8f3be5f8ca8710e33f7c395d1d2e86494a95a5d34595ab96a83c9da8"
+
+  url "https://downloads.logoscdn.com/Proclaim/Installer/#{version}/Proclaim#{arch}.dmg",
       verified: "logoscdn.com/Proclaim/"
-  name "Faithlife Proclaim"
+  name "Proclaim"
   desc "Church presentation software"
-  homepage "https://faithlife.com/products/proclaim"
+  homepage "https://proclaim.logos.com/"
 
   livecheck do
-    url "http://downloads.proclaimonline.com/mac/appcast.xml"
-    strategy :sparkle, &:short_version
+    url "https://clientservices.logos.com/update/v1/feed/proclaim-mac/stable.xml"
+    strategy :xml do |xml|
+      xml.get_elements("//logos:version")&.map { |item| item.text&.strip }
+    end
   end
 
-  depends_on macos: ">= :mojave"
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Proclaim.app"
 

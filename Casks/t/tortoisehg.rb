@@ -1,6 +1,6 @@
 cask "tortoisehg" do
-  version "6.5.1"
-  sha256 "eadc6f3b3e55af5d229b362aa973f1d7710a06df2f600ed6f6a2f86692933e79"
+  version "6.9"
+  sha256 "7197d6758042d27642f0a262866b4529e52e17838915609f2c180756d0eca719"
 
   url "https://www.mercurial-scm.org/release/tortoisehg/macos/TortoiseHg-#{version}-mac-x64-qt5.dmg",
       verified: "mercurial-scm.org/release/tortoisehg/"
@@ -16,4 +16,8 @@ cask "tortoisehg" do
   app "TortoiseHg.app"
 
   zap trash: "~/.config/tortoisehg.org"
+
+  caveats do
+    requires_rosetta
+  end
 end

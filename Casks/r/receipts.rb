@@ -1,14 +1,14 @@
 cask "receipts" do
-  version "1.14-682"
-  sha256 "85c4f5c53bc10cd4689bd6468a570bdc3d0045c3f2520bc229507b5b0defe2af"
+  version "1.17-804"
+  sha256 "39a680e7248ee871ef96891e52dd654e280a1e6d512a0554310b6432172bb49b"
 
-  url "https://www.receipts-app.com/update/download/Receipts-#{version}.zip"
+  url "https://receipts-app.com/update/download/Receipts-#{version}.zip"
   name "Receipts"
   desc "Document management"
-  homepage "https://www.receipts-app.com/"
+  homepage "https://receipts-app.com/"
 
   livecheck do
-    url "https://www.receipts-app.com/updater.php"
+    url "https://receipts-app.com/updater.php"
     regex(/href=.*?Receipts[._-]v?(\d+(?:[.-]\d+)+)\.zip/i)
   end
 
@@ -19,7 +19,7 @@ cask "receipts" do
   zap trash: [
     "~/Documents/Receipts.receipts",
     "~/Library/Application Scripts/com.apperdeck.mac.Receipts.ReceiptsShareExtension",
-    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.apperdeck.mac.receipts.sfl2",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.apperdeck.mac.receipts.sfl*",
     "~/Library/Caches/com.apperdeck.mac.Receipts",
     "~/Library/Containers/com.apperdeck.mac.Receipts.ReceiptsShareExtension",
     "~/Library/HTTPStorages/com.apperdeck.mac.Receipts",

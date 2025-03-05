@@ -1,5 +1,5 @@
 cask "lantern" do
-  version "7.6.15"
+  version :latest
   sha256 :no_check
 
   url "https://s3.amazonaws.com/lantern/lantern-installer.dmg",
@@ -8,18 +8,19 @@ cask "lantern" do
   desc "Open Internet For All"
   homepage "https://lantern.io/"
 
-  livecheck do
-    url "https://github.com/getlantern/lantern/releases"
-    strategy :github_latest
-  end
-
   app "Lantern.app"
 
-  uninstall quit:      "com.getlantern.lantern",
-            launchctl: "org.getlantern"
+  uninstall launchctl: "org.getlantern",
+            quit:      "com.getlantern.lantern"
 
   zap trash: [
+    "~/Library/Application Support/byteexec/lantern",
+    "~/Library/Application Support/byteexec/sysproxy-cmd",
     "~/Library/Application Support/Lantern",
     "~/Library/Logs/Lantern",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

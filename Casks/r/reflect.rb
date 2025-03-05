@@ -1,15 +1,18 @@
 cask "reflect" do
   arch arm: "arm64", intel: "x64"
 
-  version "2.1.2"
-  sha256 arm:   "b0eab362bfcaaddf087b4eec7d8f6c4a12f3373fccb37ae6292b6fc1716a3a5f",
-         intel: "2d3d188a5f18f0cbae070cd42763253ef604a30f347b385c892e9e6719696e8b"
+  version "3.0.5"
+  sha256 arm:   "d02271319d42de1d567bca2bc9197cd84f25ef0c7bdb5a4ae213fa35f74ff8d2",
+         intel: "9ab9d0e83ec2cdd0b7e7b8107c1e5285351dd6dbb0790e31b2ab4b6cc8b1ca4e"
 
-  url "https://github.com/team-reflect/reflect-electron-updates/releases/download/#{version}/Reflect-darwin-#{arch}-#{version}.zip",
+  url "https://github.com/team-reflect/reflect-electron-updates/releases/download/v#{version}/Reflect-darwin-#{arch}-#{version}.zip",
       verified: "github.com/team-reflect/reflect-electron-updates/"
   name "Reflect Notes"
   desc "Note taking app for meetings, ideas, journalling, and research"
   homepage "https://reflect.app/"
+
+  auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Reflect.app"
 

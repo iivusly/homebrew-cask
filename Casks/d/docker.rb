@@ -1,68 +1,58 @@
 cask "docker" do
   arch arm: "arm64", intel: "amd64"
 
+  version "4.39.0,184744"
+  sha256 arm:   "553a0b9d155af21ce9dd524a3f59d421f3ac8109c913a2c6bd663f25770803d3",
+         intel: "1b4e7efccbf0569bfcff23fa7df5e5f11ee4ae31dabc0aa974c8b1b45042832f"
+
   on_intel do
     binary "Docker.app/Contents/Resources/bin/com.docker.hyperkit",
            target: "/usr/local/bin/hyperkit"
-  end
-  on_catalina :or_older do
-    version "4.15.0,93002"
-    sha256 arm:   "fc8609d57fb8c8264122f581c0f66497e46e171f8027d85d90213527d6226362",
-           intel: "bee41d646916e579b16b7fae014e2fb5e5e7b5dbaf7c1949821fd311d3ce430b"
-
-    livecheck do
-      skip "Legacy version"
-    end
-
-    depends_on macos: ">= :catalina"
-  end
-  on_big_sur :or_newer do
-    version "4.25.0,126437"
-    sha256 arm:   "7ff7c3a5a1a4e582f610cd713aa3ee69fae669bbb8345601e892f05a33fb87b3",
-           intel: "1786b2f47127dd30674aaf8dfa491d9c614cbf260ae03c8f699abe36578713dd"
-
-    livecheck do
-      url "https://desktop.docker.com/mac/main/#{arch}/appcast.xml"
-      strategy :sparkle
-    end
-
-    depends_on macos: ">= :big_sur"
   end
 
   url "https://desktop.docker.com/mac/main/#{arch}/#{version.csv.second}/Docker.dmg"
   name "Docker Desktop"
   name "Docker Community Edition"
   name "Docker CE"
-  desc "App to build and share containerized applications and microservices"
+  desc "App to build and share containerised applications and microservices"
   homepage "https://www.docker.com/products/docker-desktop"
 
+  livecheck do
+    url "https://desktop.docker.com/mac/main/#{arch}/appcast.xml"
+    strategy :sparkle
+  end
+
   auto_updates true
-  conflicts_with formula: %w[
-    docker
-    docker-completion
-    docker-compose
-    docker-credential-helper-ecr
-  ]
+  conflicts_with cask:    "rancher",
+                 formula: %w[
+                   docker
+                   docker-completion
+                   docker-compose
+                   docker-credential-helper-ecr
+                 ]
+  depends_on macos: ">= :monterey"
 
   app "Docker.app"
-  binary "Docker.app/Contents/Resources/bin/com.docker.cli",
-         target: "/usr/local/bin/com.docker.cli"
-  binary "Docker.app/Contents/Resources/bin/docker",
+  binary "Docker.app/Contents/Resources/etc/docker-compose.bash-completion",
+         target: "#{HOMEBREW_PREFIX}/etc/bash_completion.d/docker-compose"
+  binary "Docker.app/Contents/Resources/etc/docker-compose.zsh-completion",
+         target: "#{HOMEBREW_PREFIX}/share/zsh/site-functions/_docker-compose"
+  binary "Docker.app/Contents/Resources/etc/docker-compose.fish-completion",
+         target: "#{HOMEBREW_PREFIX}/share/fish/vendor_completions.d/docker-compose.fish"
+  binary "#{appdir}/Docker.app/Contents/Resources/bin/docker",
          target: "/usr/local/bin/docker"
-  binary "Docker.app/Contents/Resources/bin/docker-compose",
-         target: "/usr/local/bin/docker-compose"
-  binary "Docker.app/Contents/Resources/bin/docker-credential-desktop",
+  binary "#{appdir}/Docker.app/Contents/Resources/bin/docker-credential-desktop",
          target: "/usr/local/bin/docker-credential-desktop"
-  binary "Docker.app/Contents/Resources/bin/docker-credential-ecr-login",
+  binary "#{appdir}/Docker.app/Contents/Resources/bin/docker-credential-ecr-login",
          target: "/usr/local/bin/docker-credential-ecr-login"
-  binary "Docker.app/Contents/Resources/bin/docker-credential-osxkeychain",
+  binary "#{appdir}/Docker.app/Contents/Resources/bin/docker-credential-osxkeychain",
          target: "/usr/local/bin/docker-credential-osxkeychain"
-  binary "Docker.app/Contents/Resources/bin/docker-index",
-         target: "/usr/local/bin/docker-index"
-  binary "Docker.app/Contents/Resources/bin/hub-tool",
+  binary "#{appdir}/Docker.app/Contents/Resources/bin/hub-tool",
          target: "/usr/local/bin/hub-tool"
-  binary "Docker.app/Contents/Resources/bin/kubectl",
+  binary "#{appdir}/Docker.app/Contents/Resources/bin/kubectl",
          target: "/usr/local/bin/kubectl.docker"
+  binary "#{appdir}/Docker.app/Contents/Resources/cli-plugins/docker-compose",
+         target: "/usr/local/cli-plugins/docker-compose"
   binary "Docker.app/Contents/Resources/etc/docker.bash-completion",
          target: "#{HOMEBREW_PREFIX}/etc/bash_completion.d/docker"
   binary "Docker.app/Contents/Resources/etc/docker.zsh-completion",
@@ -89,17 +79,17 @@ cask "docker" do
     end
   end
 
-  uninstall delete:    [
-              "/Library/PrivilegedHelperTools/com.docker.socket",
-              "/Library/PrivilegedHelperTools/com.docker.vmnetd",
-            ],
-            rmdir:     "~/.docker/bin",
-            launchctl: [
+  uninstall launchctl: [
               "com.docker.helper",
               "com.docker.socket",
               "com.docker.vmnetd",
             ],
-            quit:      "com.docker.docker"
+            quit:      "com.docker.docker",
+            delete:    [
+              "/Library/PrivilegedHelperTools/com.docker.socket",
+              "/Library/PrivilegedHelperTools/com.docker.vmnetd",
+            ],
+            rmdir:     "~/.docker/bin"
 
   zap trash: [
         "/usr/local/bin/docker-compose.backup",
@@ -107,6 +97,8 @@ cask "docker" do
         "~/.docker",
         "~/Library/Application Scripts/com.docker.helper",
         "~/Library/Application Scripts/group.com.docker",
+        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.docker.helper.sfl*",
+        "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.electron.dockerdesktop.sfl*",
         "~/Library/Application Support/com.bugsnag.Bugsnag/com.docker.docker",
         "~/Library/Application Support/Docker Desktop",
         "~/Library/Caches/com.docker.docker",

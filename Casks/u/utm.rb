@@ -1,12 +1,12 @@
 cask "utm" do
-  version "4.4.4"
-  sha256 "4b2aea90d59150a412dc3d7b5d8b02fdd7022a53cb18d36c1b9a1b1221c4d4b9"
+  version "4.6.4"
+  sha256 "aad86726152b15a3e963cf778a0b0dfd8e818736b381aed2699d974a18845427"
 
   url "https://github.com/utmapp/UTM/releases/download/v#{version}/UTM.dmg",
       verified: "github.com/utmapp/UTM/"
   name "UTM"
   desc "Virtual machines UI using QEMU"
-  homepage "https://getutm.app/"
+  homepage "https://mac.getutm.app/"
 
   livecheck do
     url :url
@@ -14,7 +14,8 @@ cask "utm" do
     strategy :github_latest
   end
 
-  conflicts_with cask: "homebrew/cask-versions/utm-beta"
+  conflicts_with cask: "utm@beta"
+  depends_on macos: ">= :big_sur"
 
   app "UTM.app"
   binary "#{appdir}/UTM.app/Contents/MacOS/utmctl"

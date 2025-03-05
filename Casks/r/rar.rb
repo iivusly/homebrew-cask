@@ -1,9 +1,9 @@
 cask "rar" do
   arch arm: "arm", intel: "x64"
 
-  version "6.24"
-  sha256 arm:   "dabe335834fb5f0fc236f03ba0d12c19fad7243cc56b980db61201ff94d84795",
-         intel: "e2f10d3cd7cca50b2db26f7ef3e8251cf2bd7c09439a71d66c21d6f87530497e"
+  version "7.10"
+  sha256 arm:   "81b6c5ca75583d5b0e340e0683c045a7327fe08c8d8424ff286855d6f8ed2054",
+         intel: "cd835c92bc4e02e82c34510d8cd4466859866856eb46fef78e911e4e6425a3c0"
 
   url "https://www.rarlab.com/rar/rarmacos-#{arch}-#{version.no_dots}.tar.gz"
   name "RAR Archiver"
@@ -12,7 +12,7 @@ cask "rar" do
 
   livecheck do
     url "https://www.rarlab.com/download.htm"
-    regex(/>s*RAR\s+v?(\d+(:?\.\d+)+)\s+for\s+macOS/i)
+    regex(/>\s*RAR\s+for\s+macOS.*?v?(\d+(:?\.\d+)+)\s*</i)
   end
 
   binary "rar/rar"

@@ -1,19 +1,20 @@
 cask "swiftbar" do
-  version "1.4.4"
-  sha256 "04f465abaabf7a06f8e75458824a551f5a2e85d60bdf73f95539825fee59d856"
+  version "2.0.1,536"
+  sha256 "ac70a9cbdde20d58dae27d360764aa42c3698f6e1bc4618c4b03297a2cee67fa"
 
-  url "https://github.com/swiftbar/SwiftBar/releases/download/v#{version}/SwiftBar.zip",
+  url "https://github.com/swiftbar/SwiftBar/releases/download/v#{version.csv.first}/SwiftBar.v#{version.csv.first}.b#{version.csv.second}.zip",
       verified: "github.com/swiftbar/SwiftBar/"
   name "SwiftBar"
   desc "Menu bar customization tool"
   homepage "https://swiftbar.app/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://swiftbar.github.io/SwiftBar/appcast.xml"
+    strategy :sparkle
   end
 
-  depends_on macos: ">= :catalina"
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "SwiftBar.app"
 

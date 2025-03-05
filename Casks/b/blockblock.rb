@@ -19,8 +19,8 @@ cask "blockblock" do
     }
   end
   on_catalina :or_newer do
-    version "2.1.5"
-    sha256 "3ee9f1bceec828e91602d7f3d3e516c8aa9cde58e98214065da380b870e92141"
+    version "2.2.4"
+    sha256 "6edd747e43148d7773adb6569b3f6fe085c82850bab6833850084ff2427b7bad"
 
     url "https://github.com/objective-see/BlockBlock/releases/download/v#{version}/BlockBlock_#{version}.zip",
         verified: "github.com/objective-see/BlockBlock/"
@@ -28,7 +28,7 @@ cask "blockblock" do
 
   name "BlockBlock"
   desc "Monitors common persistence locations"
-  homepage "https://objective-see.com/products/blockblock.html"
+  homepage "https://objective-see.org/products/blockblock.html"
 
   installer script: {
     executable: "#{staged_path}/BlockBlock Installer.app/Contents/MacOS/BlockBlock Installer",
@@ -45,7 +45,7 @@ cask "blockblock" do
   zap trash: [
     "~/Library/Caches/com.objective-see.blockblock.helper",
     "~/Library/HTTPStorages/com.objective-see.blockblock.helper",
-    "~/Library/Preferences/com.objectiveSee.BlockBlock.plist",
     "~/Library/Preferences/com.objective-see.blockblock.helper.plist",
+    "~/Library/Preferences/com.objectiveSee.BlockBlock.plist",
   ]
 end

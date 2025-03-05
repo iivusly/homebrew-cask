@@ -1,5 +1,5 @@
 cask "workplace-chat" do
-  version "194.0.0.9.196"
+  version "202.0.0.1.225"
   sha256 :no_check
 
   url "https://www.facebook.com/work/chat/download/mac",
@@ -8,10 +8,7 @@ cask "workplace-chat" do
   desc "Communications portal for your organisation"
   homepage "https://www.facebook.com/workplace/chat-app"
 
-  livecheck do
-    url :url
-    strategy :header_match
-  end
+  disable! date: "2025-02-15", because: :discontinued
 
   app "Workplace Chat.app"
 

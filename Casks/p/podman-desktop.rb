@@ -1,9 +1,9 @@
 cask "podman-desktop" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.4.0"
-  sha256 arm:   "b64cb0b8fdf8a4757aee7b6bef52af8eee303ad3168fa1e3023acc1cc14f6536",
-         intel: "0ec98a724bc045718e4b47372b5aa2d0fb7282a04be6a8ff855fa5db7f809580"
+  version "1.17.1"
+  sha256 arm:   "dabff77ee157d78f23924644cfdd0a2c165b2bdf74b21a0e76797ee85991ce7d",
+         intel: "98c51ab62dc7088c33a53fbbc8489d661b78c7f07ee596f91f9a4d163a767bd8"
 
   url "https://github.com/containers/podman-desktop/releases/download/v#{version}/podman-desktop-#{version}-#{arch}.dmg",
       verified: "github.com/containers/podman-desktop/"
@@ -16,8 +16,8 @@ cask "podman-desktop" do
     strategy :github_latest
   end
 
-  depends_on formula: "podman"
-  depends_on macos: ">= :catalina"
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Podman Desktop.app"
 

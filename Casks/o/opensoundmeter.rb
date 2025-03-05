@@ -1,8 +1,11 @@
 cask "opensoundmeter" do
-  version "1.2.3"
-  sha256 "b4de2eaabb8d65d918f47b92a65476f579117c14f9851ce91df31a71b41bc81c"
+  arch arm: "arm", intel: "intel"
 
-  url "https://github.com/psmokotnin/osm/releases/download/v#{version}/OpenSoundMeter.dmg",
+  version "1.4.1"
+  sha256 arm:   "245f2c3f7b8d0075c6f20df9905b0a938f99ae60f31cc240d7e511fc7eed7182",
+         intel: "fd361e31639098771e825d79df4f720b29a77892ca8ee2242c8c88251fefdf6b"
+
+  url "https://github.com/psmokotnin/osm/releases/download/v#{version}/OpenSoundMeter_#{arch}.dmg",
       verified: "github.com/psmokotnin/osm/"
   name "Open Sound Meter"
   desc "Sound measurement application for tuning audio systems in real-time"
@@ -13,8 +16,7 @@ cask "opensoundmeter" do
     strategy :github_latest
   end
 
-  auto_updates true
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :sierra"
 
   app "OpenSoundMeter.app"
 

@@ -16,11 +16,11 @@ cask "hiarcs-chess-explorer" do
     end
   end
   on_mojave :or_newer do
-    version "1.12.2a"
-    sha256 "fb4569d32e04e4a0434892ad283ccfe97f00ce0525c2851e403f8a13e3cdaaf3"
+    version "1.13"
+    sha256 "7b34bead03bb9f90ac56f54cb5b728af146025c3271b1a07d07dbcf5ffcbeeb3"
 
     livecheck do
-      url "https://www.hiarcs.com/mac-chess-explorer-download.htm"
+      url "https://www.hiarcs.com/mac-chess-explorer-download.html"
       regex(%r{href=.*?/HIARCS-Chess-Explorer-Installer[._-]v?(\d+(?:\.\d+)+[a-z]?)\.pkg}i)
     end
   end
@@ -28,7 +28,7 @@ cask "hiarcs-chess-explorer" do
   url "https://www.hiarcs.com/hce/HIARCS-Chess-Explorer-Installer-v#{version}.pkg"
   name "(Deep) HIARCS Chess Explorer"
   desc "Chess database, analysis and game playing program"
-  homepage "https://www.hiarcs.com/mac-chess-explorer.htm"
+  homepage "https://www.hiarcs.com/mac-chess-explorer.html"
 
   pkg "HIARCS-Chess-Explorer-Installer-v#{version}.pkg"
 

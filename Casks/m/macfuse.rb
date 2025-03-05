@@ -1,20 +1,22 @@
 cask "macfuse" do
-  version "4.5.0"
-  sha256 "9df7257315a9b9a97a9ba3a76011cabed7bc3784515b69fa098f8d81efec726d"
+  version "4.9.1"
+  sha256 "d73890b00bec8cf11add83ba5261fcbf3353af425b8f74dc28c5fd4782055a95"
 
-  url "https://github.com/osxfuse/osxfuse/releases/download/macfuse-#{version}/macfuse-#{version}.dmg",
-      verified: "github.com/osxfuse/osxfuse/"
+  url "https://github.com/macfuse/macfuse/releases/download/macfuse-#{version}/macfuse-#{version}.dmg",
+      verified: "github.com/macfuse/macfuse/"
   name "macFUSE"
   desc "File system integration"
-  homepage "https://osxfuse.github.io/"
+  homepage "https://macfuse.github.io/"
 
   livecheck do
-    url "https://osxfuse.github.io/releases/CurrentRelease.plist"
-    regex(/macfuse[._-]v?(\d+(?:\.\d+)+)\.dmg/i)
+    url "https://macfuse.github.io/releases/CurrentRelease.plist"
+    strategy :xml do |xml|
+      xml.get_elements("//key[text()='Version']").map { |item| item.next_element&.text&.strip }
+    end
   end
 
   auto_updates true
-  conflicts_with cask: "macfuse-dev"
+  conflicts_with cask: "macfuse@dev"
   depends_on macos: ">= :sierra"
 
   pkg "Extras/macFUSE #{version}.pkg"
@@ -28,7 +30,11 @@ cask "macfuse" do
     "io.macfuse.installer.components.preferencepane",
   ]
 
-  zap trash: "/Library/PreferencePanes/macFUSE.prefPane"
+  zap trash: [
+    "/Library/PreferencePanes/macFUSE.prefPane",
+    "~/Library/Caches/io.macfuse.preferencepanes.macfuse",
+    "~/Library/HTTPStorages/io.macfuse.preferencepanes.macfuse",
+  ]
 
   caveats do
     kext

@@ -1,9 +1,9 @@
 cask "wireshark-chmodbpf" do
   arch arm: "Arm", intel: "Intel"
 
-  version "4.0.10"
-  sha256 arm:   "178201c6b010e8ee7058a640b2592a8759a8ffa323f5a04434273a3501530a94",
-         intel: "f0ae6cfc2ecf1e7f5b1475c91bb2c5f7ac63174405a667056bb29b8c17f1180b"
+  version "4.4.5"
+  sha256 arm:   "2250360b04aa04412c6f0339fb6e93069a6acfd02cb7474708bf655f927f7976",
+         intel: "af2eb698e9bea714436822a1d0f6257c3960a0b1c2f61dc8f8dfffa830657060"
 
   url "https://www.wireshark.org/download/osx/Wireshark%20#{version}%20#{arch}%2064.dmg"
   name "Wireshark-ChmodBPF"
@@ -19,16 +19,15 @@ cask "wireshark-chmodbpf" do
 
   pkg "Install ChmodBPF.pkg"
 
-  uninstall_preflight do
-    system_command "/usr/sbin/installer",
-                   args: [
-                     "-pkg", "#{staged_path}/Uninstall ChmodBPF.pkg",
-                     "-target", "/"
-                   ],
-                   sudo: true
-  end
+  uninstall early_script: {
+              executable:   "/usr/sbin/installer",
+              args:         ["-pkg", "#{staged_path}/Uninstall ChmodBPF.pkg", "-target", "/"],
+              sudo:         true,
+              must_succeed: false,
+            },
+            pkgutil:      "org.wireshark.ChmodBPF.pkg"
 
-  uninstall pkgutil: "org.wireshark.ChmodBPF.pkg"
+  # No zap stanza required
 
   caveats do
     reboot

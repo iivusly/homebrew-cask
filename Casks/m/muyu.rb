@@ -1,16 +1,13 @@
 cask "muyu" do
-  version "1.5.0,36"
-  sha256 "653682940a750ce078724ae41f3b253d4ca7b3c48721d5190623b23856920cb6"
+  version "1.5.1,43"
+  sha256 "595ced25efae4a9b65f35897d3372d4f4814bfabb9f1229087c9080cd165f560"
 
-  url "https://breakit.thriller.fun/packages/Muyu.v#{version.csv.first}_#{version.csv.second}.zip"
+  url "https://breakit.thriller.fun/packages/appcast/Muyu.v#{version.csv.first}_#{version.csv.second}.zip"
   name "Muyu"
   desc "Combination of work efficiency and health"
   homepage "https://breakit.thriller.fun/"
 
-  livecheck do
-    url "https://breakit.thriller.fun/packages/appcast/appcast.xml"
-    strategy :sparkle
-  end
+  disable! date: "2025-01-04", because: :no_longer_available
 
   auto_updates true
   depends_on macos: ">= :ventura"

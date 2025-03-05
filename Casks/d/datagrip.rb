@@ -1,9 +1,9 @@
 cask "datagrip" do
   arch arm: "-aarch64"
 
-  version "2023.2.3,232.10203.8"
-  sha256 arm:   "7b42a9bdc64ebd93363b11152457190d1f04c5bf5a8f00bd8fc014e874ab4793",
-         intel: "9c8d4a5d179d03e167961f6dd19c869e69eb3cfd07e6d139bb21c95faca4d078"
+  version "2024.3.5,243.24978.79"
+  sha256 arm:   "1ba33de8b5595a7ab3ab683ed21200c6c884c7c9299a9dfe4414ae29b219dc09",
+         intel: "224a58410ef3e067b0c848607d34f5ac180e76ef95ebd1a9f7a34202d36ea278"
 
   url "https://download.jetbrains.com/datagrip/datagrip-#{version.csv.first}#{arch}.dmg"
   name "DataGrip"
@@ -13,8 +13,12 @@ cask "datagrip" do
   livecheck do
     url "https://data.services.jetbrains.com/products/releases?code=DG&latest=true&type=release"
     strategy :json do |json|
-      json["DG"].map do |release|
-        "#{release["version"]},#{release["build"]}"
+      json["DG"]&.map do |release|
+        version = release["version"]
+        build = release["build"]
+        next if version.blank? || build.blank?
+
+        "#{version},#{build}"
       end
     end
   end
@@ -23,15 +27,7 @@ cask "datagrip" do
   depends_on macos: ">= :high_sierra"
 
   app "DataGrip.app"
-
-  uninstall_postflight do
-    ENV["PATH"].split(File::PATH_SEPARATOR).map { |path| File.join(path, "datagrip") }.each do |path|
-      if File.readable?(path) &&
-         File.readlines(path).grep(/# see com.intellij.idea.SocketLock for the server side of this interface/).any?
-        File.delete(path)
-      end
-    end
-  end
+  binary "#{appdir}/DataGrip.app/Contents/MacOS/datagrip"
 
   zap trash: [
     "~/Library/Application Support/JetBrains/DataGrip*",

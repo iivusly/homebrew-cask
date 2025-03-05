@@ -1,6 +1,6 @@
 cask "davmail" do
-  version "6.1.0,3423"
-  sha256 "08c3024b9f32741d0268d2335a57337fda67d14ce47b8a4dee02bb8cbe210c64"
+  version "6.3.0,3627"
+  sha256 "cd38df6fcf4dd23da7879292fdd4a15d2845be1bd9f7a5060d5dd685aabb4c08"
 
   url "https://downloads.sourceforge.net/davmail/DavMail-MacOSX-#{version.csv.first}-#{version.csv.second}.app.zip"
   name "DavMail"
@@ -16,6 +16,11 @@ cask "davmail" do
   end
 
   app "DavMail.app"
+
+  zap trash: [
+    "~/.davmail.properties",
+    "~/Library/Logs/DavMail",
+  ]
 
   caveats do
     depends_on_java

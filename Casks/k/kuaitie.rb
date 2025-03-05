@@ -1,11 +1,11 @@
 cask "kuaitie" do
-  version "3.5.2,1698230703"
-  sha256 "d16ef31abb43983b4ceede4ec388313453b93ccdde1a7c752eb9653a1eb15c43"
+  version "3.6.6,1702800455"
+  sha256 "a644523824bf512874c31f866a7d753acb43c2a378b6e8974296ad17453cb833"
 
   url "https://clipweb.oss-cn-qingdao.aliyuncs.com/release/macos/packages/kuaitie-#{version.csv.first.no_dots}_#{version.csv.second}.zip",
       verified: "clipweb.oss-cn-qingdao.aliyuncs.com/release/macos/packages/"
   name "kuaitie"
-  desc "Cross-platform cloud clipboard synchronization tool"
+  desc "Cross-platform cloud clipboard synchronisation tool"
   homepage "https://home.clipber.com/"
 
   livecheck do

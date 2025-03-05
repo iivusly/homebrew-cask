@@ -1,9 +1,9 @@
 cask "alex313031-thorium" do
   arch arm: "ARM", intel: "X64"
 
-  version "M116.0.5845.169"
-  sha256 arm:   "3d3e0ff5ee0f32848e327877a86bb1279a2bc28ec4a2ffc690b7b85a9fb73c07",
-         intel: "894a49d108fd9a82ddf8d6b52d223784a089279ef5bf7a701334de391e8fddb9"
+  version "M130.0.6723.174"
+  sha256 arm:   "ba1c45a52962c5f7d9b293757b1ca7456171e240927c30dcdaf7fd48d2dc8c04",
+         intel: "1c92f610b56bc893b4bb11d7513366b1f991e60918d8e5feba927b5f1da66cff"
 
   url "https://github.com/Alex313031/Thorium-MacOS/releases/download/#{version}/Thorium_MacOS_#{arch}.dmg",
       verified: "github.com/Alex313031/Thorium-MacOS/"
@@ -12,12 +12,13 @@ cask "alex313031-thorium" do
   homepage "https://thorium.rocks/"
 
   livecheck do
-    strategy :git
-    regex(/^(M\d+(?:\.\d+)+)/i)
+    url :url
+    regex(/^(M?\d+(?:\.\d+)+)$/i)
+    strategy :github_latest
   end
 
   conflicts_with cask: "thorium"
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "Thorium.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

@@ -1,19 +1,22 @@
 cask "ghost-browser" do
   arch arm: "_arm64"
 
-  version "2.1.5.3"
-  sha256 arm:   "d0300160847efdecc44bae2ea7c4efea98fbc6cd17664e6b93096b062b93896d",
-         intel: "60ac496bbfb255fa88454a0648ec74ae0d2d6a9611f0d4b3531d691e05a3e8ce"
+  version "2.4.1.0"
+  sha256 arm:   "f7ff482faf3c77320ef2c0882aaec81cb6ea3bbcce6d0991a84a8d2ec1e67a17",
+         intel: "2f8ef7bc62428ce98e8b5a7b525ab2e9b93ee55e88a39d3e5f526a5340e54892"
 
   url "https://downloads.ghostbrowser.com/GhostBrowser-#{version}#{arch}.dmg"
   name "Ghost Browser"
   desc "Web browser"
-  homepage "https://ghostbrowser.com/download/"
+  homepage "https://ghostbrowser.com/"
 
   livecheck do
-    url "https://ghostbrowser.s3.amazonaws.com/updates/changelog.html"
-    regex(/>\s*Version\s*(\d+(?:\.\d+)+)/i)
+    url "https://ghostbrowser.s3.amazonaws.com/updates/macosx/manifest#{arch}"
+    regex(/^(\d+(?:\.\d+)+)\n/i)
   end
+
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Ghost Browser.app"
 

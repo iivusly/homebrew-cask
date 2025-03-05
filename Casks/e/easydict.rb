@@ -1,13 +1,19 @@
 cask "easydict" do
-  version "2.0.1"
-  sha256 "0c08ccb6a683d2fc6d9a612d4845d2b60cf0bee2163a41f7ff141976820ddf3b"
+  version "2.11.2"
+  sha256 "2076e37b8b02c0e5d31a32680822fe1b8cfb20e9e78729c30ca80ad9606cb045"
 
   url "https://github.com/tisfeng/Easydict/releases/download/#{version}/Easydict.dmg"
   name "Easydict"
   desc "Dictionary and translator app"
   homepage "https://github.com/tisfeng/Easydict/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   auto_updates true
+  depends_on macos: ">= :ventura"
 
   app "Easydict.app"
 

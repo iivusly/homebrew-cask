@@ -1,6 +1,6 @@
 cask "reunion" do
-  version "13.0.0,230824unr"
-  sha256 "371c890ecf9097cf14054b68f3e0dd4582a521d35470c93cc0387ea8302cd09a"
+  version "14.0.0,250122unr"
+  sha256 "9eeb0990e498ad8d738ea3fdb084be5d7bbb2f83e61418515adbf8d126109a88"
 
   url "https://store.leisterpro.com/updates/reunion#{version.major}/Reunion-#{version.csv.first.dots_to_hyphens}-#{version.csv.second}.zip"
   name "Reunion"
@@ -24,8 +24,8 @@ cask "reunion" do
     "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.leisterpro.reunion#{version.major}.sfl*",
     "~/Library/Application Support/Reunion",
     "~/Library/Caches/com.leisterpro.reunion#{version.major}",
-    "~/Library/Preferences/com.leisterpro.reunion.version.plist",
     "~/Library/Preferences/com.leisterpro.reunion#{version.major}.plist",
+    "~/Library/Preferences/com.leisterpro.reunion.version.plist",
     "~/Library/Preferences/Reunion Preferences",
   ]
 end

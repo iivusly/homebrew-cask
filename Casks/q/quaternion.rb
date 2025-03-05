@@ -1,6 +1,6 @@
 cask "quaternion" do
-  version "0.0.95.1"
-  sha256 "d2f80cfd17ab25b4062032afa76aa7bf509d32fb72c91858ab04347e216df9a7"
+  version "0.0.97"
+  sha256 "b935c8f026edc9dd72a6d4cfc27479c58c5b102c509e3b84a0faee20af941785"
 
   url "https://github.com/quotient-im/Quaternion/releases/download/#{version}/quaternion-#{version}.dmg"
   name "Quaternion"
@@ -20,7 +20,16 @@ cask "quaternion" do
     end
   end
 
-  depends_on macos: ">= :high_sierra"
+  depends_on macos: ">= :catalina"
 
   app "quaternion.app"
+
+  zap trash: [
+    "~/Library/Application Support/Quotient/quaternion",
+    "~/Library/Containers/com.github.quaternion",
+    "~/Library/Preferences/com.github.quaternion.plist",
+    "~/Library/Preferences/com.qmatrixclient.quaternion.plist",
+    "~/Library/Preferences/com.quotient.quaternion.plist",
+    "~/Library/Saved Application State/com.github.quaternion.savedState",
+  ]
 end

@@ -1,10 +1,10 @@
 cask "zeplin" do
-  version "4.9.4"
+  version "10.14.0"
   sha256 :no_check
 
   url "https://api.zeplin.io/urls/download-mac"
   name "Zeplin"
-  desc "Share, organize and collaborate on designs"
+  desc "Share, organise and collaborate on designs"
   homepage "https://zeplin.io/"
 
   livecheck do

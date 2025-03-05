@@ -2,32 +2,49 @@ cask "wireshark" do
   arch arm: "Arm", intel: "Intel"
   livecheck_arch = on_arch_conditional arm: "arm", intel: "x86-"
 
-  version "4.0.10"
+  on_catalina :or_older do
+    version "4.2.11"
+    sha256 arm:   "aa12b6237fe04890816dc5163e4c2990aaf83da206ce51bb53375164b7fbbcde",
+           intel: "11b3e1bb6b5b8f067b2d286c4805e7df0a487df59a432b5f3aef2c1d410b9747"
 
-  on_arm do
-    sha256 "178201c6b010e8ee7058a640b2592a8759a8ffa323f5a04434273a3501530a94"
+    livecheck do
+      url "https://www.wireshark.org/update/0/Wireshark/0.0.0/macOS/#{livecheck_arch}64/en-US/development.xml"
+      strategy :sparkle do |items|
+        items.map do |item|
+          next unless item.minimum_system_version
+          next if item.minimum_system_version < :high_sierra ||
+                  item.minimum_system_version >= :catalina
 
-    depends_on macos: ">= :big_sur"
+          item.version
+        end
+      end
+    end
   end
-  on_intel do
-    sha256 "f0ae6cfc2ecf1e7f5b1475c91bb2c5f7ac63174405a667056bb29b8c17f1180b"
+  on_big_sur :or_newer do
+    version "4.4.5"
+    sha256 arm:   "2250360b04aa04412c6f0339fb6e93069a6acfd02cb7474708bf655f927f7976",
+           intel: "af2eb698e9bea714436822a1d0f6257c3960a0b1c2f61dc8f8dfffa830657060"
 
-    depends_on macos: ">= :high_sierra"
+    # This appcast sometimes uses a newer pubDate for an older version, so we
+    # have to ignore the default `Sparkle` strategy sorting (which involves the
+    # pubDate) and simply work with the version numbers.
+    livecheck do
+      url "https://www.wireshark.org/update/0/Wireshark/0.0.0/macOS/#{livecheck_arch}64/en-US/stable.xml"
+      strategy :sparkle do |items|
+        items.map(&:nice_version)
+      end
+    end
   end
 
-  url "https://2.na.dl.wireshark.org/osx/Wireshark%20#{version}%20#{arch}%2064.dmg"
+  url "https://2.na.dl.wireshark.org/osx/all-versions/Wireshark%20#{version}%20#{arch}%2064.dmg"
   name "Wireshark"
   desc "Network protocol analyzer"
   homepage "https://www.wireshark.org/"
 
-  livecheck do
-    url "https://www.wireshark.org/update/0/Wireshark/0.0.0/macOS/#{livecheck_arch}64/en-US/stable.xml"
-    strategy :sparkle
-  end
-
   auto_updates true
   conflicts_with cask:    "wireshark-chmodbpf",
                  formula: "wireshark"
+  depends_on macos: ">= :mojave"
 
   app "Wireshark.app"
   pkg "Add Wireshark to the system path.pkg"
@@ -42,6 +59,7 @@ cask "wireshark" do
   binary "#{appdir}/Wireshark.app/Contents/MacOS/extcap/randpktdump"
   binary "#{appdir}/Wireshark.app/Contents/MacOS/extcap/sshdump"
   binary "#{appdir}/Wireshark.app/Contents/MacOS/extcap/udpdump"
+  binary "#{appdir}/Wireshark.app/Contents/MacOS/extcap/wifidump"
   binary "#{appdir}/Wireshark.app/Contents/MacOS/idl2wrs"
   binary "#{appdir}/Wireshark.app/Contents/MacOS/mergecap"
   binary "#{appdir}/Wireshark.app/Contents/MacOS/mmdbresolve"
@@ -55,7 +73,6 @@ cask "wireshark" do
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/capinfos.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/captype.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/ciscodump.1"
-  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/dftest.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/dumpcap.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/editcap.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/etwdump.1"
@@ -69,33 +86,29 @@ cask "wireshark" do
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/text2pcap.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/tshark.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/udpdump.1"
+  manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/wifidump.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man1/wireshark.1"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man4/extcap.4"
   manpage "#{appdir}/Wireshark.app/Contents/Resources/share/man/man4/wireshark-filter.4"
 
-  uninstall_preflight do
-    system_command "/usr/sbin/installer",
-                   args: [
-                     "-pkg", "#{staged_path}/Uninstall ChmodBPF.pkg",
-                     "-target", "/"
-                   ],
-                   sudo: true
-    system_command "/usr/sbin/installer",
-                   args: [
-                     "-pkg", "#{staged_path}/Remove Wireshark from the system path.pkg",
-                     "-target", "/"
-                   ],
-                   sudo: true
-  end
-
-  uninstall pkgutil: "org.wireshark.*"
+  uninstall early_script: {
+              executable:   "/usr/sbin/installer",
+              args:         ["-pkg", "#{staged_path}/Remove Wireshark from the system path.pkg", "-target", "/"],
+              sudo:         true,
+              must_succeed: false,
+            },
+            launchctl:    "org.wireshark.ChmodBPF",
+            pkgutil:      "org.wireshark.*"
 
   zap trash: [
+    "/Library/Application Support/Wireshark",
     "~/.config/wireshark",
     "~/Library/Caches/org.wireshark.Wireshark",
     "~/Library/Cookies/org.wireshark.Wireshark.binarycookies",
+    "~/Library/HTTPStorages/org.wireshark.Wireshark",
     "~/Library/HTTPStorages/org.wireshark.Wireshark.binarycookies",
     "~/Library/Preferences/org.wireshark.Wireshark.plist",
     "~/Library/Saved Application State/org.wireshark.Wireshark.savedState",
+    "~/Library/WebKit/org.wireshark.Wireshark",
   ]
 end

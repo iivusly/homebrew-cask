@@ -1,24 +1,24 @@
 cask "cursor" do
   arch arm: "arm64", intel: "x64"
 
-  version "0.13.3,231025uihnjkh9v"
-  sha256 arm:   "13cab454d91379866ca063183187280969241d057f12f5370aeb86be5e652ac9",
-         intel: "dca9b59d805157138b8350dbc479e4d78eba23aefa540f242185eac8859461fb"
+  version "0.45.17,7c00f62dd81412c8defe2b64b4d32d06e0a7e727"
+  sha256 arm:   "737d4ed8dd677b06774983a7be671f6000f312ca2aeee20aee8bfa377bdc217d",
+         intel: "da500c16a59a444b34e782cc95a001e9d8ef8f706c6e5cf638b9ee62137c83fc"
 
-  url "https://download.todesktop.com/230313mzl4w4u92/Cursor%20#{version.csv.first}%20-%20Build%20#{version.csv.second}-#{arch}-mac.zip",
-      verified: "download.todesktop.com/230313mzl4w4u92/"
+  url "https://anysphere-binaries.s3.us-east-1.amazonaws.com/production/#{version.csv.second}/darwin/#{arch}/Cursor-darwin-#{arch}.zip",
+      verified: "anysphere-binaries.s3.us-east-1.amazonaws.com/"
   name "Cursor"
   desc "Write, edit, and chat about your code with AI"
-  homepage "https://www.cursor.so/"
+  homepage "https://www.cursor.com/"
 
   livecheck do
-    url "https://download.todesktop.com/230313mzl4w4u92/latest-mac.yml"
-    regex(/Build[ ._-]([^-]+)[._-]/i)
-    strategy :electron_builder do |item, regex|
-      build = item["files"].first["url"][regex, 1]
-      next if build.blank?
+    url "https://api2.cursor.sh/updates/api/update/darwin-#{arch}/cursor/0.0.0/"
+    regex(%r{/production/(\h+)/darwin/#{arch}/Cursor[._-]darwin[._-]#{arch}\.zip}i)
+    strategy :json do |json, regex|
+      match = json["url"]&.match(regex)
+      next if match.blank?
 
-      "#{item["version"]},#{build}"
+      "#{json["name"]},#{match[1]}"
     end
   end
 
@@ -26,12 +26,20 @@ cask "cursor" do
   depends_on macos: ">= :catalina"
 
   app "Cursor.app"
+  binary "#{appdir}/Cursor.app/Contents/Resources/app/bin/code", target: "cursor"
 
   zap trash: [
-    "~/cursor-tutor",
+    "~/.cursor",
+    "~/.cursor-tutor",
+    "~/Library/Application Support/Caches/cursor-updater",
     "~/Library/Application Support/Cursor",
+    "~/Library/Caches/com.todesktop.*",
+    "~/Library/Caches/com.todesktop.*.ShipIt",
+    "~/Library/HTTPStorages/com.todesktop.*",
     "~/Library/Logs/Cursor",
-    "~/Library/Preferences/com.todesktop.*",
+    "~/Library/Preferences/ByHost/com.todesktop.*.ShipIt.*.plist",
+    "~/Library/Preferences/com.todesktop.*.plist",
+    "~/Library/Saved Application State/com.todesktop.*.savedState",
     "~/Library/Saved Application State/todesktop.com.ToDesktop-Installer.savedState",
   ]
 end

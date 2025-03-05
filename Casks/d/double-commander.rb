@@ -1,11 +1,11 @@
 cask "double-commander" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "1.1.4,119"
-  sha256 arm:   "961ebc494e20193bcce905f01c5fd2c28b8aa643b6f9ba9751d68f5a7a6c2795",
-         intel: "cfb48e8167703d04d5883d6ff4f1a3e8ea556d10bcfdfef1528284cd0aed5661"
+  version "1.1.22"
+  sha256 arm:   "05649a1b0d1a9ce0659ef8784e9da9d50c3fb41ebae75df18a08b546cfe6e6cb",
+         intel: "5761863ef4df21b4d2d5d49dbb675254887cefe656eb97e2e7c97cb29b48764c"
 
-  url "https://downloads.sourceforge.net/doublecmd/doublecmd-#{version.csv.first}-#{version.csv.second}.cocoa.#{arch}.dmg",
+  url "https://downloads.sourceforge.net/doublecmd/doublecmd-#{version.tr(",", "-")}.cocoa.#{arch}.dmg",
       verified: "downloads.sourceforge.net/doublecmd/"
   name "Double Commander"
   desc "File manager with two panels"
@@ -13,9 +13,9 @@ cask "double-commander" do
 
   livecheck do
     url "https://sourceforge.net/projects/doublecmd/rss?path=/macOS"
-    regex(%r{url=.*?/doublecmd[._-](\d+(?:\.\d+)+)[._-](\d+)[^"' ]*?\.dmg}i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+    regex(%r{url=.*?/doublecmd[._-](\d+(?:[.-]\d+)+)[^"' ]*?\.dmg}i)
+    strategy :sourceforge do |page, regex|
+      page.scan(regex).map { |match| match[0].tr("-", ",") }
     end
   end
 

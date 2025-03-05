@@ -1,6 +1,6 @@
 cask "quicken" do
-  version "7.3.2,703.50456.100"
-  sha256 "a11ff716c3e911ca54258cf339247774175e03c68bd2bee054c945b488f2b6d8"
+  version "8.1.0,801.56843.100"
+  sha256 "f73928c27197b22c42e1dd7f874163e59e85d2519ccc125cb103d89bf51897c2"
 
   url "https://download.quicken.com/mac/Quicken/001/Release/031A96D9-EFE6-4520-8B6A-7F465DDAA3E4/Quicken-#{version.csv.second}/Quicken-#{version.csv.second}.zip"
   name "Quicken"
@@ -13,7 +13,7 @@ cask "quicken" do
   end
 
   auto_updates true
-  depends_on macos: ">= :catalina"
+  depends_on macos: ">= :monterey"
 
   app "Quicken.app"
 

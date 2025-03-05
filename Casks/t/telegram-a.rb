@@ -1,9 +1,9 @@
 cask "telegram-a" do
   arch arm: "arm64", intel: "x64"
 
-  version "10.0.15"
-  sha256 arm:   "11daddc23d22f96e24e838bce3a60c83544eda35fc9a21dfaf0252fa80bad11d",
-         intel: "78cd8acab2109ffc8261532108720b74521dff520f0e1bf88cff5b25284f0c72"
+  version "10.9.42"
+  sha256 arm:   "eca412b1c6e79e3c172304c1e195399ba3b59dbf6643fad7dd6ecfd229e0ce9e",
+         intel: "c9f38378d10dfc3a89a261522bddb1a869cceb01e38332c3f59a92cf990d8cf8"
 
   url "https://github.com/Ajaxy/telegram-tt/releases/download/v#{version}/Telegram-A-#{arch}.dmg",
       verified: "github.com/Ajaxy/telegram-tt/"
@@ -11,7 +11,7 @@ cask "telegram-a" do
   desc "Web client for Telegram messenger"
   homepage "https://web.telegram.org/a/get"
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :high_sierra"
 
   app "Telegram A.app"
 

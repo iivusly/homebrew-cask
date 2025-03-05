@@ -1,8 +1,8 @@
 cask "josm" do
-  version "18822"
-  sha256 "3058966c453c0ba26fabdc2420a00d41ea89876ff20b7cb8d00367184978205d"
+  version "19342"
+  sha256 "ce887ef73ae3a99f7efe1e63e2ed130d991eeb6be3abf29ceb8be433d02774cc"
 
-  url "https://github.com/JOSM/josm/releases/download/#{version}-tested/JOSM-macOS-java17-#{version}.zip",
+  url "https://github.com/JOSM/josm/releases/download/#{version}-tested/JOSM-macOS-java21-#{version}.zip",
       verified: "github.com/JOSM/josm/"
   name "JOSM"
   desc "Extensible editor for OpenStreetMap"

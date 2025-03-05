@@ -1,14 +1,17 @@
 cask "scihubeva" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "6.2.3"
-  sha256 arm:   "b0dc6dc4931169d52f454f79d30115ac66577b31c677bd98c1e14716b6f0db0d",
-         intel: "f880354644a2287c3ee01fda5607b15f3b798a5e4bd06d63feab6dbb6e6734e3"
+  version "6.3.1"
+  sha256 arm:   "0dc12804ee8730145fe03a1a5283f2be291c68341eccbce5fdc2c15a4337ad05",
+         intel: "028b0ade8cc3f710e8b593f9b3b12ebe666933022c68cbd359777d00ce5185ba"
 
   url "https://github.com/leovan/SciHubEVA/releases/download/v#{version}/SciHubEVA-#{arch}-v#{version}.dmg"
   name "Sci-Hub EVA"
   desc "Cross-platform Sci-Hub GUI application powered by Python and Qt"
   homepage "https://github.com/leovan/SciHubEVA"
+
+  auto_updates true
+  depends_on macos: ">= :big_sur"
 
   app "Sci-Hub EVA.app"
 

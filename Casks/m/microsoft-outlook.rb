@@ -47,9 +47,17 @@ cask "microsoft-outlook" do
       skip "Legacy version"
     end
   end
-  on_monterey :or_newer do
-    version "16.78.23102103"
-    sha256 "489c300366bb1e847b83f6cb41152384c9bfaa1ee6d2384047bc7858891c778e"
+  on_monterey do
+    version "16.89.24091630"
+    sha256 "24731ffca0b78c02f2544b145b4a103bd11b724fef0dc938bf5899e156495a72"
+
+    livecheck do
+      skip "Legacy version"
+    end
+  end
+  on_ventura :or_newer do
+    version "16.94.25020927"
+    sha256 "89dcdef105e5d92478fa28881b0d232c90e38f641674c5839ab8ba2a0f03ea58"
 
     livecheck do
       url "https://go.microsoft.com/fwlink/p/?linkid=525137"
@@ -57,11 +65,10 @@ cask "microsoft-outlook" do
     end
   end
 
-  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Outlook_#{version}_Installer.pkg",
-      verified: "officecdnmac.microsoft.com/"
+  url "https://officecdnmac.microsoft.com/pr/C1297A47-86C4-4C1F-97FA-950631F94777/MacAutoupdate/Microsoft_Outlook_#{version}_Installer.pkg"
   name "Microsoft Outlook"
   desc "Email client"
-  homepage "https://products.office.com/en-us/outlook/email-and-calendar-software-microsoft-outlook"
+  homepage "https://www.microsoft.com/en-us/microsoft-365/outlook/outlook-for-business"
 
   auto_updates true
   conflicts_with cask: [
@@ -79,12 +86,12 @@ cask "microsoft-outlook" do
         },
       ]
 
-  uninstall pkgutil:   [
+  uninstall launchctl: "com.microsoft.office.licensingV2.helper",
+            quit:      "com.microsoft.autoupdate2",
+            pkgutil:   [
               "com.microsoft.package.Microsoft_Outlook.app",
               "com.microsoft.pkg.licensing",
-            ],
-            launchctl: "com.microsoft.office.licensingV2.helper",
-            quit:      "com.microsoft.autoupdate2"
+            ]
 
   zap trash: [
     "~/Library/Application Scripts/com.microsoft.Outlook",

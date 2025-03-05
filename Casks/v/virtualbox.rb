@@ -1,25 +1,31 @@
 cask "virtualbox" do
-  version "7.0.12,159484"
-  sha256 "d9e46fe33c0e25e1cb50a38e892d8713e7775d5e9cc87b29fd10452bae2709b7"
+  arch arm: "macOSArm64", intel: "OSX"
 
-  url "https://download.virtualbox.org/virtualbox/#{version.csv.first}/VirtualBox-#{version.csv.first}-#{version.csv.second}-OSX.dmg"
+  version "7.1.6,167084"
+  sha256 arm:   "f46db4a00d7cc72c50696cfd86c2f90bd3a4727bddd41a5e6b21a1ae07c32547",
+         intel: "73f7f088c1c098e9f5fbddc6cb1a0d7b56b9a500a1f34db0bee4c07ec06064b4"
+
+  url "https://download.virtualbox.org/virtualbox/#{version.csv.first}/VirtualBox-#{version.csv.first}-#{version.csv.second}-#{arch}.dmg"
   name "Oracle VirtualBox"
-  desc "Virtualizer for x86 hardware"
+  desc "Virtualiser for x86 hardware"
   homepage "https://www.virtualbox.org/"
 
   livecheck do
     url "https://www.virtualbox.org/wiki/Downloads"
-    strategy :page_match do |page|
-      match = page.match(/href=.*?VirtualBox-(\d+(?:\.\d+)+)-(\d+)-OSX.dmg/)
+    regex(/href=.*?VirtualBox[._-]v?(\d+(?:\.\d+)+)[._-](\d+)[._-]OSX\.dmg/i)
+    strategy :page_match do |page, regex|
+      match = page.match(regex)
       next if match.blank?
 
       "#{match[1]},#{match[2]}"
     end
   end
 
-  conflicts_with cask: "homebrew/cask-versions/virtualbox-beta"
+  conflicts_with cask: [
+    "virtualbox@6",
+    "virtualbox@beta",
+  ]
   depends_on macos: ">= :catalina"
-  depends_on arch: :x86_64
 
   pkg "VirtualBox.pkg",
       choices: [

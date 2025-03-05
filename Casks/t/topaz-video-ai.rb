@@ -1,6 +1,6 @@
 cask "topaz-video-ai" do
-  version "4.0.1"
-  sha256 "3ec18c6de3998092c07140d9e74e50db390d27e3367e9feed9d70f0f40961fca"
+  version "6.1.0"
+  sha256 "112c29ef8991052416493d908dd2c4c65c5f1feb173345427f87cdd7746f3e7f"
 
   url "https://downloads.topazlabs.com/deploy/TopazVideoAI/#{version}/TopazVideoAI-#{version}.dmg"
   name "Topaz Video AI"
@@ -11,6 +11,9 @@ cask "topaz-video-ai" do
     url "https://topazlabs.com/d/tvai/latest/mac/full"
     strategy :header_match
   end
+
+  auto_updates true
+  depends_on macos: ">= :mojave"
 
   app "Topaz Video AI.app"
 

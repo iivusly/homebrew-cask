@@ -1,26 +1,37 @@
 cask "feed-the-beast" do
-  version "202310071959,918caed003"
-  sha256 "16846f482ba3de79f2bc13dd659f521aa92098cb3ccc78c60277345184d03986"
+  arch arm: "arm64", intel: "x64"
+  livecheck_arch = on_arch_conditional arm: "arm", intel: "x64"
 
-  url "https://apps.modpacks.ch/FTBApp/release/#{version.csv.first}-#{version.csv.second}/FTBA_macos_#{version.csv.first}-#{version.csv.second}.dmg",
-      verified: "apps.modpacks.ch/FTBApp/"
+  version "1.27.3"
+  sha256 arm:   "28e22bd69c0a946d6487156a77b344f3e382471cda179c481d146b5f71abe717",
+         intel: "2a24f5e5b986c76ebc5761001b0a586284b9957728420889fac18550f795ea8c"
+
+  url "https://piston.feed-the-beast.com/app/ftb-app-macos-#{version}-#{arch}.dmg"
   name "Feed the Beast"
   desc "Minecraft mod downloader and manager"
   homepage "https://www.feed-the-beast.com/"
 
   livecheck do
     url "https://meta.feed-the-beast.com/v1/app/versions"
-    regex(/FTBA[._-]macos[._-](\d+)[._-](\h+)\.dmg/i)
-    strategy :page_match do |page, regex|
-      page.scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+    regex(/ftb[._-]app[._-]macos[._-]v?(\d+(?:\.\d+)+)[._-]#{arch}\.dmg/i)
+    strategy :json do |json, regex|
+      match = json.dig("macos", livecheck_arch, "dmg", "url")&.match(regex)
+      next if match.blank?
+
+      match[1]
     end
   end
 
-  app "FTBApp.app"
+  auto_updates true
+  depends_on macos: ">= :catalina"
 
-  zap trash: "~/Library/Application Support/ftblauncher"
+  app "FTB Electron App.app"
 
-  caveats do
-    depends_on_java
-  end
+  zap trash: [
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/dev.ftb.app.sfl*",
+    "~/Library/Application Support/FTB Electron App",
+    "~/Library/Logs/FTB Electron App",
+    "~/Library/Preferences/dev.ftb.app.plist",
+    "~/Library/Saved Application State/dev.ftb.app.savedState",
+  ]
 end

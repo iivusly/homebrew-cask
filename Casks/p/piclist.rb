@@ -1,11 +1,12 @@
 cask "piclist" do
   arch arm: "arm64", intel: "x64"
 
-  version "2.6.5"
-  sha256 arm:   "3a5b3f1a216afbc9c315d89bcf3a7821fde81abf417e3ca68f39b0c3105f872e",
-         intel: "b8277a5a75145259339fd6d201336916a6ef2bba41fce28e5da5dfb28dc316f5"
+  version "2.9.8"
+  sha256 arm:   "1b3f8ffe24774e584c9c07bc4807bf53f49dcb6809befa3a15c602158db3c448",
+         intel: "2fa2c9d8f0f61d26fb232aa1f64cf27314843e8a018f65dea01f2ff74274d0b2"
 
-  url "https://release.piclist.cn/latest/PicList-#{version}-#{arch}.dmg"
+  url "https://github.com/Kuingsmile/PicList/releases/download/v#{version}/PicList-#{version}-#{arch}.dmg",
+      verified: "github.com/Kuingsmile/PicList/"
   name "PicList"
   desc "Cloud storage manager tool"
   homepage "https://piclist.cn/"
@@ -14,6 +15,9 @@ cask "piclist" do
     url "https://release.piclist.cn/latest/latest-mac.yml"
     strategy :electron_builder
   end
+
+  auto_updates true
+  depends_on macos: ">= :high_sierra"
 
   app "PicList.app"
 

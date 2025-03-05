@@ -1,6 +1,6 @@
 cask "bike" do
-  version "1.17,159"
-  sha256 "93d254c30f15eef327d168e80a6d0eda6bb635b398ab9de7ea47a6aac8adac27"
+  version "1.21,189"
+  sha256 "007462579dd6cfc29cd37888c931697c18cb9a1ec1ce56adff4842a1b70c9273"
 
   url "https://www.hogbaysoftware.com/bike/releases/#{version.csv.second}.dmg"
   name "Bike"
@@ -13,12 +13,13 @@ cask "bike" do
   end
 
   auto_updates true
-  depends_on macos: ">= :big_sur"
+  depends_on macos: ">= :monterey"
 
   app "Bike.app"
 
   zap trash: [
     "~/Library/Application Scripts/com.hogbaysoftware.Bike",
+    "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.hogbaysoftware.bike.sfl*",
     "~/Library/Containers/com.hogbaysoftware.Bike",
   ]
 end

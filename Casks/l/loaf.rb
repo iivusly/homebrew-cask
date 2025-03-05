@@ -1,6 +1,6 @@
 cask "loaf" do
-  version "2.0.1"
-  sha256 "c38387af7f4acbaa68d5e24416a3c19dab987b0bd0cc702184b98b8df75f213e"
+  version "2.0.7"
+  sha256 "6bd4b6c558987cab4630ce4b50d09acf71b19a1ef5d029a4023cdea890813b91"
 
   url "https://github.com/philipardeljan/getloaf/releases/download/v#{version}/loaf.dmg",
       verified: "github.com/philipardeljan/getloaf/"
@@ -16,4 +16,8 @@ cask "loaf" do
     "~/Library/Preferences/com.loaf.studio.plist",
     "~/Library/Saved Application State/com.loaf.studio.savedState",
   ]
+
+  caveats do
+    requires_rosetta
+  end
 end

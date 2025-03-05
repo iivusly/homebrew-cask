@@ -1,20 +1,23 @@
 cask "visual-paradigm-ce" do
   arch arm: "AArch64", intel: "WithJRE"
 
-  version "17.1,20231021"
-  sha256 arm:   "22aa4ca8cf127451ec0fff1e3c3c82f38d7dc9054316a016919154a6f90ee863",
-         intel: "f57a02610ee261bdbf19d09a24b3745ef7da18628ecd43ca67d811d7eb26a696"
+  version "17.2,20250123"
+  sha256 arm:   "702a358af5ae3121db58ccc758e4e49a4ab022f1164016ae104aceb48ea1463d",
+         intel: "9bbf50e2d54cc6241a96f4a81758a28cdd80fef75c05932d6709c9790886ad32"
 
   url "https://www.visual-paradigm.com/downloads/vpce/Visual_Paradigm_CE_#{version.csv.first.dots_to_underscores}_#{version.csv.second}_OSX_#{arch}.dmg"
   name "Visual Paradigm Community Edition"
-  desc "All-in-one UML, SysML, BPMN Modeling Platform for Agile"
+  desc "UML, SysML, BPMN modelling platform"
   homepage "https://www.visual-paradigm.com/"
 
   livecheck do
     url "https://www.visual-paradigm.com/downloads/vpce/checksum.html"
     regex(%r{/vpce(\d+(?:\.\d+)+)/(\d+)/checksum\.html}i)
     strategy :header_match do |headers, regex|
-      headers["location"].scan(regex).map { |match| "#{match[0]},#{match[1]}" }
+      match = headers["location"]&.match(regex)
+      next if match.blank?
+
+      "#{match[1]},#{match[2]}"
     end
   end
 

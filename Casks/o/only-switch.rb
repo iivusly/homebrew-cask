@@ -1,6 +1,6 @@
 cask "only-switch" do
-  version "2.4.4"
-  sha256 "027fa333a0a8f8728e04a33bdc763d2f096dc3f3b34e77223b1e68ebdfdcba88"
+  version "2.5.6"
+  sha256 "4472026c40f7b0bad13fa70aa679a537e5ae6ec8db026d4f6926c285338e335b"
 
   url "https://github.com/jacklandrin/OnlySwitch/releases/download/release_#{version}/OnlySwitch.dmg"
   name "OnlySwitch"
@@ -8,11 +8,11 @@ cask "only-switch" do
   homepage "https://github.com/jacklandrin/OnlySwitch"
 
   livecheck do
-    url :url
-    regex(/release[._-]v?(\d+(?:\.\d+)+)/i)
-    strategy :github_latest
+    url "http://jacklandrin.github.io/appcast.xml"
+    strategy :sparkle, &:short_version
   end
 
+  auto_updates true
   depends_on macos: ">= :monterey"
 
   app "Only Switch.app"

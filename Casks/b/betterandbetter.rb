@@ -1,25 +1,20 @@
 cask "betterandbetter" do
-  version "2.5.7"
-  sha256 "83018bef36848a2ea6475d225aff1cf0c4720d53fccc4142908dcb9716c13065"
+  version "2.6.6,2025020902"
+  sha256 "663eb472c397c247277972f6cfb27c34b5182b6ce927f8cdd881bf050c0626d6"
 
-  url "https://cdn.better365.cn/BetterAndBetter/BetterAndBetter#{version}Beta.dmg"
+  url "https://cdn.better365.cn/BetterAndBetter/#{version.csv.second[0, 4]}/BetterAndBetter_#{version.csv.first}_#{version.csv.second}.zip"
   name "Better And Better"
   desc "Keyboard, mouse and touchpad motion gestures"
   homepage "https://www.better365.cn/bab2.html"
 
   livecheck do
     url "https://www.better365.cn/BetterAndBetterUpdate.xml"
-    strategy :sparkle, &:short_version
+    strategy :sparkle
   end
 
-  pkg "BetterAndBetter#{version}Beta.pkg"
+  depends_on macos: ">= :high_sierra"
 
-  uninstall pkgutil:   [
-              "cn.better365.BetterAndBetter",
-              "cn.better365.BetterAndBetterHelper",
-            ],
-            launchctl: "cn.better365.BetterAndBetterHelper",
-            quit:      "cn.better365.BetterAndBetter"
+  app "BetterAndBetter.app"
 
   zap trash: [
     "~/Library/Application Support/BetterAndBetter",

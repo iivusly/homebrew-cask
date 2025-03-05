@@ -1,6 +1,6 @@
 cask "lg-onscreen-control" do
-  version "6.04,ALSSoIKrThjjuA0AcSa7NQ"
-  sha256 "74ebc7f277242b9474b3730405d607f3a4976a1559037671736cbdfcc761f3eb"
+  version "7.20,9mZ5Rk4cToGkdcOPTFIUgA"
+  sha256 "d2891a3b1b5413d1d55ecb9da6182f374e6d2fb2151d3c56a1efcb7d341e68c0"
 
   url "https://gscs-b2c.lge.com/downloadFile?fileId=#{version.csv.second}",
       verified: "lge.com/"
@@ -22,20 +22,20 @@ cask "lg-onscreen-control" do
                    sudo: true
   end
 
-  uninstall login_item: [
-              "OnScreen Control",
-              "OSCMultiMonitor",
-            ],
-            quit:       [
+  uninstall quit:       [
               "com.LGSI.OnScreen-Control",
               "com.LGSI.OSCMultiMonitor",
+            ],
+            login_item: [
+              "OnScreen Control",
+              "OSCMultiMonitor",
             ],
             pkgutil:    [
               "com.lge.onscreenControl.*",
               "com.lge.OnscreenControl.*",
+              "com.OSC.Fonts.pkg",
               "com.OSC_Directory.pkg",
               "com.OSC_Library.pkg",
-              "com.OSC.Fonts.pkg",
               "com.OSCApp.pkg",
               "com.OSCMultiMonitor.pkg",
               "com.uninstall.pkg",

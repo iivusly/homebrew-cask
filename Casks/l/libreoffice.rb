@@ -2,9 +2,9 @@ cask "libreoffice" do
   arch arm: "aarch64", intel: "x86-64"
   folder = on_arch_conditional arm: "aarch64", intel: "x86_64"
 
-  version "7.6.2"
-  sha256 arm:   "a33ccdea5980a62fe6b5707ea663d5b48e9af9e0dda6f884b7f4585c0b408ff6",
-         intel: "980c0dc4a14bdd7ec260d6f8965132ec61d067e8ca20802e927ed278c31d486d"
+  version "25.2.1"
+  sha256 arm:   "d0f8573dfc5d1a858061a9bc7889313cb6837db8a8f1b568d067ca156c03745e",
+         intel: "88746b5e46a72ae964ed2275399ee0fb2a0712f6d93a30b151358ffa0ea8349a"
 
   url "https://download.documentfoundation.org/libreoffice/stable/#{version}/mac/#{folder}/LibreOffice_#{version}_MacOS_#{arch}.dmg",
       verified: "download.documentfoundation.org/libreoffice/stable/"
@@ -12,12 +12,25 @@ cask "libreoffice" do
   desc "Free cross-platform office suite, fresh version"
   homepage "https://www.libreoffice.org/"
 
+  # We check the wiki homepage for release versions because:
+  # * Upstream may upload a new version to the stable download directory
+  #   (https://download.documentfoundation.org/libreoffice/stable/) before it's
+  #   released.
+  # * The contents of the download page can change based on user agent(?),
+  #   sometimes in unpredictable ways that break the check, so it's not an
+  #   entirely dependable source for us to check.
+  # * The libreoffice.org Release Notes page may not be updated in a timely
+  #   manner after new releases are announced (whereas the wiki appears to be
+  #   updated relatively soon after).
+  #
+  # NOTE: This needs to check a page that provides the latest versons for both
+  # Fresh and Still, as this check is also used by the `libreoffice-still` cask.
   livecheck do
-    url "https://download.documentfoundation.org/libreoffice/stable/"
-    regex(%r{href="(\d+(?:\.\d+)+)/"}i)
+    url "https://wiki.documentfoundation.org/Main_Page"
+    regex(/>\s*Download\s+LibreOffice\s+v?(\d+(?:\.\d+)+)\s*</im)
   end
 
-  conflicts_with cask: "homebrew/cask-versions/libreoffice-still"
+  conflicts_with cask: "libreoffice-still"
   depends_on macos: ">= :catalina"
 
   app "LibreOffice.app"

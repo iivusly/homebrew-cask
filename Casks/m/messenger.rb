@@ -1,5 +1,5 @@
 cask "messenger" do
-  version "196.0.0.4.210"
+  version "232.0.0.8.176"
   sha256 :no_check
 
   url "https://www.messenger.com/messenger/desktop/downloadV2/?platform=mac"
@@ -13,6 +13,7 @@ cask "messenger" do
   end
 
   auto_updates true
+  depends_on macos: ">= :catalina"
 
   app "Messenger.app"
 

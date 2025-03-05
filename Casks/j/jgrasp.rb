@@ -1,10 +1,10 @@
 cask "jgrasp" do
-  version "2.0.6_10"
-  sha256 "57bac332eeba0f1769434796c72d5a875f4f9e753fff4bcf41831c2c6626109c"
+  version "2.0.6_17"
+  sha256 "4f27ad84a8fcf1821d524eaa345a03b3775f15d196719c4cdedf1c3041c6aacb"
 
   url "https://jgrasp.org/dl4g/jgrasp/jgrasp#{version.no_dots}.pkg"
   name "jgrasp"
-  desc "IDE with visualizations for improving software comprehensibility"
+  desc "IDE with visualisations for improving software comprehensibility"
   homepage "https://jgrasp.org/"
 
   livecheck do
@@ -16,7 +16,14 @@ cask "jgrasp" do
 
   uninstall pkgutil: "jgrasp"
 
+  zap trash: [
+    "~/Library/Application Support/jGRASP",
+    "~/Library/Caches/org.jgrasp.jGRASP",
+    "~/Library/Preferences/org.jgrasp.jGRASP.plist",
+    "~/Library/Saved Application State/org.jgrasp.jGRASP.savedState",
+  ]
+
   caveats do
-    depends_on_java "6+"
+    depends_on_java "11+"
   end
 end

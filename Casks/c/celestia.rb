@@ -1,15 +1,16 @@
 cask "celestia" do
-  version "1.6.3"
-  sha256 "67d22ea5b74c341b5f096591c61e4df3a861b295b5f1a1818b3c6da7ffc11caa"
+  version "1.6.4"
+  sha256 "bfb0d0070be9a240a9e3df39495a43223a18dc7757f523ba71dbe8f0bdcaf9e3"
 
-  url "https://github.com/CelestiaProject/Celestia/releases/download/#{version}/celestia-#{version}-macOS.zip"
+  url "https://github.com/CelestiaProject/Celestia/releases/download/#{version}/celestia-#{version}-macOS.zip",
+      verified: "github.com/CelestiaProject/Celestia/"
   name "Celestia"
   desc "Space simulation for exploring the universe in three dimensions"
-  homepage "https://github.com/CelestiaProject/Celestia/"
+  homepage "https://celestiaproject.space/"
 
   livecheck do
-    url :url
-    strategy :github_latest
+    url "https://celestiaproject.space/download.html"
+    regex(/href=.*?celestia[._-]v?(\d+(?:\.\d+)+)[._-]macOS\.zip/i)
   end
 
   app "Celestia.app"

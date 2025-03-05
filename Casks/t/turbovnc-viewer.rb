@@ -1,23 +1,28 @@
 cask "turbovnc-viewer" do
   arch arm: "arm64", intel: "x86_64"
 
-  version "3.0.91"
-  sha256 arm:   "77ea491139eff7cf897e59e6fab52442cd3b560f804f9c2b1bd6c5a4cb5abf69",
-         intel: "b045ceeef338415de7dba04ce5b90e0aca656152c1f6d760fbc45028138885c5"
+  version "3.1.4"
+  sha256 arm:   "a8de81ee24e265c867167b482c9476d2385a07b8de703702a6583d1ddbb0709a",
+         intel: "1df2b5f340bc6e621c251572f3940426c412b215a89aa4f55190899b9ef1386c"
 
-  url "https://downloads.sourceforge.net/turbovnc/#{version}/TurboVNC-#{version}-#{arch}.dmg",
-      verified: "sourceforge.net/turbovnc/"
+  url "https://github.com/TurboVNC/turbovnc/releases/download/#{version}/TurboVNC-#{version}-#{arch}.dmg",
+      verified: "github.com/TurboVNC/turbovnc/"
   name "TurboVNC"
   desc "Remote display system"
   homepage "https://www.turbovnc.org/"
 
+  livecheck do
+    url :url
+    strategy :github_latest
+  end
+
   pkg "TurboVNC.pkg"
 
-  uninstall pkgutil: "com.virtualgl.turbovnc",
-            script:  {
+  uninstall script:  {
               executable: "/opt/TurboVNC/bin/uninstall",
               sudo:       true,
-            }
+            },
+            pkgutil: "com.virtualgl.turbovnc"
 
   # No zap stanza required
 end

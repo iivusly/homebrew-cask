@@ -1,18 +1,15 @@
 cask "qth" do
-  version "0.8.7"
-  sha256 "08fcb26d4628e249bdefbba43535b985e4ca8a3e90ecad0f09f9b04087ef61fe"
+  version "0.8.14"
+  sha256 "52b41561eb2cfd80a59b3df69787a2b21d22e4fd855ce85b9a9df9f9aeaabe88"
 
   url "https://www.w8wjb.com/qth/QTH-#{version}.dmg"
   name "QTH"
   desc "APRS client application"
   homepage "https://www.w8wjb.com/wp/qth/"
 
-  livecheck do
-    url "https://www.w8wjb.com/wp/qth/qth-app-changelog/"
-    regex(%r{href=.*?/QTH[._-]v?(\d+(?:\.\d+)+)\.dmg}i)
-  end
+  deprecate! date: "2025-02-24", because: :moved_to_mas
 
-  depends_on macos: ">= :sierra"
+  depends_on macos: ">= :high_sierra"
 
   app "QTH.app"
 

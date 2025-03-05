@@ -1,16 +1,19 @@
 cask "jump" do
-  version "8.10.4"
-  sha256 "f797ed1b3672a0c0f18cac6195890a6372b2260862780713a85f8d0aae4aa3e1"
+  version "9.0.91,90091"
+  sha256 "5b0a0498273f8c8608e3be7f8791e6bc153e1d6d0c0089f062fa1dcb21bb447f"
 
-  url "https://mirror.jumpdesktop.com/downloads/jdm/JumpDesktopMac-#{version}.zip"
+  url "https://mirror.jumpdesktop.com/downloads/jdm/JumpDesktopMac-#{version.csv.second}.zip",
+      user_agent: :fake
   name "Jump Desktop"
   desc "Remote desktop application"
   homepage "https://jumpdesktop.com/#jdmac"
 
   livecheck do
-    url "https://jumpdesktop.com/downloads/viewer/jdmac-web-appcast.xml"
-    strategy :sparkle, &:short_version
+    url "https://mirror.jumpdesktop.com/downloads/viewer/jdmac-web-appcast.xml"
+    strategy :sparkle
   end
+
+  depends_on macos: ">= :high_sierra"
 
   app "Jump Desktop.app"
 

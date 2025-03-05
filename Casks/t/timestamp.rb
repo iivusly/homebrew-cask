@@ -8,5 +8,12 @@ cask "timestamp" do
   desc "Improved clock for the menu bar"
   homepage "https://mzdr.github.io/timestamp/"
 
+  deprecate! date: "2024-02-14", because: :discontinued
+  disable! date: "2025-02-15", because: :discontinued
+
   app "Timestamp.app"
+
+  caveats do
+    requires_rosetta
+  end
 end
